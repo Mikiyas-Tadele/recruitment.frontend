@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { VacancyPostComponent } from '../vacancy-post/vacancy-post.component';
 
 const routes: Routes = [
     {
