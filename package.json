@@ -22,7 +22,7 @@
     "@angular/platform-browser": "8.0.0",
     "@angular/platform-browser-dynamic": "8.0.0",
     "@angular/router": "8.0.0",
-    "@ng-bootstrap/ng-bootstrap": "4.2.1",
+    "@ng-bootstrap/ng-bootstrap": "5.1.2",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
     "chart.js": "2.7.3",
@@ -30,9 +30,12 @@
     "font-awesome": "4.7.0",
     "ng2-charts": "2.3.0",
     "rxjs": "6.5.2",
+    "rxjs-compat": "6.5.2",
     "tslib": "^1.9.0",
     "yarn": "1.16.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "primeicons": "^2.0.0",
+    "primeng": "^8.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
