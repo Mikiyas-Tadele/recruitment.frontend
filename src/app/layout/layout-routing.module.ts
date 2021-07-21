@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
-import { VacancyPostComponent } from '../vacancy-post/vacancy-post.component';
+import { VacancyPostComponent } from './vacancy-post/vacancy-post.component';
+import { ApplyVacancyComponent } from './apply-vacancy/apply-vacancy.component';
+import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
+import { Userprofile } from '../models/userprofile.model';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 const routes: Routes = [
     {
@@ -9,6 +13,10 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
+            { path: 'vacancy', component: VacancyPostComponent, data : {title: 'Vacancies Post'}},
+            {path: 'apply', component: ApplyVacancyComponent, data : {title: 'Vacancies Post'}},
+            {path: 'post-vacancy', component: PostVacancyComponent, data: {title: 'Post Vacancy'}},
+            {path: 'user-profile', component: UserprofileComponent, data: {title: 'User Profile'}},
             { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
             { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule) },
             { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },

@@ -8,6 +8,14 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Vacancies' | translate }}</span>
         </a>
+        <a routerLink="/post-vacancy" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Post Vacancy' | translate }}</span>
+        </a>
+        <a routerLink="/user-profile" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'User Profile' | translate }}</span>
+        </a>
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;
             <span>{{ 'Charts' | translate }}</span>

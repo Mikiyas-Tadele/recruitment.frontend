@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-lg-6">
+        <form #form="ngForm">
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <!-- <li class="active"><a data-toggle="tab" href="#basicInfoTab">User Information</a></li>
+                    <li><a data-toggle="tab" href="#educationTab">Educational Backgrounds</a></li>
+                    <li><a data-toggle="tab" href="#experienceTab">Work Expriences</a></li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" id="basicinfo-tab" [ngClass]="{ 'active':activeMainTab==='basicInfoTab'}" (click)="setActiveTab('basicInfoTab')" data-toggle="tab" href="#basicinfTab" role="tab" aria-controls="basicinfo" aria-selected="true">Basic Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="education-tab" [ngClass]="{ 'active':activeMainTab==='educationTab'}" (click)="setActiveTab('educationTab')" data-toggle="tab" href="#educationTab" role="tab" aria-controls="education" aria-selected="false">Education Background</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="experience-tab" [ngClass]="{ 'active':activeMainTab==='experienceTab'}" (click)="setActiveTab($event, 'experienceTab')" data-toggle="tab" href="#experienceTab" role="tab" aria-controls="experience" aria-selected="false">Work Experience</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="basicInfoTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='basicInfoTab'}" id="basic-info" role="tabpanel" aria-labelledby="basicinfo-tab">
+                        <fieldset class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input class="form-control" type="text" name="fullName" [(ngModel)]="userprofile.fullName" disabled/>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" name="email" [(ngModel)]="userprofile.email" class="form-control" disabled>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" [(ngModel)]="userprofile.gender">
+                              <option  value="">Please select your gender</option>
+                              <option  value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <fieldset class="form-group">
+                            <label for="dateofBirth">Date of Birth</label>
+                            <input type="text" name="dateofBirth" [(ngModel)]="userprofile.dateOfBirth" class="form-control" />
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label for="disability">Text area</label>
+                            <input type="text" name="disability" [(ngModel)]="userprofile.disability" class="form-control" />
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="mphone">Primary Phone Number</label>
+                                <input type="tel" class="form-control" [(ngModel)]="userprofile.mPhone1" name="mphone1" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="mphone2">Secondary Phone Number</label>
+                                <input type="tel" class="form-control" [(ngModel)]="userprofile.mPhone2" name="mphone2" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="fphone">Office Phone Number</label>
+                                <input type="tel" class="form-control" [(ngModel)]="userprofile.fPhone" name="fphone" />
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="experienceTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='educationTab'}" id="education" role="tabpanel" aria-labelledby="educationtab">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="position">Position</label>
+                                <input type="text" class="form-control" [(ngModel)]="userprofile.workExperiences.position" name="position" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="orgName">Organization Name</label>
+                                <input type="text" name="orgName" class="form-control" [(ngModel)]="userprofile.workExperiences.organization" name="orgName" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" [(ngModel)]="userprofile.workExperiences.startDate" name="startDate" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="endDate">End Date </label>
+                                <input type="date" class="form-control" [(ngModel)]="userprofile.workExperiences.endDate" name="endDate" />
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="educationTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='experienceTab'}" id="experience" role="tabpanel" aria-labelledby="experience-tab">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="field">Field of Education</label>
+                                <input type="text" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.fieldOfEducation" name="field" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="qualification">Qualification</label>
+                                <input type="tel" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.qualification" name="qualification" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="university">University Name</label>
+                                <input type="text" name="university" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.university" name="university" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="graduationYear">Year of Graduation</label>
+                                <input type="number" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.yearOfGraduation" name="graduationYear" />
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+        </form>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

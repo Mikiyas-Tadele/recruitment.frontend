@@ -8,8 +8,6 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ApplyVacancyComponent } from './apply-vacancy/apply-vacancy.component';
-import { VacancyPostComponent } from './vacancy-post/vacancy-post.component';
 import { ApplicantHeaderComponent } from './applicant-header/applicant-header.component';
 
 @NgModule({
@@ -21,7 +19,7 @@ import { ApplicantHeaderComponent } from './applicant-header/applicant-header.co
         LanguageTranslationModule,
         AppRoutingModule
     ],
-    declarations: [AppComponent, ApplyVacancyComponent, VacancyPostComponent, ApplicantHeaderComponent],
+    declarations: [AppComponent, ApplicantHeaderComponent],
     providers: [AuthGuard],
     bootstrap: [AppComponent]
 })

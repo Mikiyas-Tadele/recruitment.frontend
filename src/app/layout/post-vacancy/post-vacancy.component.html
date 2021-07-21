@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-lg-6">
+        <form #form="ngForm" class="p-5">
+            <fieldset class="form-group">
+                <label for="title">Job title</label>
+                <input type="text" [(ngModel)]="vacancy.title" class="form-control" #titleCtrl="ngModel" class="form-control" name="title" required />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="qualification">Qualification</label>
+                <input type="text" [(ngModel)]="vacancy.qualification" class="form-control" #qualificationCtrl="ngModel" placeholder="Enter Qualification" name="qualification" required />
+            </fieldset>
+
+            <div class="form-group">
+                <label for="workExprience">Work Exprience</label>
+                <input type="text" [(ngModel)]="vacancy.workExperience" class="form-control" #exprienceCtrl="ngModel" placeholder="Enter Work Exprience" name="workExperience" required />
+            </div>
+
+            <fieldset class="form-group">
+                <label for="location">Location</label>
+                <input type="text" [(ngModel)]="vacancy.location" class="form-control" #locationCtrl="ngModel" placeholder="Enter Location" name="location" required>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="postedDate">Posted Date</label>
+                <input type="date" [(ngModel)]="vacancy.postedDate" class="form-control" #postedDateCtrl="ngModel" name="postedDate" required/>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="deadlineDate">Deadline Date</label>
+                <input type="date" [(ngModel)]="vacancy.deadlineDate" class="form-control" #deadlineDateCtrl="ngModel" name="deadlineDate" required/>
+            </fieldset>
+            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+        </form>
+    </div>
+</div>
