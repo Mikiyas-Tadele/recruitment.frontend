@@ -1,6 +1,7 @@
-<div class="row">
+<div class="card">
+    <form #form="ngForm" class="p-5">
+<div class="card-body">
     <div class="col-lg-6">
-        <form #form="ngForm" class="p-5">
             <fieldset class="form-group">
                 <label for="title">Job title</label>
                 <input type="text" [(ngModel)]="vacancy.title" class="form-control" #titleCtrl="ngModel" class="form-control" name="title" required />
@@ -30,7 +31,13 @@
                 <label for="deadlineDate">Deadline Date</label>
                 <input type="date" [(ngModel)]="vacancy.deadlineDate" class="form-control" #deadlineDateCtrl="ngModel" name="deadlineDate" required/>
             </fieldset>
-            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
-        </form>
     </div>
+   
+</div>
+<div class="card-footer col-lg-6">
+    <button type="submit" class="btn btn-primary" (click)="save()">Save</button>&nbsp;
+    <button type="button" class="btn btn-success" (click)="save()">Clear</button>&nbsp;
+    <button type="button" class="btn btn-defualt" (click)="save()">Back</button>
+</div>
+</form>
 </div>

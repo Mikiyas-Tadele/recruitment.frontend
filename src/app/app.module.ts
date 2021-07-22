@@ -21,11 +21,8 @@ const baseUrl = 'http://localhost:8080/api';
         LanguageTranslationModule,
         AppRoutingModule
     ],
-<<<<<<< HEAD
     declarations: [AppComponent, ApplicantHeaderComponent],
-    providers: [AuthGuard],
-=======
-    declarations: [AppComponent, ApplyVacancyComponent, VacancyPostComponent, ApplicantHeaderComponent],
+    bootstrap: [AppComponent],
     providers: [AuthGuard,
         {
             provide: HTTP_INTERCEPTORS,
@@ -33,7 +30,5 @@ const baseUrl = 'http://localhost:8080/api';
             multi: true
           },
         { provide: 'BASE_API_URL', useValue: baseUrl }],
->>>>>>> cc4789790bdeca521ac7400c4292827d3f883f3a
-    bootstrap: [AppComponent]
 })
 export class AppModule {}
