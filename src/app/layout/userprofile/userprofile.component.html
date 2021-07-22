@@ -1,25 +1,11 @@
 <div class="row">
     <div class="col-lg-6">
         <form #form="ngForm">
-            <div class="container">
-                <ul class="nav nav-tabs">
-                    <!-- <li class="active"><a data-toggle="tab" href="#basicInfoTab">User Information</a></li>
-                    <li><a data-toggle="tab" href="#educationTab">Educational Backgrounds</a></li>
-                    <li><a data-toggle="tab" href="#experienceTab">Work Expriences</a></li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" id="basicinfo-tab" [ngClass]="{ 'active':activeMainTab==='basicInfoTab'}" (click)="setActiveTab('basicInfoTab')" data-toggle="tab"  role="tab" aria-controls="basicinfo" aria-selected="true">Basic Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="education-tab" [ngClass]="{ 'active':activeMainTab==='educationTab'}" (click)="setActiveTab('educationTab')" data-toggle="tab"  role="tab" aria-controls="education" aria-selected="false">Education Background</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="experience-tab" [ngClass]="{ 'active':activeMainTab==='experienceTab'}" (click)="setActiveTab($event, 'experienceTab')" data-toggle="tab"  role="tab" aria-controls="experience" aria-selected="false">Work Experience</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="basicInfoTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='basicInfoTab'}" id="basic-info" role="tabpanel" aria-labelledby="basicinfo-tab">
-                        <fieldset class="form-group">
+            <ngb-tabset [destroyOnHide]="false">
+  
+                <ngb-tab title="Basic Info">
+                  <ng-template ngbTabContent>
+                  <fieldset class="form-group">
                             <label for="fullName">Full Name</label>
                             <input class="form-control" type="text" name="fullName" [(ngModel)]="userprofile.fullName" disabled/>
                         </fieldset>
@@ -65,8 +51,11 @@
                                 <input type="tel" class="form-control" [(ngModel)]="userprofile.fPhone" name="fphone" />
                             </div>
                         </fieldset>
-                    </div>
-                    <div id="experienceTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='educationTab'}" id="education" role="tabpanel" aria-labelledby="educationtab">
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>Work Experience</ng-template>
+                    <ng-template ngbTabContent>
                         <fieldset class="form-group">
                             <div class="form-group">
                                 <label for="position">Position</label>
@@ -91,8 +80,11 @@
                                 <input type="date" class="form-control" [(ngModel)]="userprofile.workExperiences.endDate" name="endDate" />
                             </div>
                         </fieldset>
-                    </div>
-                    <div id="educationTab" class="tab-pane fade" [ngClass]="{ 'show active':activeMainTab==='experienceTab'}" id="experience" role="tabpanel" aria-labelledby="experience-tab">
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>Education Background</ng-template>
+                    <ng-template ngbTabContent>
                         <fieldset class="form-group">
                             <div class="form-group">
                                 <label for="field">Field of Education</label>
@@ -117,9 +109,9 @@
                                 <input type="number" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.yearOfGraduation" name="graduationYear" />
                             </div>
                         </fieldset>
-                    </div>
-                </div>
-            </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
             <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
         </form>
     </div>

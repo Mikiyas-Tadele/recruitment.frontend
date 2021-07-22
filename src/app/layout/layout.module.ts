@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -20,7 +20,8 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
         LayoutRoutingModule,
         TranslateModule,
         NgbDropdownModule,
-        FormsModule
+        FormsModule,
+        NgbModule
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent, VacancyPostComponent, ApplyVacancyComponent, PostVacancyComponent, UserprofileComponent]
 })
