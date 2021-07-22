@@ -11,7 +11,7 @@ import { AuthGuard } from './shared';
 import { ApplicantHeaderComponent } from './applicant-header/applicant-header.component';
 import { AuthHeaderInterceptor } from './shared/guard/auth-header.interceptor';
 
-const baseUrl = 'http://localhost:8080/api';
+const baseUrl = 'http://172.18.10.145:8080/api';
 @NgModule({
     imports: [
         CommonModule,

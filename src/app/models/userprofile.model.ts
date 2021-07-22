@@ -12,11 +12,6 @@ export class Userprofile {
      mPhone1: Number;
      mPhone2: string;
      fPhone: string;
-     educationalBackgrounds: Education;
-     workExperiences: WorkExperience;
-
-      constructor(education: Education, experience: WorkExperience) {
-        this.educationalBackgrounds = education;
-        this.workExperiences = experience;
-     }
+     educationalBackgrounds: Education[] = [];
+     workExperiences: WorkExperience[] = [];
 }

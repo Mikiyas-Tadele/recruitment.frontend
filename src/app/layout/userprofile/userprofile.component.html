@@ -1,118 +1,268 @@
-<div class="row">
-    <div class="col-lg-6">
-        <form #form="ngForm">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
             <ngb-tabset [destroyOnHide]="false">
   
                 <ngb-tab title="Basic Info">
                   <ng-template ngbTabContent>
+                      <div class="row">
+                          <div class="col-md-6">
                   <fieldset class="form-group">
+                    <div [formGroup]="userForm">
                             <label for="fullName">Full Name</label>
-                            <input class="form-control" type="text" name="fullName" [(ngModel)]="userprofile.fullName" disabled/>
+                            <input class="form-control" formControlName="fullName" type="text" name="fullName" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.fullName.touched || submitted) && userFormControl.fullName.errors?.required">
+                            Name is required
+                        </span>
+                    </div>
                         </fieldset>
 
                         <fieldset class="form-group">
+                            <div [formGroup]="userForm">
                             <label for="email">E-Mail</label>
-                            <input type="email" name="email" [(ngModel)]="userprofile.email" class="form-control" disabled>
+                            <input type="email" name="email" formControlName="email" class="form-control" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.email.touched || submitted) && userFormControl.email.errors?.required">
+                            Email is required
+                        </span>
+                    </div>
                         </fieldset>
 
-                        <div class="form-group">
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
                             <label for="gender">Gender</label>
-                            <select class="form-control" name="gender" [(ngModel)]="userprofile.gender">
+                            <select class="form-control" name="gender" formControlName="gender" >
                               <option  value="">Please select your gender</option>
                               <option  value="Male">Male</option>
                               <option value="Female">Female</option>
                             </select>
-                        </div>
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.gender.touched || submitted) && userFormControl.gender.errors?.required">
+                            Gender is required
+                        </span>
+                    </div>
+                        </fieldset>
 
                         <fieldset class="form-group">
+                            <div [formGroup]="userForm">
                             <label for="dateofBirth">Date of Birth</label>
-                            <input type="text" name="dateofBirth" [(ngModel)]="userprofile.dateOfBirth" class="form-control" />
+                            <input type="text" name="dateofBirth" formControlName="dateOfBirth"  class="form-control" />
+                           
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.dateOfBirth.touched || submitted) && userFormControl.dateOfBirth.errors?.required">
+                            Date of Birth is required
+                        </span>
+                    </div>
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label for="disability">Text area</label>
-                            <input type="text" name="disability" [(ngModel)]="userprofile.disability" class="form-control" />
+                            <div [formGroup]="userForm">
+                            <label for="disability">Disability</label>
+                            <input type="text" name="disability" formControlName="disability"  class="form-control" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.disability.touched || submitted) && userFormControl.disability.errors?.required">
+                            Disability is required
+                        </span>
+                    </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="userForm">
                                 <label for="mphone">Primary Phone Number</label>
-                                <input type="tel" class="form-control" [(ngModel)]="userprofile.mPhone1" name="mphone1" />
-                            </div>
+                                <input type="tel" class="form-control" formControlName="mPhone"  name="mphone1" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.mPhone.touched || submitted) && userFormControl.mPhone.errors?.required">
+                            Primary Phone number is required
+                        </span>
+                    </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="userForm">
                                 <label for="mphone2">Secondary Phone Number</label>
-                                <input type="tel" class="form-control" [(ngModel)]="userprofile.mPhone2" name="mphone2" />
+                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" />
+                                
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="userForm">
                                 <label for="fphone">Office Phone Number</label>
-                                <input type="tel" class="form-control" [(ngModel)]="userprofile.fPhone" name="fphone" />
+                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone" />
                             </div>
                         </fieldset>
+                        </div>
+                        </div>
                     </ng-template>
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>Work Experience</ng-template>
                     <ng-template ngbTabContent>
+                     
+                        <form [formGroup]="experienceForm">
+                            <div class="row">
+                                <div class="col-md-6">
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="experienceForm">
                                 <label for="position">Position</label>
-                                <input type="text" class="form-control" [(ngModel)]="userprofile.workExperiences.position" name="position" />
+                                <input type="text" class="form-control" formControlName="position"  name="position" />
+                                <span class="text-danger"
+                            *ngIf="(experienceFormControl.position.touched || submitted) && experienceFormControl.position.errors?.required">
+                            Position is required
+                        </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="experienceForm">
                                 <label for="orgName">Organization Name</label>
-                                <input type="text" name="orgName" class="form-control" [(ngModel)]="userprofile.workExperiences.organization" name="orgName" />
+                                <input type="text" name="orgName" class="form-control" formControlName="orgName" name="orgName" />
+                                <span class="text-danger"
+                                *ngIf="(experienceFormControl.orgName.touched || submitted) && experienceFormControl.orgName.errors?.required">
+                                Organization name is required
+                            </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="experienceForm">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" [(ngModel)]="userprofile.workExperiences.startDate" name="startDate" />
+                                <input type="date" class="form-control" formControlName="startDate"  name="startDate" />
+                                <span class="text-danger"
+                            *ngIf="(experienceFormControl.startDate.touched || submitted) && experienceFormControl.startDate.errors?.required">
+                            Start date is required
+                        </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="experienceForm">
                                 <label for="endDate">End Date </label>
-                                <input type="date" class="form-control" [(ngModel)]="userprofile.workExperiences.endDate" name="endDate" />
-                            </div>
+                                <input type="date" class="form-control" formControlName="endDate"  name="endDate" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(experienceFormControl.endDate.touched || submitted) && experienceFormControl.endDate.errors?.required">
+                            End date is required
+                        </span>
+                    </div>
                         </fieldset>
+                        <button type="button" class="btn btn-primary" (click)="addExperiences()">Add</button>
+                    </div>
+                </div>
+                    </form>
+                  
+                    <div class="row">
+                        <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Organization Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="experiences != null || experiences != ' '">
+                          <tr *ngFor="let experience of experiences; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{experience.organization}}</td>
+                            <td>{{experience.position}}</td>
+                            <td>{{experience.startDate}}</td>
+                            <td>{{experience.endDate}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="experiences == null">
+                            <tr>
+                                <td>1</td>
+                            <td colspan="4">You didn't add education yet</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      </div>
                     </ng-template>
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>Education Background</ng-template>
                     <ng-template ngbTabContent>
+                        <form [formGroup]="educationForm">
+                            <div class="row">
+                             <div class="col-md-6">
                         <fieldset class="form-group">
-                            <div class="form-group">
+                                <div [formGroup]="educationForm">
                                 <label for="field">Field of Education</label>
-                                <input type="text" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.fieldOfEducation" name="field" />
+                                <input type="text" class="form-control" formControlName="field" name="field" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.field.touched || submitted) && educationFormControl.field.errors?.required">
+                                Field of education is required
+                            </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="educationForm">
                                 <label for="qualification">Qualification</label>
-                                <input type="tel" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.qualification" name="qualification" />
+                                <input type="tel" class="form-control" formControlName="qualification"  name="qualification" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.qualification.touched || submitted) && educationFormControl.qualification.errors?.required">
+                                Qualification is required
+                            </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="educationForm">
                                 <label for="university">University Name</label>
-                                <input type="text" name="university" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.university" name="university" />
+                                <input type="text" name="university" class="form-control" formControlName="university"  name="university" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.university.touched || submitted) && educationFormControl.university.errors?.required">
+                                End date is required
+                            </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
-                            <div class="form-group">
+                            <div [formGroup]="educationForm">
                                 <label for="graduationYear">Year of Graduation</label>
-                                <input type="number" class="form-control" [(ngModel)]="userprofile.educationalBackgrounds.yearOfGraduation" name="graduationYear" />
+                                <input type="Year" class="form-control" formControlName="graduationYear"  name="graduationYear" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.graduationYear.touched || submitted) && educationFormControl.graduationYear.errors?.required">
+                                Year of Graduation is required
+                            </span>
                             </div>
                         </fieldset>
+                        <button type="button" class="btn btn-primary" (click)="addEducation()">Add</button>                        
+                    </div>
+                    </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th>Qualification</th>
+                            <th scope="col">Field of Education</th>
+                            <th scope="col">University Name</th>
+                            <th scope="col">Year of Graduation</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="experiences != null">
+                          <tr *ngFor="let education of educations; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{education.qualification}}</td>
+                            <td>{{education.fieldOfEducation}}</td>
+                            <td>{{education.university}}</td>
+                            <td>{{education.yearOfGraduation}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="experiences == null">
+                            <tr>
+                                <td>1</td>
+                            <td colspan="4">You didn't add experience yet</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      </div>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
-            <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
-</div>

@@ -10,7 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { VacancyPostComponent } from './vacancy-post/vacancy-post.component';
 import { ApplyVacancyComponent } from './apply-vacancy/apply-vacancy.component';
 import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
@@ -21,6 +21,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
         TranslateModule,
         NgbDropdownModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent, VacancyPostComponent, ApplyVacancyComponent, PostVacancyComponent, UserprofileComponent]
