@@ -34,28 +34,22 @@ url = '/api';
       mPhone: ['', Validators.required],
       mPhone2: ['', Validators.required],
       fPhone: ['', Validators.required],
-      // position: ['', Validators.required],
-      // orgName: ['', Validators.required],
-      // startDate: ['', Validators.required],
-      // endDate: ['', Validators.required],
-      // field: ['', Validators.required],
-      // qualification: ['', Validators.required],
-      // university: ['', Validators.required],
-      // graduationYear: ['', Validators.required],
     });
 
     this.experienceForm = this.fb.group({
       position: ['', Validators.required],
-      orgName: ['', Validators.required],
+      organization: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      salary: ['', Validators.required],
     });
 
     this.educationForm = this.fb.group ({
-      field: ['', Validators.required],
+      fieldOfEducation: ['', Validators.required],
       qualification: ['', Validators.required],
       university: ['', Validators.required],
-      graduationYear: ['', Validators.required],
+      yearOfGraduation: ['', Validators.required],
+      cgpa: ['', Validators.required],
     });
   }
   get userFormControl() {
@@ -70,27 +64,28 @@ url = '/api';
   setActiveTab(event, tab) {
     this.activeMainTab = tab;
   }
-  onSubmit() {
+  onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     console.log("Form submitted");
-    if (this.userForm.valid) {
-      this.userprofile.educationalBackgrounds = this.educations;
-      this.userprofile.workExperiences = this.experiences;
-      this.repo.saveApplication(this.userprofile, this.url);
+    if (valid) {
+      value.educationalBackgrounds = this.educations;
+      value.workExperiences = this.experiences;
+      this.repo.saveApplication(value, this.url);
     }
     else {
       console.log("form not valid!!");
     }
   }
-  addEducation() {
-    if (this.educationForm.valid) {
-    console.log("Education added " + JSON.stringify(this.education));
-    this.educations.push(this.education);
+  addEducation({value, valid}: { value: Education, valid: boolean }) {
+    console.log("education form submitted Valid:"+ valid);
+    console.log(JSON.stringify(value));
+    if (valid) {
+    this.educations.push(value);
     this.education = new Education();
     }
   }
-  addExperiences() {
-    if (this.experienceForm.valid) {
-    this.experiences.push(this.experience);
+  addExperiences({value, valid}: { value: WorkExperience, valid: boolean }) {
+    if (valid) {
+    this.experiences.push(value);
     this.experience = new WorkExperience();
     }
   }

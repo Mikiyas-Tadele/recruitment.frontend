@@ -1,4 +1,4 @@
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="form">
             <ngb-tabset [destroyOnHide]="false">
   
                 <ngb-tab title="Basic Info">
@@ -8,10 +8,10 @@
                   <fieldset class="form-group">
                     <div [formGroup]="userForm">
                             <label for="fullName">Full Name</label>
-                            <input class="form-control" formControlName="fullName" type="text" name="fullName" />
+                            <input class="form-control" formControlName="fullName" type="text" name="fullName" required/>
                             
                             <span class="text-danger"
-                            *ngIf="(userFormControl.fullName.touched || submitted) && userFormControl.fullName.errors?.required">
+                            *ngIf="(userFormControl.fullName.touched || userFormControl.fullName.drty) && userFormControl.fullName.invalid">
                             Name is required
                         </span>
                     </div>
@@ -20,10 +20,10 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                             <label for="email">E-Mail</label>
-                            <input type="email" name="email" formControlName="email" class="form-control" />
+                            <input type="email" name="email" formControlName="email" class="form-control" required/>
                             
                             <span class="text-danger"
-                            *ngIf="(userFormControl.email.touched || submitted) && userFormControl.email.errors?.required">
+                            *ngIf="(userFormControl.email.touched || userFormControl.email.drty) && userFormControl.email.invalid">
                             Email is required
                         </span>
                     </div>
@@ -39,7 +39,7 @@
                             </select>
                             
                             <span class="text-danger"
-                            *ngIf="(userFormControl.gender.touched || submitted) && userFormControl.gender.errors?.required">
+                            *ngIf="(userFormControl.gender.touched || userFormControl.gender.drty) && userFormControl.gender.invalid">
                             Gender is required
                         </span>
                     </div>
@@ -51,7 +51,7 @@
                             <input type="text" name="dateofBirth" formControlName="dateOfBirth"  class="form-control" />
                            
                             <span class="text-danger"
-                            *ngIf="(userFormControl.dateOfBirth.touched || submitted) && userFormControl.dateOfBirth.errors?.required">
+                            *ngIf="(userFormControl.dateOfBirth.touched || userFormControl.dateOfBirth.drty) && userFormControl.dateOfBirth.invalid">
                             Date of Birth is required
                         </span>
                     </div>
@@ -63,7 +63,7 @@
                             <input type="text" name="disability" formControlName="disability"  class="form-control" />
                             
                             <span class="text-danger"
-                            *ngIf="(userFormControl.disability.touched || submitted) && userFormControl.disability.errors?.required">
+                            *ngIf="(userFormControl.disability.touched || userFormControl.disability.drty) && userFormControl.disability.invalid">
                             Disability is required
                         </span>
                     </div>
@@ -74,7 +74,7 @@
                                 <input type="tel" class="form-control" formControlName="mPhone"  name="mphone1" />
                             
                             <span class="text-danger"
-                            *ngIf="(userFormControl.mPhone.touched || submitted) && userFormControl.mPhone.errors?.required">
+                            *ngIf="(userFormControl.mPhone.touched || userFormControl.mPhone.drty) && userFormControl.invalid">
                             Primary Phone number is required
                         </span>
                     </div>
@@ -108,17 +108,17 @@
                                 <label for="position">Position</label>
                                 <input type="text" class="form-control" formControlName="position"  name="position" />
                                 <span class="text-danger"
-                            *ngIf="(experienceFormControl.position.touched || submitted) && experienceFormControl.position.errors?.required">
+                            *ngIf="(experienceFormControl.position.touched || experienceFormControl.position.drty) && experienceFormControl.position.invalid">
                             Position is required
                         </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
-                                <label for="orgName">Organization Name</label>
-                                <input type="text" name="orgName" class="form-control" formControlName="orgName" name="orgName" />
+                                <label for="organization">Organization Name</label>
+                                <input type="text" class="form-control" formControlName="organization" name="organization" />
                                 <span class="text-danger"
-                                *ngIf="(experienceFormControl.orgName.touched || submitted) && experienceFormControl.orgName.errors?.required">
+                                *ngIf="(experienceFormControl.organization.touched || experienceFormControl.organization.drty) && (experienceFormControl.organization.invalid)">
                                 Organization name is required
                             </span>
                             </div>
@@ -128,7 +128,7 @@
                                 <label for="startDate">Start Date</label>
                                 <input type="date" class="form-control" formControlName="startDate"  name="startDate" />
                                 <span class="text-danger"
-                            *ngIf="(experienceFormControl.startDate.touched || submitted) && experienceFormControl.startDate.errors?.required">
+                            *ngIf="(experienceFormControl.startDate.touched || experienceFormControl.startDate.drty) && experienceFormControl.startDate.invalid">
                             Start date is required
                         </span>
                             </div>
@@ -139,13 +139,20 @@
                                 <input type="date" class="form-control" formControlName="endDate"  name="endDate" />
                             
                             <span class="text-danger"
-                            *ngIf="(experienceFormControl.endDate.touched || submitted) && experienceFormControl.endDate.errors?.required">
+                            *ngIf="(experienceFormControl.endDate.touched || experienceFormControl.endDate.drty) && experienceFormControl.endDate.invalid">
                             End date is required
                         </span>
                     </div>
                         </fieldset>
-                        <button type="button" class="btn btn-primary" (click)="addExperiences()">Add</button>
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="salary">Salary </label>
+                                <input type="number" class="form-control" formControlName="salary"  name="salary" />
+                             </div>
+                        </fieldset>
+                        <button type="button" class="btn btn-primary" (click)="addExperiences(experienceForm)">Add</button>
                     </div>
+                    
                 </div>
                     </form>
                   
@@ -159,6 +166,7 @@
                             <th scope="col">Position</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Salary</th>
                           </tr>
                         </thead>
                         <tbody *ngIf="experiences != null || experiences != ' '">
@@ -168,6 +176,7 @@
                             <td>{{experience.position}}</td>
                             <td>{{experience.startDate}}</td>
                             <td>{{experience.endDate}}</td>
+                            <td>{{experience.salary}}</td>
                           </tr>
                         </tbody>
                         <tbody *ngIf="experiences == null">
@@ -189,10 +198,10 @@
                              <div class="col-md-6">
                         <fieldset class="form-group">
                                 <div [formGroup]="educationForm">
-                                <label for="field">Field of Education</label>
-                                <input type="text" class="form-control" formControlName="field" name="field" />
+                                <label for="fieldOfEducation">Field of Education</label>
+                                <input type="text" class="form-control" formControlName="fieldOfEducation" name="field" />
                                 <span class="text-danger"
-                                *ngIf="(educationFormControl.field.touched || submitted) && educationFormControl.field.errors?.required">
+                                *ngIf="(educationFormControl.fieldOfEducation.touched || educationFormControl.fieldOfEducation.drty) && educationFormControl.fieldOfEducation.invalid">
                                 Field of education is required
                             </span>
                             </div>
@@ -202,7 +211,7 @@
                                 <label for="qualification">Qualification</label>
                                 <input type="tel" class="form-control" formControlName="qualification"  name="qualification" />
                                 <span class="text-danger"
-                                *ngIf="(educationFormControl.qualification.touched || submitted) && educationFormControl.qualification.errors?.required">
+                                *ngIf="(educationFormControl.qualification.touched || educationFormControl.qualification.drty) && educationFormControl.qualification.invalid">
                                 Qualification is required
                             </span>
                             </div>
@@ -210,24 +219,34 @@
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
                                 <label for="university">University Name</label>
-                                <input type="text" name="university" class="form-control" formControlName="university"  name="university" />
+                                <input type="text" class="form-control" formControlName="university"  name="university" />
                                 <span class="text-danger"
-                                *ngIf="(educationFormControl.university.touched || submitted) && educationFormControl.university.errors?.required">
+                                *ngIf="(educationFormControl.university.touched || educationFormControl.university.drty) && educationFormControl.university.invalid">
                                 End date is required
                             </span>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="graduationYear">Year of Graduation</label>
-                                <input type="Year" class="form-control" formControlName="graduationYear"  name="graduationYear" />
+                                <label for="cgpa">CGPA</label>
+                                <input type="number" name="cgpa" class="form-control" formControlName="cgpa"  />
                                 <span class="text-danger"
-                                *ngIf="(educationFormControl.graduationYear.touched || submitted) && educationFormControl.graduationYear.errors?.required">
+                                *ngIf="(educationFormControl.cgpa.touched || educationFormControl.cgpa.drty) && educationFormControl.cgpa.invalid">
+                                CGPA is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="yearOfGraduation">Year of Graduation</label>
+                                <input type="Year" class="form-control" formControlName="yearOfGraduation"  name="yearOfGraduation" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.yearOfGraduation.touched || educationFormControl.yearOfGraduation.drty) && educationFormControl.yearOfGraduation.invalid">
                                 Year of Graduation is required
                             </span>
                             </div>
                         </fieldset>
-                        <button type="button" class="btn btn-primary" (click)="addEducation()">Add</button>                        
+                        <button type="button" class="btn btn-primary" (click)="addEducation(educationForm)">Add</button>                        
                     </div>
                     </div>
                     </form>
@@ -240,6 +259,7 @@
                             <th>Qualification</th>
                             <th scope="col">Field of Education</th>
                             <th scope="col">University Name</th>
+                            <th scope="col">CGPA</th>
                             <th scope="col">Year of Graduation</th>
                           </tr>
                         </thead>
@@ -249,6 +269,7 @@
                             <td>{{education.qualification}}</td>
                             <td>{{education.fieldOfEducation}}</td>
                             <td>{{education.university}}</td>
+                            <td>{{education.cgpa}}</td>
                             <td>{{education.yearOfGraduation}}</td>
                           </tr>
                         </tbody>
