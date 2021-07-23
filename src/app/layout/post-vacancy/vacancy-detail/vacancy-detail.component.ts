@@ -56,4 +56,16 @@ export class VacancyDetailComponent implements OnInit {
        this.messageService.add({severity: 'error', summary: 'Saved', detail: err});
       });
     }
+     edit(data: VacancyDetail) {
+      this.setForm(data);
+    }
+
+    clear() {
+      this.vacancyDetailForm.reset({});
+    }
+
+    back() {
+      this.router.navigate(['vacancy']);
+    }
+
   }

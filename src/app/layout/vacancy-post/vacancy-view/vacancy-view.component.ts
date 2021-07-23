@@ -14,6 +14,7 @@ export class VacancyViewComponent implements OnInit {
 
 
   vacancyForm: FormGroup;
+  vacancyDetails: any = [];
   constructor(private vacancyService: VancancyService, private route: ActivatedRoute,
      private router: Router) { }
 
@@ -50,9 +51,10 @@ export class VacancyViewComponent implements OnInit {
       postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
       deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en'),
     });
+    this.vacancyDetails = vacancy.vacancyModelDetailList;
   }
 
   back() {
-
+   this.router.navigate(['vacancy']);
   }
 }
