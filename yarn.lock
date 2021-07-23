@@ -321,7 +321,7 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     "to-fast-properties" "^2.0.0"
 
-"@ng-bootstrap/ng-bootstrap@5.1.2":
+"@ng-bootstrap/ng-bootstrap@^5.1.2":
   "integrity" "sha512-wNH8/xi4+Tx4CSUlJNPphkTva6/TnhhLhoPnSW36pvW/BSJSfX8IribDl666vyKGcJPPprSK0AXECfpe2NkKvg=="
   "resolved" "https://registry.npmjs.org/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-5.1.2.tgz"
   "version" "5.1.2"
@@ -1155,7 +1155,7 @@
     "multicast-dns" "^6.0.1"
     "multicast-dns-service-types" "^1.1.0"
 
-"bootstrap@^4.1.1":
+"bootstrap@^4.6.0":
   "integrity" "sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw=="
   "resolved" "https://registry.npmjs.org/bootstrap/-/bootstrap-4.6.0.tgz"
   "version" "4.6.0"
