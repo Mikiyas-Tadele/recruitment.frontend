@@ -1,6 +1,6 @@
 <div class="card">
-  <form  role="form" [formGroup]="vacancyForm" class="p-5" >
 <div class="card-body">
+  <form  role="form" [formGroup]="vacancyForm" class="p-5" >
   <div class="col-lg-6">
           <fieldset class="form-group">
               <label for="title">Job title</label>
@@ -32,10 +32,26 @@
               <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate">
           </fieldset>
   </div>
- 
+</form>
+  <div class="row" *ngFor="let item of vacancyDetails">
+    <div class="col-lg-6">
+      <fieldset class="form-group">
+          <label for="description">{{item.title}}</label>
+      </fieldset>
+
+      <fieldset class="form-group">
+          <p-editor [(ngModel)]="item.description" [style]="{'height':'200px'}" [readonly]="true" name ="description">
+            <p-header>
+              <span class="ql-formats">
+                  
+              </span>
+          </p-header>
+          </p-editor>
+      </fieldset>
+</div>
+  </div>
 </div>
 <div class="card-footer col-lg-6">
-  <button type="button" class="btn btn-defualt" (click)="back()">Back</button>
+  <button type="button" class="btn btn-primary" (click)="back()">Back</button>
 </div>
-</form>
 </div>

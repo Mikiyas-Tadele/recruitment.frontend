@@ -9,6 +9,8 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MessageService} from 'primeng/api';
 import {EditorModule} from 'primeng/editor';
+import { ButtonModule } from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -34,7 +36,9 @@ import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-de
         ToastModule,
         MessagesModule,
         MessageModule,
-        EditorModule
+        EditorModule,
+        ButtonModule,
+        PanelModule
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent, VacancyPostComponent,
         ApplyVacancyComponent, PostVacancyComponent, UserprofileComponent, VacancyViewComponent, VacancyDetailComponent],
