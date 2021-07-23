@@ -16,6 +16,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'vacancy', component: VacancyPostComponent, data : {title: 'Vacancies Post'}},
             {path: 'vacancy-view/:id', component: VacancyViewComponent},
+            {path: 'apply/:id', component: ApplyVacancyComponent},
             {path: 'apply', component: ApplyVacancyComponent, data : {title: 'Vacancies Post'}},
             {path: 'post-vacancy', component: PostVacancyComponent, data: {title: 'Post Vacancy'}},
             {path: 'user-profile', component: UserprofileComponent, data: {title: 'User Profile'}},

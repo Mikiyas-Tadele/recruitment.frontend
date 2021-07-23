@@ -25,5 +25,7 @@ export class VacancyPostComponent implements OnInit {
   goToView(data: Vacancy) {
     this.router.navigate(['vacancy-view/' + data.id]);
   }
-
+  apply(data: Vacancy) {
+    this.router.navigate(['apply/' + data.id]);
+  }
 }
