@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Education } from 'src/app/models/education.model';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 import { Userprofile } from 'src/app/models/userprofile.model';
@@ -17,7 +18,7 @@ experience = new WorkExperience();
 userprofile = new Userprofile();
 experiences: WorkExperience[] = [];
 educations: Education[] = [];
-
+userProfile: Userprofile;
 userForm: FormGroup;
 educationForm: FormGroup;
 experienceForm: FormGroup;
@@ -51,6 +52,11 @@ url = '/api';
       yearOfGraduation: ['', Validators.required],
       cgpa: ['', Validators.required],
     });
+
+      this.repo.getUserProfile().subscribe(res => 
+        this.userProfile = res
+        );
+        console.log(this.userProfile);
   }
   get userFormControl() {
     return this.userForm.controls;
