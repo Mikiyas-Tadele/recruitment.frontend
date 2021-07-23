@@ -7,6 +7,7 @@ import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { Userprofile } from '../models/userprofile.model';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { VacancyViewComponent } from './vacancy-post/vacancy-view/vacancy-view.component';
+import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'vacancy', component: VacancyPostComponent, data : {title: 'Vacancies Post'}},
+            {path: 'vacancyDetailForm/:vacancyId', component: VacancyDetailComponent},
             {path: 'vacancy-view/:id', component: VacancyViewComponent},
             {path: 'apply/:id', component: ApplyVacancyComponent},
             {path: 'apply', component: ApplyVacancyComponent, data : {title: 'Vacancies Post'}},

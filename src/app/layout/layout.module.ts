@@ -8,6 +8,7 @@ import { ToastModule } from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MessageService} from 'primeng/api';
+import {EditorModule} from 'primeng/editor';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -18,6 +19,7 @@ import { ApplyVacancyComponent } from './apply-vacancy/apply-vacancy.component';
 import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { VacancyViewComponent } from './vacancy-post/vacancy-view/vacancy-view.component';
+import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
 
 
 @NgModule({
@@ -32,9 +34,10 @@ import { VacancyViewComponent } from './vacancy-post/vacancy-view/vacancy-view.c
         ToastModule,
         MessagesModule,
         MessageModule,
+        EditorModule
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent, VacancyPostComponent,
-        ApplyVacancyComponent, PostVacancyComponent, UserprofileComponent, VacancyViewComponent],
+        ApplyVacancyComponent, PostVacancyComponent, UserprofileComponent, VacancyViewComponent, VacancyDetailComponent],
     providers: [MessageService]
 })
 export class LayoutModule {}

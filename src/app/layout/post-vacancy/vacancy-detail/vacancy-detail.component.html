@@ -1,0 +1,41 @@
+<div class="row">
+  <p-toast [style]="{marginTop: '100px'}"></p-toast>
+  <form  role="form" [formGroup]="vacancyDetailForm" (ngSubmit)="save(vacancyDetailForm)"  class="p-5">
+    <div class="card-body">
+        <div class="col-lg-6">
+                <fieldset class="form-group">
+                    <label for="title">title</label>
+                    <input type="text" formControlName="title" class="form-control" class="form-control" name="title" required />
+                </fieldset>
+    
+                <fieldset class="form-group">
+                    <label for="description">Description</label>
+                    <p-editor formControlName="description" [style]="{'height':'320px'}" name="description"></p-editor>
+                </fieldset>
+        </div>
+       
+    </div>
+    <div class="card-footer col-lg-6">
+        <button type="submit" class="btn btn-primary" (click)="save()">Save</button>&nbsp;
+        <button type="button" class="btn btn-success" (click)="save()">Clear</button>&nbsp;
+        <button type="button" class="btn btn-defualt" (click)="save()">Back</button>
+    </div>
+    </form>
+</div>
+<div class="row">
+ <table>
+   <th>
+     <tr>
+     <td>Title</td>
+     <td>Description</td>
+     <td></td>
+     </tr>
+   </th>
+   <tbody>
+     <tr *ngFor="let item of vacancyDetails">
+     <td>{{item.title}}</td>
+     <td>{{item.description}}</td>
+    </tr>
+   </tbody>
+ </table>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm, FormGroupDirective, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Vacancy } from 'src/app/models/vacancy.model';
 import { VancancyService } from './vancancy.service';
@@ -12,13 +13,16 @@ import { VancancyService } from './vancancy.service';
 })
 export class PostVacancyComponent implements OnInit {
 vacancyForm: FormGroup;
-  constructor(private vacancyService: VancancyService, private messageService: MessageService) { }
+vacancy: any;
+  constructor(private vacancyService: VancancyService, private messageService: MessageService,
+     private router: Router) { }
 
   ngOnInit() {
     this.initForm();
   }
 save({value, valid}: { value: Vacancy, valid: boolean }) {
    this.vacancyService.saveVacancy(value).subscribe(res => {
+     this.vacancy = res;
     this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Data Saved Successfully'});
    }, err => {
     this.messageService.add({severity: 'error', summary: 'Saved', detail: err});
@@ -48,4 +52,11 @@ setForm(vacancy: Vacancy) {
     deadlineDate: vacancy.deadlineDate
   });
 }
+
+detailForm() {
+  if (this.vacancy != null) {
+    this.router.navigate(['vacancyDetailForm/' + this.vacancy.id]);
+  }
+}
+
 }
