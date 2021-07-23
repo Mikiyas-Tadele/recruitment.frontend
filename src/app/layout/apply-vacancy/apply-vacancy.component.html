@@ -2,10 +2,8 @@
     <div class="col-lg-6">
         <form [formGroup]="applicationForm" (ngSubmit)="onSubmit(applicationForm)" class="form">
             <fieldset class="form-group">
-                <div [formGroup]="applicationForm">
-                <label for="applicationLetter">Application Letter</label>
-                <textarea  class="form-control" formControlName="applicationLetter" name="applicationLetter" rows="8"></textarea>
-                </div>
+                <label for="applicationLetter"><em>Please write application letter to apply for this vacancy.</em> </label>
+                <p-editor formControlName="applicationLetter" [style]="{'height':'320px'}"  name="applicationLetter" formControlName="applicationLetter"></p-editor>
             </fieldset>
             <!-- <span class="text-danger"
             *ngIf="(applicationFormControl.applicationLetter.touched || applicationFormControl.applicationLetter.drty) && applicationFormControl.applicationLetter.invalid">
