@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
     authenticatedResult: boolean;
     errorMessage: string;
     session: any;
+    private readonly ADMIN = 'ROLE_ADMIN';
+    private readonly APPLICANT = 'ROLE_APPLICANT';
 
     constructor(
       public router: Router,
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loginService.logout();
 
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'vacancies';
         this.authenticated = new FormGroup({
           username: new FormControl(''),
           password: new FormControl('')
@@ -39,10 +41,16 @@ export class LoginComponent implements OnInit {
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
         this.loginService.login(value.username, value.password).subscribe(
             (data) => {
+               console.log(data);
                 this.token.saveToken(data['accessToken']);
                 this.token.setUserName(value.username);
-                this.token.setAuthorities(data['authorities']);
-                this.router.navigate([this.returnUrl]);
+                this.token.setAuthorities(data['authorities'][0].authority);
+                // tslint:disable-next-line:triple-equals
+                if (this.token.getAuthorities() === this.ADMIN) {
+                  this.router.navigate(['admin/dashboard']);
+                } else {
+                  this.router.navigate([this.returnUrl]);
+                }
               },
               error => {
                 console.log(error);

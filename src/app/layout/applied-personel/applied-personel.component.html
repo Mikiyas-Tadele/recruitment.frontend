@@ -1,0 +1,60 @@
+<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true">
+  <ng-template pTemplate="caption">
+    <h5>Development Bank of Ethiopia<br>
+      Human Resource Management Directorate<br>
+      Applicants profile Summary for the Position of {{vacancyName}}
+     </h5>
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th rowspan="2">SrNo</th>
+          <th rowspan="2">Name</th>
+          <th rowspan="2">Age</th>
+          <th rowspan="2">Gender</th>
+          <th rowspan="2">Disability</th>
+          <th rowspan="2">Mobile</th>
+          <th rowspan="2">Fixed</th>
+          <th rowspan="2">Email</th>
+          <th rowspan="2">CV</th>
+          <th colspan="5">Educational Background</th>
+          <th colspan="5">Work Experience</th>
+      </tr>
+      <tr>
+          <th>Field of Education</th>
+          <th>Qualification</th>
+          <th>University</th>
+          <th>Year Of Graduation</th>
+          <th>CGPA</th>
+          <th>Organization</th>
+          <th>Position</th>
+          <th>Salary</th>
+          <th>Duration</th>
+          <th>Total Experience In Years</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-appliedPersonel>
+      <tr>
+          <td>{{appliedPersonel.id}}</td>
+          <td>{{appliedPersonel.fullName}}</td>
+          <td>{{appliedPersonel.age}}</td>
+          <td>{{appliedPersonel.gender}}</td>
+          <td>{{appliedPersonel.disability}}</td>
+          <td>{{appliedPersonel.mobilePhone1}}</td>
+          <td>{{appliedPersonel.fixedLinePhone}}</td>
+          <td>{{appliedPersonel.email}}</td>
+          <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadFile(appliedPersonel)" pTooltip="download" tooltipPosition="top"></button></td>
+          <td>{{appliedPersonel.fieldOfEducation}}</td>
+          <td>{{appliedPersonel.qualification}}</td>
+          <td>{{appliedPersonel.university}}</td>
+          <td>{{appliedPersonel.yearOfGraduation}}</td>
+          <td>{{appliedPersonel.cgpa}}</td>
+          <td>{{appliedPersonel.organization}}</td>
+          <td>{{appliedPersonel.position}}</td>
+          <td>{{appliedPersonel.salary}}</td>
+          <td>{{appliedPersonel.startDate | date :'dd/MM/yyyy'}} - {{appliedPersonel.endDate | date :'dd/MM/yyyy'}}</td>
+          <td>{{appliedPersonel.workExperienceInYears}}</td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+  </ng-template>
+</p-table>

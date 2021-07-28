@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { VacancyDetail } from 'src/app/models/vacancy.detail.model';
-import { VancancyService } from '../vancancy.service';
+import { VancancyService } from './vancancy.service';
 
 @Component({
   selector: 'app-vacancy-detail',
@@ -65,7 +65,7 @@ export class VacancyDetailComponent implements OnInit {
     }
 
     back() {
-      this.router.navigate(['vacancy']);
+      this.router.navigate(['admin/dashboard']);
     }
 
   }

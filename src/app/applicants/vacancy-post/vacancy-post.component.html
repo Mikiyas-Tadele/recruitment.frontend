@@ -1,0 +1,29 @@
+<div class="row">
+<app-applicant-header></app-applicant-header>
+</div>
+   <div class="row" style="margin-top: 5%; margin-left: 2%;margin-right: 2%;">
+    <div class="col-lg-4" *ngFor="let vacancy of vacancies">
+        <div class="card card-default mb-3">
+            <div class="card-header">
+                <i class="fa fa-bell fa-fw"></i> {{vacancy.title}}
+            </div>
+            <div class="card-body">
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4 class="timeline-title">{{vacancy.workExperience}} Year Experience</h4>
+                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago </small>
+                        </p>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{vacancy.qualification}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;
+                <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

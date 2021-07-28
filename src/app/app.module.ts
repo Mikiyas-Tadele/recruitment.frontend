@@ -8,9 +8,10 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ApplicantHeaderComponent } from './applicant-header/applicant-header.component';
 import { AuthHeaderInterceptor } from './shared/guard/auth-header.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from 'primeng/editor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const baseUrl = 'http://172.18.10.145:8080/api';
 
@@ -23,9 +24,11 @@ const baseUrl = 'http://172.18.10.145:8080/api';
         FormsModule,
         ReactiveFormsModule,
         LanguageTranslationModule,
-        AppRoutingModule
+        AppRoutingModule,
+        EditorModule,
+        NgbModule,
     ],
-    declarations: [AppComponent, ApplicantHeaderComponent],
+    declarations: [AppComponent],
     bootstrap: [AppComponent],
     providers: [AuthGuard,
         {

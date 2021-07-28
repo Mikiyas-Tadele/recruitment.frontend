@@ -1,0 +1,283 @@
+       <div class="row-container" style="margin-top: 5%; margin-left: 2%;margin-right: 2%;">
+        <p-toast [style]="{marginTop: '100px'}"></p-toast>
+       <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="form">
+            <ngb-tabset [destroyOnHide]="false">
+  
+                <ngb-tab title="Basic Info">
+                  <ng-template ngbTabContent>
+                      <div class="row">
+                          <div class="col-md-6">
+
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" formControlName="gender" >
+                              <option  value="">Please select your gender</option>
+                              <option  value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.gender.touched || userFormControl.gender.drty) && userFormControl.gender.invalid">
+                            Gender is required
+                        </span>
+                    </div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                            <label for="dateofBirth">Date of Birth</label>
+                            <input type="date" name="dateofBirth" formControlName="dateOfBirth"  class="form-control" />
+                           
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.dateOfBirth.touched || userFormControl.dateOfBirth.drty) && userFormControl.dateOfBirth.invalid">
+                            Date of Birth is required
+                        </span>
+                    </div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                            <label for="disability">Disability</label>
+                            <input type="text" name="disability" formControlName="disability"  class="form-control" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.disability.touched || userFormControl.disability.drty) && userFormControl.disability.invalid">
+                            Disability is required
+                        </span>
+                    </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                                <label for="mphone">Primary Phone Number</label>
+                                <input type="tel" class="form-control" formControlName="mPhone1"  name="mphone1" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(userFormControl.mPhone.touched || userFormControl.mPhone.drty) && userFormControl.invalid">
+                            Primary Phone number is required
+                        </span>
+                    </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                                <label for="mphone2">Secondary Phone Number</label>
+                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" />
+                                
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="userForm">
+                                <label for="fphone">Office Phone Number</label>
+                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone" />
+                            </div>
+                        </fieldset>
+                        </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>Education Background</ng-template>
+                    <ng-template ngbTabContent>
+                        <form [formGroup]="educationForm">
+                            <div class="row">
+                             <div class="col-md-6">
+                        <fieldset class="form-group">
+                                <div [formGroup]="educationForm">
+                                <label for="fieldOfEducation">Field of Education</label>
+                                <input type="text" class="form-control" formControlName="fieldOfEducation" name="field" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.fieldOfEducation.touched || educationFormControl.fieldOfEducation.drty) && educationFormControl.fieldOfEducation.invalid">
+                                Field of education is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="qualification">Qualification</label>
+                                <input type="tel" class="form-control" formControlName="qualification"  name="qualification" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.qualification.touched || educationFormControl.qualification.drty) && educationFormControl.qualification.invalid">
+                                Qualification is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="university">University Name</label>
+                                <input type="text" class="form-control" formControlName="university"  name="university" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.university.touched || educationFormControl.university.drty) && educationFormControl.university.invalid">
+                                End date is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="cgpa">CGPA</label>
+                                <input type="number" name="cgpa" class="form-control" formControlName="cgpa"  />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.cgpa.touched || educationFormControl.cgpa.drty) && educationFormControl.cgpa.invalid">
+                                CGPA is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="yearOfGraduation">Year of Graduation</label>
+                                <input type="Year" class="form-control" formControlName="yearOfGraduation"  name="yearOfGraduation" />
+                                <span class="text-danger"
+                                *ngIf="(educationFormControl.yearOfGraduation.touched || educationFormControl.yearOfGraduation.drty) && educationFormControl.yearOfGraduation.invalid">
+                                Year of Graduation is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn btn-primary" (click)="addEducation(educationForm)">Add</button>                        
+                    </div>
+                    </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th>Qualification</th>
+                            <th scope="col">Field of Education</th>
+                            <th scope="col">University Name</th>
+                            <th scope="col">CGPA</th>
+                            <th scope="col">Year of Graduation</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="experiences != null">
+                          <tr *ngFor="let education of educations; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{education.qualification}}</td>
+                            <td>{{education.fieldOfEducation}}</td>
+                            <td>{{education.university}}</td>
+                            <td>{{education.cgpa}}</td>
+                            <td>{{education.yearOfGraduation}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="experiences == null">
+                            <tr>
+                                <td>1</td>
+                            <td colspan="4">You didn't add experience yet</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      </div>
+                </ng-template>
+            </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>Work Experience</ng-template>
+                    <ng-template ngbTabContent>
+                     
+                        <form [formGroup]="experienceForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="position">Position</label>
+                                <input type="text" class="form-control" formControlName="position"  name="position" />
+                                <span class="text-danger"
+                            *ngIf="(experienceFormControl.position.touched || experienceFormControl.position.drty) && experienceFormControl.position.invalid">
+                            Position is required
+                        </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="organization">Organization Name</label>
+                                <input type="text" class="form-control" formControlName="organization" name="organization" />
+                                <span class="text-danger"
+                                *ngIf="(experienceFormControl.organization.touched || experienceFormControl.organization.drty) && (experienceFormControl.organization.invalid)">
+                                Organization name is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" formControlName="startDate"  name="startDate" />
+                                <span class="text-danger"
+                            *ngIf="(experienceFormControl.startDate.touched || experienceFormControl.startDate.drty) && experienceFormControl.startDate.invalid">
+                            Start date is required
+                        </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="endDate">End Date </label>
+                                <input type="date" class="form-control" formControlName="endDate"  name="endDate" />
+                            
+                            <span class="text-danger"
+                            *ngIf="(experienceFormControl.endDate.touched || experienceFormControl.endDate.drty) && experienceFormControl.endDate.invalid">
+                            End date is required
+                        </span>
+                    </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="experienceForm">
+                                <label for="salary">Salary </label>
+                                <input type="number" class="form-control" formControlName="salary"  name="salary" />
+                             </div>
+                        </fieldset>
+                        <button type="button" class="btn btn-primary" (click)="addExperiences(experienceForm)">Add</button>
+                    </div>
+                    
+                </div>
+                    </form>
+                  
+                    <div class="row">
+                        <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Organization Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Salary</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="experiences != null || experiences != ' '">
+                          <tr *ngFor="let experience of experiences; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{experience.organization}}</td>
+                            <td>{{experience.position}}</td>
+                            <td>{{experience.startDate | date :'dd/MM/yyyy'}}</td>
+                            <td>{{experience.startDate | date :'dd/MM/yyyy'}}</td>
+                            <td>{{experience.salary}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="experiences == null">
+                            <tr>
+                                <td>1</td>
+                            <td colspan="4">You didn't add education yet</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Upload Your CV">
+                    <ng-template ngbTabContent>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)"
+                                accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" fileLimit="1">
+                            </p-fileUpload>
+                            <br><br>
+                            </div>
+                            </div>
+                            </ng-template>
+                  </ngb-tab>
+        </ngb-tabset>
+            <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" (click)="back()">Back</button>
+        </form>
+        </div>

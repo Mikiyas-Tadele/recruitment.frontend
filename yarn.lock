@@ -130,6 +130,15 @@
   dependencies:
     "tslib" "^1.9.0"
 
+"@angular/cdk@8.0.0":
+  "integrity" "sha512-2vsRWEHNARe0iRmqgzvM67gwfRy+aKvdef4Qu9L+ndSsTrrZT3tSgG8SMn1v9SfBHnx5G8mo4d1AMquXG69AuQ=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-8.0.0.tgz"
+  "version" "8.0.0"
+  dependencies:
+    "tslib" "^1.7.1"
+  optionalDependencies:
+    "parse5" "^5.0.0"
+
 "@angular/cli@8.0.2":
   "integrity" "sha512-xXSCwTKonC6nMqKPDlEFhXjKBu85jVB+KYo2tLU+RKtgFeIF/hTaUWQTvWXRwRsQAfBhB1cwe0oijdljOItTgw=="
   "resolved" "https://registry.npmjs.org/@angular/cli/-/cli-8.0.2.tgz"
@@ -153,7 +162,7 @@
     "universal-analytics" "^0.4.20"
     "uuid" "^3.3.2"
 
-"@angular/common@^7.2.0 || ^8.0.0", "@angular/common@^8.0.0", "@angular/common@>=7.0.0", "@angular/common@8.0.0":
+"@angular/common@^7.2.0 || ^8.0.0", "@angular/common@^8.0.0", "@angular/common@^8.0.0 || ^9.0.0-0", "@angular/common@>=7.0.0", "@angular/common@8.0.0":
   "integrity" "sha512-iOAJZ0+1zTRHnHE/5G30+4Q66W1pfZkSkxZIXvgijZ+wtuNloYdWNy/IdZ/m7ayBI7A6FsYEhyMUoWz2HVEJNw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-8.0.0.tgz"
   "version" "8.0.0"
@@ -184,7 +193,7 @@
   dependencies:
     "tslib" "^1.9.0"
 
-"@angular/core@^7.2.0 || ^8.0.0", "@angular/core@^8.0.0", "@angular/core@>=2.3.1 <9.0.0 || >8.0.0-beta <9.0.0", "@angular/core@>=7.0.0", "@angular/core@8.0.0":
+"@angular/core@^7.2.0 || ^8.0.0", "@angular/core@^8.0.0", "@angular/core@^8.0.0 || ^9.0.0-0", "@angular/core@>=2.3.1 <9.0.0 || >8.0.0-beta <9.0.0", "@angular/core@>=7.0.0", "@angular/core@8.0.0":
   "integrity" "sha512-mrkP1PTzqCmZGLYll+TDyawLXHzi+FcRPqSuRxCmDMthUUE93SLXT2yISDkx9aMPtFKgFr6KfrIkKuCz16BP/g=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-8.0.0.tgz"
   "version" "8.0.0"
@@ -2677,6 +2686,11 @@
     "loader-utils" "^1.0.2"
     "schema-utils" "^1.0.0"
 
+"file-saver@^2.0.2":
+  "integrity" "sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA=="
+  "resolved" "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
+  "version" "2.0.5"
+
 "fileset@^2.0.3":
   "integrity" "sha1-jnVIqW08wjJ+5eZ0FocjozO7oqA="
   "resolved" "https://registry.npmjs.org/fileset/-/fileset-2.0.3.tgz"
@@ -4933,6 +4947,11 @@
     "error-ex" "^1.3.1"
     "json-parse-better-errors" "^1.0.1"
 
+"parse5@^5.0.0":
+  "integrity" "sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug=="
+  "resolved" "https://registry.npmjs.org/parse5/-/parse5-5.1.1.tgz"
+  "version" "5.1.1"
+
 "parse5@4.0.0":
   "integrity" "sha512-VrZ7eOd3T1Fk4XWNXMgiGBK/z0MG48BWG2uQNU4I72fkQuKUTZpl+u9k+CxEG0twMVzSmXEEz12z5Fnw1jIQFA=="
   "resolved" "https://registry.npmjs.org/parse5/-/parse5-4.0.0.tgz"
@@ -6626,7 +6645,7 @@
     "source-map-support" "^0.5.6"
     "yn" "^2.0.0"
 
-"tslib@^1.8.0", "tslib@^1.8.1", "tslib@^1.9.0":
+"tslib@^1.7.1", "tslib@^1.8.0", "tslib@^1.8.1", "tslib@^1.9.0":
   "integrity" "sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.9.0.tgz"
   "version" "1.9.0"

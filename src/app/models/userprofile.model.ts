@@ -9,7 +9,7 @@ export class Userprofile {
      dateOfBirth: Date;
      gender: string;
      disability: string;
-     mPhone1: Number;
+     mPhone1: string;
      mPhone2: string;
      fPhone: string;
      educationalBackgrounds: Education[] = [];

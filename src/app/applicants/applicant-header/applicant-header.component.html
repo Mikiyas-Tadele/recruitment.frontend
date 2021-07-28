@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="#">Development Bank of Ethiopia</a>
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+  </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item d-none d-xl-block" *ngIf="isNotLoggedIn">
+                <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/signup']">
+                  {{ 'Register' | translate }}
+              </a>
+            </li> &nbsp;&nbsp;
+            <li class="nav-item d-none d-xl-block" *ngIf="displayUserInfo">
+                <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;">
+                  {{ 'Applied Jobs' | translate }}
+              </a>
+            </li> &nbsp;&nbsp;
+            <li class="nav-item d-none d-xl-block" *ngIf="displayUserInfo">
+                <a class="dropdown-item" (click)="gotoProfile()" class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;">
+                    <i class="fa fa-fw fa-user"></i> {{ 'User Profile' | translate }}
+                </a>
+            </li> &nbsp;&nbsp;
+            <li class="nav-item dropdown" ngbDropdown *ngIf="displayUserInfo">
+                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-user"></i> {{userEmail}}<b class="caret"></b>
+                </a>
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                    </a> -->
+                    <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

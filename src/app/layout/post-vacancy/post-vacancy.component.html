@@ -1,4 +1,7 @@
 <div class="card">
+    <div class="card-header">
+       <h4>Vacancy Posting Form</h4> 
+    </div>
     <p-toast [style]="{marginTop: '100px'}"></p-toast>
     <form  role="form" [formGroup]="vacancyForm" (ngSubmit)="save(vacancyForm)"  class="p-5">
 <div class="card-body">
@@ -37,8 +40,8 @@
 </div>
 <div class="card-footer col-lg-6">
     <button type="submit" class="btn btn-primary" (click)="save()">Save</button>&nbsp;
-    <button type="button" class="btn btn-success" (click)="save()">Clear</button>&nbsp;
-    <button type="button" class="btn btn-defualt" (click)="save()">Back</button>&nbsp;
+    <button type="button" class="btn btn-success" (click)="clear()">Clear</button>&nbsp;
+    <button type="button" class="btn btn-defualt" (click)="back()">Back</button>&nbsp;
     <button type="button" class="btn btn-success" (click)="detailForm()">Add Details</button>
 </div>
 </form>

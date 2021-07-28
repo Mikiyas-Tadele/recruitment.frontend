@@ -1,9 +1,10 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm, FormGroupDirective, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Vacancy } from 'src/app/models/vacancy.model';
-import { VancancyService } from './vancancy.service';
+import { VancancyService } from './vacancy-detail/vancancy.service';
 
 @Component({
   selector: 'app-post-vacancy',
@@ -15,10 +16,19 @@ export class PostVacancyComponent implements OnInit {
 vacancyForm: FormGroup;
 vacancy: any;
   constructor(private vacancyService: VancancyService, private messageService: MessageService,
-     private router: Router) { }
+     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initForm();
+    const id = this.route.snapshot.params['id'];
+    if (id != null && id !== '0') {
+    this.vacancyService.getVacancy(id).subscribe(res => {
+      this.vacancy = res as Vacancy;
+      if (this.vacancy != null) {
+        this.setForm(this.vacancy);
+      }
+    });
+  }
   }
 save({value, valid}: { value: Vacancy, valid: boolean }) {
    this.vacancyService.saveVacancy(value).subscribe(res => {
@@ -48,15 +58,23 @@ setForm(vacancy: Vacancy) {
     qualification: vacancy.qualification,
     workExperience: vacancy.workExperience,
     location: vacancy.location,
-    postedDate: vacancy.postedDate,
-    deadlineDate: vacancy.deadlineDate
+    postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
+    deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en')
   });
 }
 
 detailForm() {
   if (this.vacancy != null) {
-    this.router.navigate(['vacancyDetailForm/' + this.vacancy.id]);
+    this.router.navigate(['admin/vacancyDetailForm/' + this.vacancy.id]);
   }
+}
+
+back() {
+  this.router.navigate(['admin/dashboard']);
+}
+
+clear() {
+  this.vacancyForm.reset({});
 }
 
 }

@@ -1,0 +1,24 @@
+import { Inject, Injectable } from '@angular/core';
+import { saveFile } from 'src/app/models/services/file.saver.helper';
+import { RepositoryService } from 'src/app/models/services/repository.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AppliedPersonelService {
+
+  private readonly APPLIED_PERSONELS = '/application/appliedPersonel/';
+
+  constructor(private repoService: RepositoryService, @Inject('BASE_API_URL') private baseUrl: string) { }
+
+  getAppliedPersonelForVacancy(id: number) {
+    return  this.repoService.sendRequest('GET', this.baseUrl + this.APPLIED_PERSONELS + id);
+  }
+  downloadFile(documentId: number, userName: string) {
+    return this.repoService.httpClient.get(this.baseUrl + '/application/downloadFile?documentId=' + documentId, {responseType: 'blob'})
+      .subscribe((res: any) => {
+        console.log(res);
+        return saveFile(res, userName);
+      });
+  }
+}

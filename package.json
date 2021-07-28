@@ -22,6 +22,7 @@
         "@angular/platform-browser": "8.0.0",
         "@angular/platform-browser-dynamic": "8.0.0",
         "@angular/router": "8.0.0",
+        "@angular/cdk":"8.0.0",
         "@ng-bootstrap/ng-bootstrap": "^5.1.2",
         "@ngx-translate/core": "11.0.1",
         "@ngx-translate/http-loader": "4.0.0",
@@ -38,7 +39,8 @@
         "rxjs-compat": "6.5.2",
         "tslib": "^1.9.0",
         "yarn": "1.16.0",
-        "zone.js": "~0.9.1"
+        "zone.js": "~0.9.1",
+        "file-saver": "^2.0.2"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.800.0",
