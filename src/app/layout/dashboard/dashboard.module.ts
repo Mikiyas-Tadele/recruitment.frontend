@@ -6,6 +6,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { StatModule } from '../../shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         DashboardRoutingModule,
         StatModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DropdownModule
     ],
     declarations: [
         DashboardComponent

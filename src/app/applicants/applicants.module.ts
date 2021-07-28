@@ -20,6 +20,7 @@ import { PanelModule } from 'primeng/panel';
 import { MessageService } from 'primeng/api';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AppliedJobComponent } from './applied-job/applied-job.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
@@ -38,7 +39,8 @@ import { AppliedJobComponent } from './applied-job/applied-job.component';
     EditorModule,
     ButtonModule,
     PanelModule,
-    FileUploadModule
+    FileUploadModule,
+    DropdownModule,
   ],
   providers: [MessageService]
 })

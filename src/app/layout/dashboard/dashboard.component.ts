@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SelectItem } from 'primeng/api';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 import { VacancieslFilter } from 'src/app/models/vacanciesl-filter.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
@@ -16,6 +17,15 @@ import { VancancyService } from '../post-vacancy/vacancy-detail/vancancy.service
 export class DashboardComponent implements OnInit {
     vacancies: Vacancy[] = [];
     vacancyFilterForm: FormGroup;
+    vacanvyTitles: SelectItem[] = [];
+   
+    data = [
+      {id: 1, name: 'Senior Accountant'},
+      {id: 2, name: 'Junior Accountant'},
+      {id: 3, name: 'Senior Loan Officer'},
+      {id: 4, name: 'Senior Electrical Engineer'}
+  
+  ];
     constructor(private vacancyService: VancancyService, private router: Router, private repo: RepositoryService) { }
 
     ngOnInit() {
@@ -23,7 +33,12 @@ this.initForm();
       this.vacancyService.getVcancies().subscribe(res => {
         this.vacancies = res as any;
       });
-
+      
+      this.vacanvyTitles = this.data.map(item =>
+        ({
+          label: item.name,
+          value: item.id
+        }));
     }
 
     appliedPersonel(data: Vacancy) {
