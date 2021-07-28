@@ -81,7 +81,7 @@ isNewUser = true;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     console.log(valid);
-    if (valid && this.isNewUser && this.educations.length > 0 && this.uploadedFiles.length > 0) {
+    if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       this.userService.saveApplicant(value).subscribe(res => {
@@ -91,12 +91,6 @@ isNewUser = true;
           this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
       });
         });
-    } else if (valid && !this.isNewUser) {
-      value.educationalBackgrounds = this.educations;
-      value.workExperiences = this.experiences;
-      this.userService.saveApplicant(value).subscribe(res => {
-        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
-      });
     } else {
       this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Check for wrong data in the form'});
     }
@@ -121,7 +115,7 @@ isNewUser = true;
       gender: userProfile.gender,
       dateOfBirth: formatDate(userProfile.dateOfBirth, 'yyyy-MM-dd', 'en'),
       disability: userProfile.disability,
-      mPhone: userProfile.mPhone1,
+      mPhone1: userProfile.mPhone1,
       mPhone2: userProfile.mPhone2,
       fPhone: userProfile.fPhone,
     });
