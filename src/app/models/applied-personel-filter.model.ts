@@ -1,9 +1,10 @@
 export class AppliedPersonelFilter {
     age: number;
-    gender: string;
     cgpa: number;
     workExperience: number;
-    experienceCriteria: string;
-    agecriteria: string;
-    cgpacriteria: string;
+    gender: string;
+    ageCriteria: string;
+    cgpaCriteria: string;
+    workExperienceCriteria: string;
+    vacancyId: number;
 }

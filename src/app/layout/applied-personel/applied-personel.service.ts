@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { saveFile } from 'src/app/models/services/file.saver.helper';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 
@@ -20,5 +21,10 @@ export class AppliedPersonelService {
         console.log(res);
         return saveFile(res, userName);
       });
+  }
+
+  advanceSearch(data: AppliedPersonelFilter) {
+    const options = {body: data};
+     return this.repoService.sendRequest('POST', this.baseUrl + '/application/search', options);
   }
 }

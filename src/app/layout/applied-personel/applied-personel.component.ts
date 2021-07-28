@@ -45,11 +45,10 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
   }
 
   search({value, valid}: { value: AppliedPersonelFilter, valid: boolean }) {
-    if (value.agecriteria === 'greaterthan') {
-    this.filteredAppliedPersonels =  this.appliedPersonels.filter((val) => val.age >= value.age);
-    } else if (value.agecriteria === 'lessthan') {
-    this.filteredAppliedPersonels =  this.appliedPersonels.filter((val) => val.age <= value.age);
-         }
+    value.vacancyId = this.route.snapshot.params['id'];
+    this.appliedPersonelService.advanceSearch(value).subscribe(res => {
+        this.appliedPersonels = res;
+    });
 
   }
   initForm() {
@@ -57,8 +56,8 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
       age: new FormControl(''),
       gender: new FormControl(''),
       cgpa: new FormControl(''),
-      cgpacriteria: new FormControl(''),
-      agecriteria: new FormControl(''),
+      cgpaCriteria: new FormControl(''),
+      ageCriteria: new FormControl(''),
     });
   }
   exportPdf() {
