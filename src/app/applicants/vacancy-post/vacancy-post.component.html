@@ -8,8 +8,9 @@
      <fieldset class="form-group">
          <label for="title">Job Title: &nbsp;&nbsp;</label>
          <!-- <input type="text" formControlName="title" name="title" /> -->
-         <p-dropdown formControlName="month" name="month" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
-           <button type="submit" class="btn btn-primary" >Search</button>
+         <p-dropdown formControlName="vacancyId" name="month" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
+           <button type="submit" class="btn btn-primary" >Search</button>&nbsp;
+           <button type="button" class="btn btn-success" (click)="clearSearch()">Clear</button>
      </fieldset>
      </div>
  </form>

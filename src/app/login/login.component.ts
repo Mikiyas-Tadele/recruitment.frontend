@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { routerTransition } from '../router.animations';
 import { TokenStorage } from '../shared/guard/token.storage';
 import { LoginService } from './login-service.service';
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
       public router: Router,
       private route: ActivatedRoute,
       private loginService: LoginService,
-      private token: TokenStorage
+      private token: TokenStorage,
+      private messageService: MessageService
     ) {}
 
     ngOnInit() {
@@ -54,7 +56,7 @@ export class LoginComponent implements OnInit {
               },
               error => {
                 console.log(error);
-                // this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});
+                this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});
               });
     }
 }
