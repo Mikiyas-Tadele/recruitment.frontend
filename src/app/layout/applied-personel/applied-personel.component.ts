@@ -18,6 +18,12 @@ export class AppliedPersonelComponent implements OnInit {
   appliedPersonelsCol: any = [];
   vacancyName: string;
   filterForm: FormGroup;
+
+  onClick(event: Event, menu) {
+    menu.toggle(event);
+    event.stopPropagation();
+  }
+  
   readonly columns = [
     'SrNo', 'Name', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
     'Email', 'Educational Background', 'Work Experience', 'Field of Education',
@@ -58,6 +64,8 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
       cgpa: new FormControl(''),
       cgpaCriteria: new FormControl(''),
       ageCriteria: new FormControl(''),
+      qualification: new FormControl(''),
+      qualificationcriteria: new FormControl('')
     });
   }
   exportPdf() {

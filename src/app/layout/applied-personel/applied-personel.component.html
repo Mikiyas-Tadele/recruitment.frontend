@@ -1,37 +1,77 @@
+<div class="spaceholder">
+
+</div>
+<div class="filterFelds">
+<p-panel header="Expand this pannel to Filter applicants" [toggleable]="true" toggler="header" [collapsed] ="true">
+	<ng-template>
+		<button pButton (click)="onClick($event, menu)">
+        </button>
+	</ng-template>
+
 <form role="form" [formGroup]="filterForm" (ngSubmit)="search(filterForm)"  class="p-5">
-   <div class="filterFields" >
+  
     <fieldset class="form-group">
-        <label for="age">Age: </label>
-        <select  name="agecriteria" formControlName="ageCriteria" >
+      <table class="table-responsive">
+        <tr>
+          <td>
+            <label for="age">Age: </label>
+          </td>
+          <td>
+            <select  name="agecriteria" formControlName="ageCriteria" >
+              <option  value="">All</option>
+              <option  value="greaterthan">Greater Than</option>
+              <option value="lessthan">Less Than</option>
+            </select>
+            </td>
+            <td>
+          <input type="number" formControlName="age" name="age" />
+          </td>
+          <td>
+            <label for="cgpa">CGPA: </label>
+          </td>
+          <td><select  name="cgpacriteria" formControlName="cgpaCriteria" >
             <option  value="">All</option>
             <option  value="greaterthan">Greater Than</option>
             <option value="lessthan">Less Than</option>
           </select>
-        <input type="number" formControlName="age" name="age" />
-   
-        <label for="cgpa">CGPA: </label>
-        <select  name="cgpacriteria" formControlName="cgpaCriteria" >
-            <option  value="">All</option>
-            <option  value="greaterthan">Greater Than</option>
-            <option value="lessthan">Less Than</option>
-          </select>
-        
-        <input type="number" formControlName="cgpa"  name="cgpa" />
-   
-        <label for="gender">Gender:</label>
-        <select  name="gender" formControlName="gender">
+        </td>
+        <td>
+        <input type="number" formControlName="cgpa"  name="cgpa" /></td>
+          <td><label for="gender">Gender:</label></td>
+          <td> <select  name="gender" formControlName="gender">
             <option  value="">All</option>
             <option  value="male">Male</option>
             <option value="female">Female</option>
           </select>
-          <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
+          </td>
+         
+        </tr><br />
+        <tr>
+          <td>
+            <label for="qualification">Qualification: </label>
+          </td>
+          <td>
+            <select  name="qualification" formControlName="qualificationcriteria" >
+              <option  value="">All</option>
+              <option  value="Diploma">Diploma</option>
+              <option value="Degree">Degree</option>
+              <option value="Masters">Masters</option>
+              <option value="PHD">PHD</option>
+            </select>
+            </td>
+        </tr>
+      </table>
+        <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
     </fieldset>
-    </div>
+    
 </form>
+</p-panel>
+</div>
+<br />
 <p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true">
   <ng-template pTemplate="caption">
     <div class="ui-helper-clearfix" style="text-align: left">
-      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
   </div>
     <h5>Development Bank of Ethiopia<br>
       Human Resource Management Directorate<br>

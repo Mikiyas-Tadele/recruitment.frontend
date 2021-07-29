@@ -1,5 +1,18 @@
 .filterFields input, select{
-    width: 150px;
-    height: 35px;
-    margin: 0 10px;
+    width: auto;
+    margin: 5px 3px;
+}
+ select {
+    padding: 5px;
+}
+ input {
+    padding: 12px;
+}
+.spaceholder {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 5%;
+}
+ label {
+    font-weight: bold;
 }

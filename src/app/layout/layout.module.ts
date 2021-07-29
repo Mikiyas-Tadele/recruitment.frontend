@@ -12,7 +12,7 @@ import {MessageService} from 'primeng/api';
 import {EditorModule} from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
-
+import { MenuModule } from 'primeng/menu';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -39,6 +39,10 @@ import { AppliedPersonelComponent } from './applied-personel/applied-personel.co
         EditorModule,
         ButtonModule,
         PanelModule,
+        PanelModule,
+        ToastModule,
+        ButtonModule,
+        MenuModule,
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
