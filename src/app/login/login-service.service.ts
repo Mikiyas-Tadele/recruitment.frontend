@@ -47,6 +47,10 @@ export class LoginService {
      return this.http.post(this.baseUrl + '/auth/register-user', data);
   }
 
+  verifyUser(token: String) {
+    return this.http.get(this.baseUrl + '/auth/verify/' + token);
+  }
+
 
 
 }
