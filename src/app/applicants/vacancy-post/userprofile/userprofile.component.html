@@ -93,8 +93,18 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="qualification">Qualification</label>
-                                <input type="tel" class="form-control" formControlName="qualification"  name="qualification" />
+                            <label for="fieldOfEducation">Specialization</label>
+                            <input type="text" class="form-control" formControlName="specialization" name="field" />
+                            <span class="text-danger"
+                            *ngIf="(educationFormControl.specialization.touched || educationFormControl.specialization.drty) && educationFormControl.specialization.invalid">
+                            Field of education is required
+                        </span>
+                        </div>
+                    </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="educationForm">
+                                <label for="qualification">Qualification</label><br>
+                                <p-dropdown formControlName="qualification"  class="dropdownInput" [options]="qualifications" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.qualification.touched || educationFormControl.qualification.drty) && educationFormControl.qualification.invalid">
                                 Qualification is required
@@ -143,6 +153,7 @@
                             <th scope="col">#</th>
                             <th>Qualification</th>
                             <th scope="col">Field of Education</th>
+                            <th scope="col">Specialization</th>
                             <th scope="col">University Name</th>
                             <th scope="col">CGPA</th>
                             <th scope="col">Year of Graduation</th>
@@ -151,8 +162,9 @@
                         <tbody *ngIf="experiences != null">
                           <tr *ngFor="let education of educations; let i = index">
                             <th scope="row">{{i + 1}}</th>
-                            <td>{{education.qualification}}</td>
+                            <td>{{education.qualificationDesc}}</td>
                             <td>{{education.fieldOfEducation}}</td>
+                            <td>{{education.specialization}}</td>
                             <td>{{education.university}}</td>
                             <td>{{education.cgpa}}</td>
                             <td>{{education.yearOfGraduation}}</td>
@@ -268,6 +280,7 @@
                         <br/>
                         <div class="row">
                             <div class="col-md-6">
+                                <label><em>Upload Yours CV not greater than 2MB.<br> By clicking choose file button then clicking the upload button</em></label><br>
                                 <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)"
                                 accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" fileLimit="1">
                             </p-fileUpload>

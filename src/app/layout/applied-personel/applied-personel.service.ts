@@ -15,8 +15,9 @@ export class AppliedPersonelService {
   getAppliedPersonelForVacancy(id: number) {
     return  this.repoService.sendRequest('GET', this.baseUrl + this.APPLIED_PERSONELS + id);
   }
-  downloadFile(documentId: number, userName: string) {
-    return this.repoService.httpClient.get(this.baseUrl + '/application/downloadFile?documentId=' + documentId, {responseType: 'blob'})
+  downloadFile(documentId: number, fileTypeId: number, userName: string) {
+    return this.repoService.httpClient.get(this.baseUrl + '/application/downloadFile?documentId='
+     + documentId + '&fileTypeId=' + fileTypeId , {responseType: 'blob'})
       .subscribe((res: any) => {
         console.log(res);
         return saveFile(res, userName);

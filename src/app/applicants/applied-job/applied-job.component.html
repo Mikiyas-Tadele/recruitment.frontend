@@ -1,3 +1,27 @@
-<p>
-  applied-job works!
-</p>
+<div class="row" style="margin-top: 5%; margin-right: 2%;">
+<p-table [columns]="appliedJobsCols" [value]="appliedJobs"  
+  [responsive]="true" [paginator]="true" [rows]="10" [scrollable]="true" [resizableColumns]="true"
+  [autoLayout]="true">
+  <ng-template pTemplate="caption">
+    Applied Jobs 
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <ng-container *ngFor="let col of columns" >
+      <th *ngIf="!col.hide">
+        {{col.header}}
+      </th>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td>{{rowData.title}}</td>
+      <td>{{rowData.postedDate |  date :'dd/MM/yyyy'}}</td>
+      <td>{{rowData.deadlineDate |  date :'dd/MM/yyyy'}}</td>
+      <td>{{rowData.appliedDate |  date :'dd/MM/yyyy'}}</td>
+      <td>{{rowData.status}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>

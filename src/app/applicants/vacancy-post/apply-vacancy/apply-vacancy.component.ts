@@ -20,6 +20,8 @@ export class ApplyVacancyComponent implements OnInit {
 
   applicationForm: FormGroup;
   vacancyId: number;
+  uploadedFiles: any[] = [];
+  private readonly QUALIFICATION_FILE = 1;
   private routeSub: Subscription;
   ngOnInit() {
     this.applicationForm = this.fb.group({
@@ -37,10 +39,14 @@ export class ApplyVacancyComponent implements OnInit {
     return this.applicationForm.controls;
   }
   onSubmit({value, valid}: { value: Application, valid: boolean }) {
-    if (valid) {
+    if (valid && this.uploadedFiles.length > 0) {
       value.vacancyId = this.vacancyId;
       this.userProfileService.apply(value).subscribe(res => {
-        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'You Have Successfully Applied'});
+        const formData: FormData = new FormData();
+        formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
+        this.userProfileService.storeFile(formData, this.QUALIFICATION_FILE).subscribe(fileRes => {
+          this.messageService.add({severity: 'success', summary: 'Saved', detail: 'You Have Successfully Applied'});
+      });
       },
       err => {
         console.log(err);
@@ -48,9 +54,13 @@ export class ApplyVacancyComponent implements OnInit {
       }
       );
     } else {
-      this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Application Letter not entered!'});
+      this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Application Letter not entered and/or File not uploaded!'});
     }
 
+  }
+
+  onUpload(event) {
+    this.uploadedFiles.push(event.files[0]);
   }
 
 }

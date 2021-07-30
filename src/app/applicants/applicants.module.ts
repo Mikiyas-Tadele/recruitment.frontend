@@ -22,6 +22,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import { AppliedJobComponent } from './applied-job/applied-job.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {DataViewModule} from 'primeng/dataview';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
@@ -42,7 +43,8 @@ import {DataViewModule} from 'primeng/dataview';
     PanelModule,
     FileUploadModule,
     DropdownModule,
-    DataViewModule
+    DataViewModule,
+    TableModule
   ],
   providers: [MessageService]
 })
