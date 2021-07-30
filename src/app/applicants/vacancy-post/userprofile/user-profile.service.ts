@@ -11,7 +11,7 @@ export class UserProfileService {
    private readonly ADD_CREATE_APPLICANT = '/application/applicant';
    private readonly GET_APPLICANT = '/application/applicant/';
    private readonly APPLY = '/application/apply';
-   private readonly STORE = '/application/store';
+   private readonly STORE = '/application/store?fileTypeId=';
    private readonly GET_APPLIED_JOBS = '/application/applied-jobs';
    private readonly GET_LOOKUPS = '/settings/getlookupDetails/';
 
@@ -31,8 +31,8 @@ export class UserProfileService {
     return this.repoService.sendRequest('POST', this.baseUrl + this.APPLY, options);
   }
 
-  storeFile(file: any) {
-    return this.repoService.httpClient.post(this.baseUrl + this.STORE, file);
+  storeFile(file: any, fileType: number) {
+    return this.repoService.httpClient.post(this.baseUrl + this.STORE + fileType, file);
  }
   getAppliedJobs() {
     return this.repoService.sendRequest('GET', this.baseUrl + this.GET_APPLIED_JOBS);

@@ -13,24 +13,24 @@ import { AppliedPersonelService } from './applied-personel.service';
   styleUrls: ['./applied-personel.component.scss']
 })
 export class AppliedPersonelComponent implements OnInit {
+  constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
+    private vacancyService: VancancyService) { }
   appliedPersonels: any = [];
   filteredAppliedPersonels: any[];
   appliedPersonelsCol: any = [];
   vacancyName: string;
   filterForm: FormGroup;
 
-  onClick(event: Event, menu) {
-    menu.toggle(event);
-    event.stopPropagation();
-  }
-  
   readonly columns = [
     'SrNo', 'Name', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
     'Email', 'Educational Background', 'Work Experience', 'Field of Education',
     'Qualification', 'University', 'Year of Graduation', 'CGPA', 'Organization',
     'Position', 'Salary', 'Duration', 'Total Experience (Years)'];
-  constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
-    private vacancyService: VancancyService) { }
+
+  onClick(event: Event, menu) {
+    menu.toggle(event);
+    event.stopPropagation();
+  }
 
   ngOnInit() {
     this.initForm();
@@ -47,7 +47,7 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
   }
 
   downloadFile(data: AppliedPersonelModel) {
-     this.appliedPersonelService.downloadFile(data.userId, data.fullName);
+     this.appliedPersonelService.downloadFile(data.userId, 1, data.fullName);
   }
 
   search({value, valid}: { value: AppliedPersonelFilter, valid: boolean }) {

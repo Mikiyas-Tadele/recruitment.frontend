@@ -43,7 +43,7 @@ import { TableModule } from 'primeng/table';
     PanelModule,
     FileUploadModule,
     DropdownModule,
-    DataViewModule
+    DataViewModule,
     TableModule
   ],
   providers: [MessageService]
