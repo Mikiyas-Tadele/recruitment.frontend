@@ -18,28 +18,24 @@ export class DashboardComponent implements OnInit {
     vacancies: Vacancy[] = [];
     vacancyFilterForm: FormGroup;
     vacanvyTitles: SelectItem[] = [];
-   
-    data = [
-      {id: 1, name: 'Senior Accountant'},
-      {id: 2, name: 'Junior Accountant'},
-      {id: 3, name: 'Senior Loan Officer'},
-      {id: 4, name: 'Senior Electrical Engineer'}
-  
-  ];
+
     constructor(private vacancyService: VancancyService, private router: Router, private repo: RepositoryService) { }
 
     ngOnInit() {
-this.initForm();
-      this.vacancyService.getVcancies().subscribe(res => {
-        this.vacancies = res as any;
-      });
-      
-      this.vacanvyTitles = this.data.map(item =>
-        ({
-          label: item.name,
-          value: item.id
-        }));
+       this.initForm();
+      this.getVacancies();
     }
+    private getVacancies() {
+        this.vacanvyTitles = [];
+       this.vacancyService.getVcancies().subscribe(res => {
+         this.vacancies = res as Vacancy[];
+         for (let i = 0; i < this.vacancies.length; i++) {
+           const element = this.vacancies[i];
+           const l = { label: element.title, value: element.id };
+           this.vacanvyTitles.push(l);
+         }
+       });
+     }
 
     appliedPersonel(data: Vacancy) {
         this.router.navigate(['admin/appliedPersonel/' + data.id]);
@@ -50,15 +46,23 @@ this.initForm();
     }
 
     search({value, valid}: { value: VacancieslFilter, valid: boolean }) {
-      if(valid)
-      console.log(value.title);
+        if (valid) {
+            this.vacancies = this.vacancies.filter(v => {
+               return v.id === value.vacancyId;
+            });
+           } else {
+              this.getVacancies();
+           }
     // this.repo.getVacancies(value.title);
-  
+
     }
     initForm() {
       this.vacancyFilterForm = new FormGroup({
-        title: new FormControl('', Validators.required),
-       
+        vacancyId: new FormControl('', Validators.required),
+
       });
     }
+    clearSearch() {
+        this.getVacancies();
+      }
 }

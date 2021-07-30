@@ -16,15 +16,7 @@ export class VacancyPostComponent implements OnInit {
 
   vacancies: Vacancy[] = [];
   vacancyFilterForm: FormGroup;
-  vacanvyTitles: SelectItem[] = [];
- 
-  data = [
-    {id: 1, name: 'Senior Accountant'},
-    {id: 2, name: 'Junior Accountant'},
-    {id: 3, name: 'Senior Loan Officer'},
-    {id: 4, name: 'Senior Electrical Engineer'}
-
-];
+  vacanvyTitles: any = [];
 
 
   constructor(private vacancyService: VancancyService,
@@ -32,16 +24,22 @@ export class VacancyPostComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.getVacancies();
+
+  }
+
+  private getVacancies() {
+     this.vacanvyTitles = [];
     this.vacancyService.getVcancies().subscribe(res => {
-      this.vacancies = res as any;
+      this.vacancies = res as Vacancy[];
+      for (let i = 0; i < this.vacancies.length; i++) {
+        const element = this.vacancies[i];
+        const l = { label: element.title, value: element.id };
+        this.vacanvyTitles.push(l);
+      }
+
+
     });
-
-    this.vacanvyTitles = this.data.map(item =>
-      ({
-        label: item.name,
-        value: item.id
-      }));
-
   }
 
   goToView(data: Vacancy) {
@@ -55,14 +53,27 @@ export class VacancyPostComponent implements OnInit {
     }
   }
   search({value, valid}: { value: VacancieslFilter, valid: boolean }) {
-    if(valid)
-    console.log(value.title);
+    if (valid) {
+     this.vacancies = this.vacancies.filter(v => {
+        return v.id === value.vacancyId;
+     });
+    } else {
+       this.getVacancies();
+    }
   // this.repo.getVacancies(value.title);
 
   }
+
+  clearSearch() {
+    this.getVacancies();
+  }
   initForm() {
     this.vacancyFilterForm = new FormGroup({
+<<<<<<< HEAD
       title: new FormControl('', Validators.required),
+=======
+      vacancyId: new FormControl('', Validators.required),
+>>>>>>> 8b1ddc32879fc941afa42dba77cd6848f0c8aa7f
     });
 }
 loadData(event) {
