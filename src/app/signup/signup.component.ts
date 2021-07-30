@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-=======
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
->>>>>>> 8b1ddc32879fc941afa42dba77cd6848f0c8aa7f
 import { LoginService } from '../login/login-service.service';
 import { routerTransition } from '../router.animations';
 import { UserModel } from './models/user.model';
@@ -19,11 +15,7 @@ export class SignupComponent implements OnInit {
 
     signupForm: FormGroup;
     submitted = false;
-<<<<<<< HEAD
-    constructor(private logiService: LoginService, private fb: FormBuilder) {}
-=======
-    constructor(private logiService: LoginService, private messageService: MessageService) {}
->>>>>>> 8b1ddc32879fc941afa42dba77cd6848f0c8aa7f
+    constructor(private logiService: LoginService, private messageService: MessageService, private fb: FormBuilder) {}
 
     ngOnInit() {
         this.signupForm = this.fb.group({

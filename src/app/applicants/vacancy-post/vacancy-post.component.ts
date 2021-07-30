@@ -69,11 +69,8 @@ export class VacancyPostComponent implements OnInit {
   }
   initForm() {
     this.vacancyFilterForm = new FormGroup({
-<<<<<<< HEAD
       title: new FormControl('', Validators.required),
-=======
       vacancyId: new FormControl('', Validators.required),
->>>>>>> 8b1ddc32879fc941afa42dba77cd6848f0c8aa7f
     });
 }
 loadData(event) {
