@@ -1,7 +1,8 @@
 export class Education {
      id?: Number;
      fieldOfEducation: string;
-     qualification: string;
+     specialization: string;
+     qualification: number;
      cgpa: Number;
      qualificationDesc: string;
      university: string;

@@ -12,6 +12,8 @@ export class UserProfileService {
    private readonly GET_APPLICANT = '/application/applicant/';
    private readonly APPLY = '/application/apply';
    private readonly STORE = '/application/store';
+   private readonly GET_APPLIED_JOBS = '/application/applied-jobs';
+   private readonly GET_LOOKUPS = '/settings/getlookupDetails/';
 
   constructor(private repoService: RepositoryService, @Inject('BASE_API_URL') private baseUrl: string) { }
 
@@ -32,4 +34,11 @@ export class UserProfileService {
   storeFile(file: any) {
     return this.repoService.httpClient.post(this.baseUrl + this.STORE, file);
  }
+  getAppliedJobs() {
+    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_APPLIED_JOBS);
+  }
+
+  getLookkups(code: string) {
+    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_LOOKUPS + code);
+  }
 }

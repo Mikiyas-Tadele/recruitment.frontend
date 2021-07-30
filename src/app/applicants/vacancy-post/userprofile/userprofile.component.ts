@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Education } from 'src/app/models/education.model';
+import { LookupDetail } from 'src/app/models/lookup.model';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 import { Userprofile } from 'src/app/models/userprofile.model';
 import { WorkExperience } from 'src/app/models/work-experience.model';
@@ -28,6 +29,8 @@ educationForm: FormGroup;
 experienceForm: FormGroup;
 uploadedFiles: any[] = [];
 isNewUser = true;
+qualifications: any = [];
+private readonly qualificationLookupCode = 'QUALIFICATION';
   constructor(private userService: UserProfileService,
      private fb: FormBuilder, private router: Router, private messageService: MessageService ) { }
 
@@ -51,11 +54,14 @@ isNewUser = true;
 
     this.educationForm = this.fb.group ({
       fieldOfEducation: ['', Validators.required],
+      specialization: [''],
       qualification: ['', Validators.required],
       university: ['', Validators.required],
       yearOfGraduation: ['', Validators.required],
       cgpa: ['', Validators.required],
     });
+
+    this.loadQualificationLookups();
 
       this.userService.getApplicant().subscribe(res => {
          this.userProfile = res;
@@ -65,7 +71,7 @@ isNewUser = true;
            this.setForm(this.userProfile);
          }
       });
-        console.log(this.userProfile);
+
   }
   get userFormControl() {
     return this.userForm.controls;
@@ -133,5 +139,17 @@ isNewUser = true;
   }
   onUpload(event) {
     this.uploadedFiles.push(event.files[0]);
+  }
+
+  loadQualificationLookups() {
+    this.userService.getLookkups(this.qualificationLookupCode).subscribe(res => {
+      const results = res as LookupDetail[];
+      for (let index = 0; index < results.length; index++) {
+        const element = results[index];
+        const q = {label: element.description, value: element.id};
+        this.qualifications.push(q);
+      }
+
+    });
   }
 }
