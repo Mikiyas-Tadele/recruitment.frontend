@@ -2,13 +2,9 @@
     <form  [formGroup]="vacancyFilterForm" (ngSubmit)="search(vacancyFilterForm)"  class="p-5">
         <div class="filterFields" >
          <fieldset class="form-group">
-             <label for="title">Vacancy Title: &nbsp;&nbsp;</label>
+             <label for="title">Job Title: &nbsp;&nbsp;</label>
              <!-- <input type="text" formControlName="title" name="title" /> -->
-<<<<<<< HEAD
-             <p-dropdown formControlName="title" name="title" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
-=======
              <p-dropdown formControlName="vacancyId" name="month" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
->>>>>>> 8b1ddc32879fc941afa42dba77cd6848f0c8aa7f
                <button type="submit" class="btn btn-primary" >Search</button>
                <button type="button" class="btn btn-success" (click)="clearSearch()">Clear</button>
          </fieldset>
@@ -19,8 +15,12 @@
 <div [@routerTransition]>
    
 
-<p-dataView [value]="vacancies" [paginator]="true" [rows]="10">
-    <div class="row">
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title">
+    
+        <p-header>
+            <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">
+        </p-header>
+        <div class="row">
     <ng-template let-vacancy pTemplate="listItem">
        
             <div class="col-lg-6">
