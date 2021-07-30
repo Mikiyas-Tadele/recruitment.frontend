@@ -80,7 +80,6 @@ isNewUser = true;
     this.activeMainTab = tab;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
-    console.log(valid);
     if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
@@ -91,6 +90,9 @@ isNewUser = true;
           this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
       });
         });
+        this.userForm.reset();
+        this.educationForm.reset();
+        this.experienceForm.reset();
     } else {
       this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Check for wrong data in the form'});
     }
@@ -100,12 +102,14 @@ isNewUser = true;
     console.log(JSON.stringify(value));
     if (valid) {
     this.educations.push(value);
+    this.educationForm.reset();
     this.education = new Education();
     }
   }
   addExperiences({value, valid}: { value: WorkExperience, valid: boolean }) {
     if (valid) {
     this.experiences.push(value);
+    this.experienceForm.reset();
     this.experience = new WorkExperience();
     }
   }

@@ -1,30 +1,40 @@
 <div class="login-page" [@routerTransition]>
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <img class="user-avatar" src="assets/images/dbelogo.jpg" width="150px" />
             <h3>SignUp To DBE's Vacancy</h3>
             <form role="form" [formGroup]="signupForm" (ngSubmit)="onRegister(signupForm)">
                 <div class="form-content" >
                     <div class="form-group">
                         <input type="text" formControlName="fullName"   class="form-control input-underline input-lg" id="" placeholder="{{ 'Full Name' | translate }}">
-                        <p-message severity="error" text="Full Name is required" *ngIf="signupForm.controls.fullName.invalid && (signupForm.controls.fullName.dirty || signupForm.controls.fullName.touched)"></p-message>
+                        <div *ngIf="f.fullName.touched && f.fullName.invalid" class="form-control-error">
+                            <div *ngIf="f.fullName.errors.required">Fullname is required.</div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <input type="email"   formControlName="email"  class="form-control input-underline input-lg" id="" placeholder="{{ 'Email' | translate }}">
-                        <p-message severity="error" text="Email is required" *ngIf="signupForm.controls.email.invalid && (signupForm.controls.email.dirty || signupForm.controls.email.touched)"></p-message>
+                        <div *ngIf="f.email.touched && f.email.invalid" class="form-control-error">
+                            <div *ngIf="f.email.errors.required">Email is required.</div>
+                            <div *ngIf="f.email.errors.email">invalid email address.</div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <input type="password"  formControlName="password"    class="form-control input-underline input-lg" id="" placeholder="{{ 'Password' | translate }}">
-                        <p-message severity="error" text="Password is required" *ngIf="signupForm.controls.password.invalid && (signupForm.controls.password.dirty || signupForm.controls.password.touched)"></p-message>
+                        <div *ngIf="f.password.touched && f.password.invalid" class="form-control-error">
+                            <div *ngIf="f.password.errors.required">Password is required.</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="password"   formControlName="confirmPassword"  class="form-control input-underline input-lg" id="" placeholder="{{ 'Repeat Password' | translate }}">
-                        <p-message severity="error" text="Confirm Password is required" *ngIf="signupForm.controls.confirmPassword.invalid && (signupForm.controls.confirmPassword.dirty || signupForm.controls.confirmPassword.touched)"></p-message>
+                        <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="form-control-error">
+                            <div *ngIf="f.confirmPassword.errors.required">Password is required.</div>
+                            <div *ngIf="f.confirmPassword.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn">{{ 'Register' | translate }}</button>&nbsp;
+                <button type="submit" class="btn rounded-btn" [disabled] = "!signupForm.valid">{{ 'Register' | translate }}</button>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/login']">{{ 'Log in' | translate }}</a>
             </form>
         </div>

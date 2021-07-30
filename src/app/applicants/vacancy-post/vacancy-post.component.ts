@@ -63,7 +63,10 @@ export class VacancyPostComponent implements OnInit {
   initForm() {
     this.vacancyFilterForm = new FormGroup({
       title: new FormControl('', Validators.required),
-      month: new FormControl('', Validators.required),
     });
+}
+loadData(event) {
+  //event.first = First row offset
+  //event.rows = Number of rows per page
 }
 }

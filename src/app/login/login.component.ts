@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { TokenStorage } from '../shared/guard/token.storage';
@@ -33,11 +33,13 @@ export class LoginComponent implements OnInit {
 
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'vacancies';
         this.authenticated = new FormGroup({
-          username: new FormControl(''),
-          password: new FormControl('')
+          username: new FormControl('', Validators.required),
+          password: new FormControl('', Validators.required)
         });
     }
-
+get f() {
+  return this.authenticated.controls;
+}
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
         this.loginService.login(value.username, value.password).subscribe(
             (data) => {

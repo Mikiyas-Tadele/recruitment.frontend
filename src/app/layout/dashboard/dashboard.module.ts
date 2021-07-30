@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { StatModule } from '../../shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { DropdownModule } from 'primeng/dropdown';
         StatModule,
         FormsModule,
         ReactiveFormsModule,
-        DropdownModule
+        DropdownModule,
+        DataViewModule
     ],
     declarations: [
         DashboardComponent

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../login/login-service.service';
 import { routerTransition } from '../router.animations';
 import { UserModel } from './models/user.model';
@@ -14,14 +14,16 @@ export class SignupComponent implements OnInit {
 
     signupForm: FormGroup;
     submitted = false;
-    constructor(private logiService: LoginService) {}
+    constructor(private logiService: LoginService, private fb: FormBuilder) {}
 
     ngOnInit() {
-        this.signupForm = new FormGroup({
-          fullName: new FormControl('', Validators.required),
-          email: new FormControl('', [Validators.required, Validators.email]),
-          password: new FormControl('', Validators.required),
-          confirmPassword: new FormControl('', Validators.required)
+        this.signupForm = this.fb.group({
+          fullName: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email]],
+          password: ['', Validators.required],
+          confirmPassword: ['', [Validators.required]]
+        }, { 
+          validator: this.ConfirmedValidator('password', 'confirmPassword')
         });
     }
 
@@ -41,6 +43,22 @@ export class SignupComponent implements OnInit {
         }
 
     }
-
+    get f() {
+        return this.signupForm.controls;
+    }
+    ConfirmedValidator(controlName: string, matchingControlName: string){
+        return (formGroup: FormGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+            if (matchingControl.errors && !matchingControl.errors.confirmedValidator) {
+                return;
+            }
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ confirmedValidator: true });
+            } else {
+                matchingControl.setErrors(null);
+            }
+        }
+    }
 
 }

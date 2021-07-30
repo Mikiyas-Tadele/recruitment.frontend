@@ -2,6 +2,9 @@ $topnav-background-color: rgb(250, 245, 245);
 :host {
     display: block;
 }
+.form-control-error {
+    color: #9c0a0a;
+}
 .login-page {
     position: absolute;
     top: 0;

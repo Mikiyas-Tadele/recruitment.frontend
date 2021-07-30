@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AppliedJobComponent } from './applied-job/applied-job.component';
 import {DropdownModule} from 'primeng/dropdown';
+import {DataViewModule} from 'primeng/dataview';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
@@ -41,6 +42,7 @@ import {DropdownModule} from 'primeng/dropdown';
     PanelModule,
     FileUploadModule,
     DropdownModule,
+    DataViewModule
   ],
   providers: [MessageService]
 })

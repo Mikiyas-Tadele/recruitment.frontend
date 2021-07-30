@@ -8,35 +8,44 @@
      <fieldset class="form-group">
          <label for="title">Job Title: &nbsp;&nbsp;</label>
          <!-- <input type="text" formControlName="title" name="title" /> -->
-         <p-dropdown formControlName="month" name="month" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
+         <p-dropdown formControlName="title" name="title" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
            <button type="submit" class="btn btn-primary" >Search</button>
      </fieldset>
      </div>
  </form>
 </div>
-   <div class="row" style="margin-top: 5%; margin-left: 2%;margin-right: 2%;">
-    <div class="col-lg-4" *ngFor="let vacancy of vacancies">
-        <div class="card card-default mb-3">
-            <div class="card-header">
-                <i class="fa fa-bell fa-fw"></i> {{vacancy.title}}
-            </div>
-            <div class="card-body">
-                <div class="timeline-panel">
-                    <div class="timeline-heading">
-                        <h4 class="timeline-title">{{vacancy.workExperience}} Year Experience</h4>
-                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago </small>
-                        </p>
+   
+
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="10">
+    <div class="row">
+    <ng-template let-vacancy pTemplate="listItem">
+       
+            <div class="col-lg-6">
+           
+                <div class="card card-default mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-bell fa-fw"></i> {{vacancy.title}}
                     </div>
-                    <div class="timeline-body">
-                        <p>{{vacancy.qualification}}
-                        </p>
+                    <div class="card-body">
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">{{vacancy.workExperience}} Year Experience</h4>
+                                <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago </small>
+                                </p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>{{vacancy.qualification}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Apply</button>
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;
-                <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Apply</button>
-            </div>
-        </div>
-    </div>
+        
+    </ng-template>
 </div>
+</p-dataView>
