@@ -47,7 +47,7 @@ export class VacancyPostComponent implements OnInit {
   }
   apply(data: Vacancy) {
     if (this.tokenStorage.getToken() != null) {
-      this.router.navigate(['apply/' + data.id]);
+      this.router.navigate(['apply/' + data.id + '/' + data.title]);
     } else {
       this.router.navigate(['login']);
     }
@@ -69,12 +69,12 @@ export class VacancyPostComponent implements OnInit {
   }
   initForm() {
     this.vacancyFilterForm = new FormGroup({
-      title: new FormControl('', Validators.required),
-      vacancyId: new FormControl('', Validators.required),
+      title: new FormControl(''),
+      vacancyId: new FormControl(''),
     });
 }
 loadData(event) {
-  //event.first = First row offset
-  //event.rows = Number of rows per page
+  // event.first = First row offset
+  // event.rows = Number of rows per page
 }
 }

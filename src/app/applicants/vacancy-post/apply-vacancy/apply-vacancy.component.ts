@@ -20,6 +20,7 @@ export class ApplyVacancyComponent implements OnInit {
 
   applicationForm: FormGroup;
   vacancyId: number;
+  vacancyname; string;
   uploadedFiles: any[] = [];
   private readonly QUALIFICATION_FILE = 1;
   private routeSub: Subscription;
@@ -30,10 +31,8 @@ export class ApplyVacancyComponent implements OnInit {
 
     this.routeSub = this.route.params.subscribe(params => {
        this.vacancyId = params['id'];
+       this.vacancyname = params['name'];
     });
-  }
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
   }
   get applicationFormControl() {
     return this.applicationForm.controls;
@@ -42,9 +41,10 @@ export class ApplyVacancyComponent implements OnInit {
     if (valid && this.uploadedFiles.length > 0) {
       value.vacancyId = this.vacancyId;
       this.userProfileService.apply(value).subscribe(res => {
+        const savedModel = res as Application;
         const formData: FormData = new FormData();
         formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
-        this.userProfileService.storeFile(formData, this.QUALIFICATION_FILE).subscribe(fileRes => {
+        this.userProfileService.storeFile(formData, savedModel.id).subscribe(fileRes => {
           this.messageService.add({severity: 'success', summary: 'Saved', detail: 'You Have Successfully Applied'});
       });
       },

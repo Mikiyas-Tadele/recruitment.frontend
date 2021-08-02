@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { TokenStorage } from 'src/app/shared/guard/token.storage';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    userName = '';
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, public router: Router, private tokenStorage: TokenStorage) {
 
         this.router.events.subscribe(val => {
             if (
@@ -25,6 +27,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.userName = this.tokenStorage.getUserName();
     }
 
     isToggled(): boolean {

@@ -11,7 +11,7 @@ export class UserProfileService {
    private readonly ADD_CREATE_APPLICANT = '/application/applicant';
    private readonly GET_APPLICANT = '/application/applicant/';
    private readonly APPLY = '/application/apply';
-   private readonly STORE = '/application/store?fileTypeId=';
+   private readonly STORE = '/application/store?applicationId=';
    private readonly GET_APPLIED_JOBS = '/application/applied-jobs';
    private readonly GET_LOOKUPS = '/settings/getlookupDetails/';
 

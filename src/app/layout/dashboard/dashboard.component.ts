@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
     }
     initForm() {
       this.vacancyFilterForm = new FormGroup({
-        vacancyId: new FormControl('', Validators.required),
+        vacancyId: new FormControl(''),
 
       });
     }

@@ -8,5 +8,6 @@ export class Vacancy {
       location: string;
       postedDate: Date;
       deadlineDate: Date;
+      minutesElapsedSinceCreation: string;
       vacancyModelDetailList: Array<VacancyDetail>;
 }

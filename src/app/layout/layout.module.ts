@@ -13,6 +13,9 @@ import {EditorModule} from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
+import { TooltipModule } from 'primeng/tooltip';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -43,6 +46,9 @@ import { AppliedPersonelComponent } from './applied-personel/applied-personel.co
         ToastModule,
         ButtonModule,
         MenuModule,
+        TooltipModule,
+        DialogModule,
+        DropdownModule
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,

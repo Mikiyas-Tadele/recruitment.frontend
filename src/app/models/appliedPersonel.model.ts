@@ -22,4 +22,6 @@ export class AppliedPersonelModel {
      vacancyId: number;
      workExperienceInYears: number;
      userId: number;
+     applicationLetter: string;
+     applicationId: number;
 }

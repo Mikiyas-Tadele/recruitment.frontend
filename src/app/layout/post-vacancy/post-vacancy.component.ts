@@ -21,7 +21,7 @@ vacancy: any;
   ngOnInit() {
     this.initForm();
     const id = this.route.snapshot.params['id'];
-    if (id != null && id !== '0') {
+    if (id !== '0') {
     this.vacancyService.getVacancy(id).subscribe(res => {
       this.vacancy = res as Vacancy;
       if (this.vacancy != null) {

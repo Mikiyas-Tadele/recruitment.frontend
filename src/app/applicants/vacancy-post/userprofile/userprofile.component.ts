@@ -31,7 +31,7 @@ uploadedFiles: any[] = [];
 isNewUser = true;
 qualifications: any = [];
 private readonly qualificationLookupCode = 'QUALIFICATION';
-private readonly CV_FILE = 1;
+private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
      private fb: FormBuilder, private router: Router, private messageService: MessageService ) { }
 
@@ -93,7 +93,7 @@ private readonly CV_FILE = 1;
       this.userService.saveApplicant(value).subscribe(res => {
         const formData: FormData = new FormData();
         formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
-        this.userService.storeFile(formData, this.CV_FILE ).subscribe(fileRes => {
+        this.userService.storeFile(formData, this.CV_FILE).subscribe(fileRes => {
           this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
       });
         });
