@@ -1,22 +1,4 @@
 
-<div class="row">
-<app-applicant-header></app-applicant-header>
-</div>
-<div class="filterFields" >
-<form  [formGroup]="vacancyFilterForm" (ngSubmit)="search(vacancyFilterForm)"  class="p-5">
-    <div class="filterFields" >
-     <fieldset class="form-group">
-         <label for="title">Job Title: &nbsp;&nbsp;</label>
-         <!-- <input type="text" formControlName="title" name="title" /> -->
-         <p-dropdown formControlName="vacancyId" name="month" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
-           <button type="submit" class="btn btn-primary" >Search</button>&nbsp;
-           <button type="button" class="btn btn-success" (click)="clearSearch()">Clear</button>
-     </fieldset>
-     </div>
- </form>
-</div>
-   
-
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title">
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">
