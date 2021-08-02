@@ -9,6 +9,7 @@ import { RepositoryService } from 'src/app/models/services/repository.service';
 export class AppliedPersonelService {
 
   private readonly APPLIED_PERSONELS = '/application/appliedPersonel/';
+  private readonly GET_LOOKUPS = '/settings/getlookupDetails/';
 
   constructor(private repoService: RepositoryService, @Inject('BASE_API_URL') private baseUrl: string) { }
 
@@ -17,7 +18,7 @@ export class AppliedPersonelService {
   }
   downloadFile(documentId: number, fileTypeId: number, userName: string) {
     return this.repoService.httpClient.get(this.baseUrl + '/application/downloadFile?documentId='
-     + documentId + '&fileTypeId=' + fileTypeId , {responseType: 'blob'})
+     + documentId + '&applicationId=' + fileTypeId , {responseType: 'blob'})
       .subscribe((res: any) => {
         console.log(res);
         return saveFile(res, userName);
@@ -27,5 +28,8 @@ export class AppliedPersonelService {
   advanceSearch(data: AppliedPersonelFilter) {
     const options = {body: data};
      return this.repoService.sendRequest('POST', this.baseUrl + '/application/search', options);
+  }
+  getLookups(code: string) {
+    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_LOOKUPS + code);
   }
 }

@@ -1,7 +1,7 @@
 <div class="spaceholder">
 
 </div>
-<div class="filterFelds">
+<div class="filterFields">
 <p-panel header="Expand this pannel to Filter applicants" [toggleable]="true" toggler="header" [collapsed] ="true">
 	<ng-template>
 		<button pButton (click)="onClick($event, menu)">
@@ -11,7 +11,7 @@
 <form role="form" [formGroup]="filterForm" (ngSubmit)="search(filterForm)"  class="p-5">
   
     <fieldset class="form-group">
-      <table class="table-responsive">
+      <table class=" table table-borderless table-responsive">
         <tr>
           <td>
             <label for="age">Age: </label>
@@ -37,6 +37,8 @@
         </td>
         <td>
         <input type="number" formControlName="cgpa"  name="cgpa" /></td>
+        </tr><br />
+        <tr>
           <td><label for="gender">Gender:</label></td>
           <td> <select  name="gender" formControlName="gender">
             <option  value="">All</option>
@@ -44,19 +46,13 @@
             <option value="female">Female</option>
           </select>
           </td>
-         
-        </tr><br />
-        <tr>
           <td>
             <label for="qualification">Qualification: </label>
           </td>
           <td>
-            <select  name="qualification" formControlName="qualificationcriteria" >
+            <select  name="qualification" formControlName="qualification" >
               <option  value="">All</option>
-              <option  value="Diploma">Diploma</option>
-              <option value="Degree">Degree</option>
-              <option value="Masters">Masters</option>
-              <option value="PHD">PHD</option>
+              <option *ngFor="let d of qualifications" [ngValue]="d.value">{{d.label}}</option>
             </select>
             </td>
         </tr>
@@ -89,6 +85,8 @@
           <th rowspan="2">Fixed</th>
           <th rowspan="2">Email</th>
           <th rowspan="2">CV</th>
+          <th rowspan="2">Document</th>
+          <th rowspan="2">Application Letter</th>
           <th colspan="5">Educational Background</th>
           <th colspan="5">Work Experience</th>
       </tr>
@@ -115,7 +113,9 @@
           <td>{{appliedPersonel.mobilePhone1}}</td>
           <td>{{appliedPersonel.fixedLinePhone}}</td>
           <td>{{appliedPersonel.email}}</td>
-          <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadFile(appliedPersonel)" pTooltip="download" tooltipPosition="top"></button></td>
+          <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadCV(appliedPersonel,1)" pTooltip="download cv" tooltipPosition="top"></button></td>
+          <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadQualificationDocument(appliedPersonel,2)" pTooltip="download qualification document" tooltipPosition="top"></button></td>
+          <td><button pButton  class="ui-button-secondary" (click)="displayAL(appliedPersonel)">Application Letter</button></td>
           <td>{{appliedPersonel.fieldOfEducation}}</td>
           <td>{{appliedPersonel.qualification}}</td>
           <td>{{appliedPersonel.university}}</td>
@@ -131,3 +131,10 @@
   <ng-template pTemplate="footer">
   </ng-template>
 </p-table>
+
+<p-dialog header="Application Letter" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="true" [baseZIndex]="10000">
+        <p-editor [(ngModel)]="letter" [style]="{'height':'200px'}" [readonly]="true" name ="description"></p-editor>
+        <p-footer>
+        </p-footer>
+</p-dialog>

@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
   {path: 'vacancies', component: VacancyPostComponent},
   {path: 'vacancy-view/:id', component: VacancyViewComponent},
-  {path: 'apply/:id', component: ApplyVacancyComponent},
+  {path: 'apply/:id/:name', component: ApplyVacancyComponent},
   {path: 'userProfile', component: UserprofileComponent},
   {path: 'appliedJobs', component: AppliedJobComponent},
   {path: '', redirectTo: 'vacancies', pathMatch: 'prefix' }

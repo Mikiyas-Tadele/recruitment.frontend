@@ -7,4 +7,5 @@ export class AppliedPersonelFilter {
     cgpaCriteria: string;
     workExperienceCriteria: string;
     vacancyId: number;
+    qualification: number;
 }

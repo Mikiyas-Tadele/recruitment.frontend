@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
+import { LookupDetail } from 'src/app/models/lookup.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
 import { VancancyService } from '../post-vacancy/vacancy-detail/vancancy.service';
 import { AppliedPersonelService } from './applied-personel.service';
@@ -20,6 +21,10 @@ export class AppliedPersonelComponent implements OnInit {
   appliedPersonelsCol: any = [];
   vacancyName: string;
   filterForm: FormGroup;
+  letter: string;
+  display = false;
+  private readonly qualificationLookupCode = 'QUALIFICATION';
+  qualifications: any = [];
 
   readonly columns = [
     'SrNo', 'Name', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
@@ -46,8 +51,16 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
     });
   }
 
-  downloadFile(data: AppliedPersonelModel) {
-     this.appliedPersonelService.downloadFile(data.userId, 1, data.fullName);
+  downloadCV(data: AppliedPersonelModel) {
+     this.appliedPersonelService.downloadFile(data.userId, 0, data.fullName);
+  }
+
+  downloadQualificationDocument(data: AppliedPersonelModel) {
+    this.appliedPersonelService.downloadFile(data.userId, data.applicationId, data.fullName);
+  }
+  displayAL(data: AppliedPersonelModel) {
+   this.letter = data.applicationLetter;
+   this.display = true;
   }
 
   search({value, valid}: { value: AppliedPersonelFilter, valid: boolean }) {
@@ -65,8 +78,8 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
       cgpaCriteria: new FormControl(''),
       ageCriteria: new FormControl(''),
       qualification: new FormControl(''),
-      qualificationcriteria: new FormControl('')
     });
+    this.loadQualificationLookups();
   }
   exportPdf() {
     import('jspdf').then(jsPDF => {
@@ -96,6 +109,18 @@ saveAsExcelFile(buffer: any, fileName: string): void {
         });
         FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
+}
+
+loadQualificationLookups() {
+  this.appliedPersonelService.getLookups(this.qualificationLookupCode).subscribe(res => {
+    const results = res as LookupDetail[];
+    for (let index = 0; index < results.length; index++) {
+      const element = results[index];
+      const q = {label: element.description, value: element.id};
+      this.qualifications.push(q);
+    }
+
+  });
 }
 
 }
