@@ -5,10 +5,12 @@ import { AuthGuard } from './shared';
 import { ApplyVacancyComponent } from './applicants/vacancy-post/apply-vacancy/apply-vacancy.component';
 import { VacancyPostComponent } from './applicants/vacancy-post/vacancy-post.component';
 import { VacancyViewComponent } from './applicants/vacancy-post/vacancy-view/vacancy-view.component';
+import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 
 const routes: Routes = [
     {path: '', loadChildren: () => import('./applicants/applicants.module').then(m => m.ApplicantsModule)},
     { path: 'admin', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule), canActivate: [AuthGuard] },
+    { path: 'signup/notification', component: RegistrationNotificationComponent},
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
     { path: 'verify/:token', loadChildren: () => import('./verification/verification.module').then(m => m.VerificationModule) },

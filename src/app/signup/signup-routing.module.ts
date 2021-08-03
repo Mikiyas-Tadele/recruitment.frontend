@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RegistrationNotificationComponent } from '../registration-notification/registration-notification.component';
 import { SignupComponent } from './signup.component';
 
 const routes: Routes = [

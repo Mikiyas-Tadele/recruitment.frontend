@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoginService } from '../login/login-service.service';
 import { routerTransition } from '../router.animations';
@@ -15,7 +16,7 @@ export class SignupComponent implements OnInit {
 
     signupForm: FormGroup;
     submitted = false;
-    constructor(private logiService: LoginService, private messageService: MessageService, private fb: FormBuilder) {}
+    constructor(private logiService: LoginService, private messageService: MessageService, private fb: FormBuilder, private route: Router) {}
 
     ngOnInit() {
         this.signupForm = this.fb.group({
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit {
                 this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.' +
                  'Please go to your email and click the verify link. ' +
                  'Note that if the email is not on your inbox folder check it on spam folder'});
+                 this.route.navigate(['signup/notification']);
                  this.submitted = false;
             }, error => {
                 this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});

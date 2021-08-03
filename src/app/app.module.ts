@@ -12,6 +12,7 @@ import { AuthHeaderInterceptor } from './shared/guard/auth-header.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 
 const baseUrl = 'http://172.18.10.145:8080/api';
 
@@ -27,8 +28,9 @@ const baseUrl = 'http://172.18.10.145:8080/api';
         AppRoutingModule,
         EditorModule,
         NgbModule,
+        
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, RegistrationNotificationComponent],
     bootstrap: [AppComponent],
     providers: [AuthGuard,
         {
