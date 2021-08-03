@@ -9,7 +9,7 @@ import { Vacancy } from 'src/app/models/vacancy.model';
 export class VancancyService {
 
   readonly ADD_VACANCY = '/vacancy/vacancy';
-  readonly GET_VANCANCIES = '/vacancy/vacancies';
+  readonly GET_VANCANCIES = '/vacancy/active-vacancies';
   readonly GET_VACANCY = '/vacancy/vacancy';
   readonly ADD_VACANCY_DETAIL = '/vacancy/vacancyDetail';
   readonly GET_VACANCY_DETAILS = '/vacancy/vacancyDetails';
