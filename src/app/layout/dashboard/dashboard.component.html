@@ -16,7 +16,7 @@
 <div [@routerTransition]>
    
 
-<p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title">
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title" emptyMessage="No Vacancy Available!">
     
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">

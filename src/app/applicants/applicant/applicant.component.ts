@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantComponent implements OnInit {
 
+  collapedSideBar: boolean;
+
   constructor() { }
 
   ngOnInit() {

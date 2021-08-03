@@ -9,11 +9,10 @@ import { LoginService } from '../login/login-service.service';
 })
 export class VerifyLinkComponent implements OnInit {
 
-  isActivated = true;
+  isActivated: boolean;
 
   constructor(private loginService: LoginService,
     private route: ActivatedRoute, private router: Router) {
-      console.log('I am here!');
     }
 
   ngOnInit() {
