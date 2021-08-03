@@ -9,5 +9,6 @@ export class Vacancy {
       postedDate: Date;
       deadlineDate: Date;
       minutesElapsedSinceCreation: string;
+      closed: boolean;
       vacancyModelDetailList: Array<VacancyDetail>;
 }
