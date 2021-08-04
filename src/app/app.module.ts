@@ -14,9 +14,9 @@ import { EditorModule } from 'primeng/editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 
-// const baseUrl = 'http://172.18.10.145:8080/api';
+//  const baseUrl = 'http://172.18.10.145:8080/api';
 
-const baseUrl = 'http://192.168.4.11:8080/recruitment/api';
+const baseUrl = 'http://jobs.dbe.com.et:8080/recruitment/api';
 
 @NgModule({
     imports: [
@@ -30,7 +30,7 @@ const baseUrl = 'http://192.168.4.11:8080/recruitment/api';
         AppRoutingModule,
         EditorModule,
         NgbModule,
-        
+
     ],
     declarations: [AppComponent, RegistrationNotificationComponent],
     bootstrap: [AppComponent],

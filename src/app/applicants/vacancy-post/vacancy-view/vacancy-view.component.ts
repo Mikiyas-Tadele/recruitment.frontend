@@ -56,6 +56,6 @@ export class VacancyViewComponent implements OnInit {
   }
 
   back() {
-   this.router.navigate(['vacancy']);
+   this.router.navigate(['vacancies']);
   }
 }

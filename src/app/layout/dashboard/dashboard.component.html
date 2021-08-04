@@ -1,17 +1,4 @@
 <div class="spacehlder"></div>
-<div class="filterFields" >
-    <form  [formGroup]="vacancyFilterForm" (ngSubmit)="search(vacancyFilterForm)"  class="p-5">
-        <div class="filterFields" >
-         <fieldset class="form-group">
-             <label for="title">Vacancy Title: &nbsp;&nbsp;</label>
-             <!-- <input type="text" formControlName="title" name="title" /> -->
-             <p-dropdown formControlName="vacancyId" name="title" class="dropdownInput" [options]="vacanvyTitles" [filter]="true" ></p-dropdown>
-               <button type="submit" class="btn btn-primary" >Search</button>
-               <button type="button" class="btn btn-success" (click)="clearSearch()">Clear</button>
-         </fieldset>
-         </div>
-     </form>
-    </div>
 
 <div [@routerTransition]>
    
