@@ -76,14 +76,13 @@
   </ng-template>
   <ng-template pTemplate="header">
       <tr>
-          <th rowspan="2">SrNo</th>
           <th rowspan="2">Name</th>
+          <th rowspan="2">Email</th>
           <th rowspan="2">Age</th>
           <th rowspan="2">Gender</th>
           <th rowspan="2">Disability</th>
           <th rowspan="2">Mobile</th>
           <th rowspan="2">Fixed</th>
-          <th rowspan="2">Email</th>
           <th rowspan="2">CV</th>
           <th rowspan="2">Document</th>
           <th rowspan="2">Application Letter</th>
@@ -103,16 +102,15 @@
           <th>Total Experience In Years</th>
       </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-appliedPersonel>
+  <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
       <tr>
-          <td>{{appliedPersonel.id}}</td>
-          <td>{{appliedPersonel.fullName}}</td>
+          <td *ngIf="rowGroupFullName[appliedPersonel.fullName].index === rowIndex" [attr.rowspan]="rowGroupFullName[appliedPersonel.fullName].size">{{appliedPersonel.fullName}}</td>
+          <td *ngIf="rowGroupEmail[appliedPersonel.email].index === rowIndex" [attr.rowspan]="rowGroupEmail[appliedPersonel.email].size">{{appliedPersonel.email}}</td>
           <td>{{appliedPersonel.age}}</td>
           <td>{{appliedPersonel.gender}}</td>
           <td>{{appliedPersonel.disability}}</td>
           <td>{{appliedPersonel.mobilePhone1}}</td>
           <td>{{appliedPersonel.fixedLinePhone}}</td>
-          <td>{{appliedPersonel.email}}</td>
           <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadCV(appliedPersonel,1)" pTooltip="download cv" tooltipPosition="top"></button></td>
           <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadQualificationDocument(appliedPersonel,2)" pTooltip="download qualification document" tooltipPosition="top"></button></td>
           <td><button pButton  class="ui-button-secondary" (click)="displayAL(appliedPersonel)">Application Letter</button></td>
@@ -125,7 +123,7 @@
           <td>{{appliedPersonel.position}}</td>
           <td>{{appliedPersonel.salary}}</td>
           <td>{{appliedPersonel.startDate | date :'dd/MM/yyyy'}} - {{appliedPersonel.endDate | date :'dd/MM/yyyy'}}</td>
-          <td>{{appliedPersonel.workExperienceInYears}}</td>
+          <td *ngIf="rowGroupTotal[appliedPersonel.totalExperience].index === rowIndex" [attr.rowspan]="rowGroupTotal[appliedPersonel.totalExperience].size">{{appliedPersonel.totalExperience}}</td>
       </tr>
   </ng-template>
   <ng-template pTemplate="footer">

@@ -16,7 +16,8 @@ export class SignupComponent implements OnInit {
 
     signupForm: FormGroup;
     submitted = false;
-    constructor(private logiService: LoginService, private messageService: MessageService, private fb: FormBuilder, private route: Router) {}
+    constructor(private logiService: LoginService, private messageService: MessageService,
+        private fb: FormBuilder, private route: Router) {}
 
     ngOnInit() {
         this.signupForm = this.fb.group({
@@ -24,7 +25,7 @@ export class SignupComponent implements OnInit {
           email: ['', [Validators.required, Validators.email]],
           password: ['', Validators.required],
           confirmPassword: ['', [Validators.required]]
-        }, { 
+        }, {
           validator: this.ConfirmedValidator('password', 'confirmPassword')
         });
     }
@@ -36,7 +37,7 @@ export class SignupComponent implements OnInit {
                 this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.' +
                  'Please go to your email and click the verify link. ' +
                  'Note that if the email is not on your inbox folder check it on spam folder'});
-                 this.route.navigate(['signup/notification']);
+                 this.route.navigate(['/notification']);
                  this.submitted = false;
             }, error => {
                 this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});
@@ -51,7 +52,7 @@ export class SignupComponent implements OnInit {
     get f() {
         return this.signupForm.controls;
     }
-    ConfirmedValidator(controlName: string, matchingControlName: string){
+    ConfirmedValidator(controlName: string, matchingControlName: string) {
         return (formGroup: FormGroup) => {
             const control = formGroup.controls[controlName];
             const matchingControl = formGroup.controls[matchingControlName];
@@ -63,7 +64,7 @@ export class SignupComponent implements OnInit {
             } else {
                 matchingControl.setErrors(null);
             }
-        }
+        };
     }
 
 }

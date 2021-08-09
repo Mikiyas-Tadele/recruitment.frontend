@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
 import { LookupDetail } from 'src/app/models/lookup.model';
+import { RowGroupModel } from 'src/app/models/row.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
 import { VancancyService } from '../post-vacancy/vacancy-detail/vancancy.service';
 import { AppliedPersonelService } from './applied-personel.service';
@@ -25,6 +26,10 @@ export class AppliedPersonelComponent implements OnInit {
   display = false;
   private readonly qualificationLookupCode = 'QUALIFICATION';
   qualifications: any = [];
+  counter = 0;
+  rowGroupFullName: RowGroupModel;
+  rowGroupEmail: RowGroupModel;
+  rowGroupTotal: RowGroupModel;
 
   readonly columns = [
     'SrNo', 'Name', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
@@ -41,7 +46,11 @@ export class AppliedPersonelComponent implements OnInit {
     this.initForm();
     const vacancyId = this.route.snapshot.params['id'];
     this.appliedPersonelService.getAppliedPersonelForVacancy(vacancyId).subscribe(res => {
+      this.counter = 0;
            this.appliedPersonels = res;
+           this.updateFullNameRowGroupMetaData1();
+           this.updateEmailRowGroupMetaData1();
+           this.updateTotalRowGroupMetaData1();
     });
 this.filteredAppliedPersonels = this.appliedPersonels;
 console.log('Filtered Applied Personel: ' + this.appliedPersonels);
@@ -66,7 +75,11 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
   search({value, valid}: { value: AppliedPersonelFilter, valid: boolean }) {
     value.vacancyId = this.route.snapshot.params['id'];
     this.appliedPersonelService.advanceSearch(value).subscribe(res => {
+      this.counter = 0;
         this.appliedPersonels = res;
+        this.updateFullNameRowGroupMetaData1();
+        this.updateEmailRowGroupMetaData1();
+        this.updateTotalRowGroupMetaData1();
     });
 
   }
@@ -121,6 +134,84 @@ loadQualificationLookups() {
     }
 
   });
+}
+updateFullNameRowGroupMetaData1() {
+  this.rowGroupFullName = new RowGroupModel();
+  if (this.appliedPersonels) {
+      for (let i = 0; i < this.appliedPersonels.length; i++) {
+          const rowData = this.appliedPersonels[i];
+          const name = rowData.fullName;
+          if (i === 0) {
+              this.rowGroupFullName[name] = {
+                  index: 0,
+                  size: 1,
+              };
+          } else {
+              const previousRowData = this.appliedPersonels[i - 1];
+              const previousRowGroup = previousRowData.fullName;
+              if (name === previousRowGroup) {
+                  this.rowGroupFullName[name].size++;
+              } else {
+                  this.rowGroupFullName[name] = {
+                      index: i,
+                      size: 1,
+                  };
+              }
+          }
+      }
+  }
+}
+updateEmailRowGroupMetaData1() {
+  this.rowGroupEmail = new RowGroupModel();
+  if (this.appliedPersonels) {
+      for (let i = 0; i < this.appliedPersonels.length; i++) {
+          const rowData = this.appliedPersonels[i];
+          const email = rowData.email;
+          if (i === 0) {
+              this.rowGroupEmail[email] = {
+                  index: 0,
+                  size: 1,
+              };
+          } else {
+              const previousRowData = this.appliedPersonels[i - 1];
+              const previousRowGroup = previousRowData.email;
+              if (email === previousRowGroup) {
+                  this.rowGroupEmail[email].size++;
+              } else {
+                  this.rowGroupEmail[email] = {
+                      index: i,
+                      size: 1,
+                  };
+              }
+          }
+      }
+  }
+}
+updateTotalRowGroupMetaData1() {
+  this.rowGroupTotal = new RowGroupModel();
+  if (this.appliedPersonels) {
+      for (let i = 0; i < this.appliedPersonels.length; i++) {
+          const rowData = this.appliedPersonels[i];
+          const total = rowData.totalExperience;
+          if (i === 0) {
+              this.rowGroupTotal[total] = {
+                  index: 0,
+                  size: 1,
+              };
+          } else {
+              const previousRowData = this.appliedPersonels[i - 1];
+              const previousRowGroup = previousRowData.totalExperience;
+              if (total === previousRowGroup) {
+                  this.rowGroupTotal[total].size++;
+              } else {
+                  this.rowGroupTotal[total] = {
+                      index: i,
+                      size: 1,
+                  };
+              }
+          }
+      }
+  }
 }
 
 }

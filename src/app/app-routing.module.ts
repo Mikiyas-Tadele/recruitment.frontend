@@ -10,7 +10,7 @@ import { RegistrationNotificationComponent } from './registration-notification/r
 const routes: Routes = [
     {path: '', loadChildren: () => import('./applicants/applicants.module').then(m => m.ApplicantsModule)},
     { path: 'admin', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule), canActivate: [AuthGuard] },
-    { path: 'signup/notification', component: RegistrationNotificationComponent},
+    { path: 'notification', component: RegistrationNotificationComponent},
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
     { path: 'verify/:token', loadChildren: () => import('./verification/verification.module').then(m => m.VerificationModule) },

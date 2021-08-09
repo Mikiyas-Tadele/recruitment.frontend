@@ -24,4 +24,5 @@ export class AppliedPersonelModel {
      userId: number;
      applicationLetter: string;
      applicationId: number;
+     totalExperience: number;
 }
