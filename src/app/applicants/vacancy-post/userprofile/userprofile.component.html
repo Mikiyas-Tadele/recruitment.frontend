@@ -27,8 +27,13 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                             <label for="dateofBirth">Date of Birth</label>
-                            <input type="date" name="dateofBirth" formControlName="dateOfBirth"  class="form-control" />
-                           
+                            <div class="input-group">
+                                <input class="form-control" placeholder="dd/mm/yyyy"
+                                       name="dateofBirth"  formControlName="dateofBirth" ngbDatepicker #dateofBirth="ngbDatepicker">
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary calendar" (click)="dateofBirth.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                </div>
+                              </div>
                             <span class="text-danger"
                             *ngIf="(userFormControl.dateOfBirth.touched || userFormControl.dateOfBirth.drty) && userFormControl.dateOfBirth.invalid">
                             Date of Birth is required
@@ -117,7 +122,7 @@
                                 <input type="text" class="form-control" formControlName="university"  name="university" />
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.university.touched || educationFormControl.university.drty) && educationFormControl.university.invalid">
-                                End date is required
+                                University name is required
                             </span>
                             </div>
                         </fieldset>
@@ -157,6 +162,7 @@
                             <th scope="col">University Name</th>
                             <th scope="col">CGPA</th>
                             <th scope="col">Year of Graduation</th>
+                            <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody *ngIf="experiences != null">
@@ -168,7 +174,9 @@
                             <td>{{education.university}}</td>
                             <td>{{education.cgpa}}</td>
                             <td>{{education.yearOfGraduation}}</td>
-                          </tr>
+                            <td><button type="button" class="btn" style="color: rgb(16, 105, 28);" (click)="editEducation(education)"><i class="fa fa-edit"></i></button> 
+                                <button type="button" class="btn" style="color: rgba(228, 19, 54);" (click)="deleteEducation(education)"><i class="fa fa-trash fa-lg"></i></button>
+                            </tr>
                         </tbody>
                         <tbody *ngIf="experiences == null">
                             <tr>
@@ -211,7 +219,13 @@
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" formControlName="startDate"  name="startDate" />
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="dd/mm/yyyy"
+                                           name="startDate"  formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                    </div>
+                                  </div>
                                 <span class="text-danger"
                             *ngIf="(experienceFormControl.startDate.touched || experienceFormControl.startDate.drty) && experienceFormControl.startDate.invalid">
                             Start date is required
@@ -221,8 +235,13 @@
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
                                 <label for="endDate">End Date </label>
-                                <input type="date" class="form-control" formControlName="endDate"  name="endDate" />
-                            
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="dd/mm/yyyy"
+                                           name="endDate"  formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                    </div>
+                                  </div>
                             <span class="text-danger"
                             *ngIf="(experienceFormControl.endDate.touched || experienceFormControl.endDate.drty) && experienceFormControl.endDate.invalid">
                             End date is required
@@ -262,7 +281,10 @@
                             <td>{{experience.startDate | date :'dd/MM/yyyy'}}</td>
                             <td>{{experience.startDate | date :'dd/MM/yyyy'}}</td>
                             <td>{{experience.salary}}</td>
-                          </tr>
+                            <td>
+                                <button type="button" class="btn" style="color: rgb(16, 105, 28);" (click)="editExperience(experience)"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn" style="color: rgba(228, 19, 54);" (click)="deleteExperience(experience)"><i class="fa fa-trash fa-lg"></i></button>
+                            </tr>
                         </tbody>
                         <tbody *ngIf="experiences == null">
                             <tr>
@@ -275,6 +297,88 @@
                       </div>
                     </ng-template>
                 </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>Certifications</ng-template>
+                    <ng-template ngbTabContent>
+                        <form [formGroup]="certificationForm">
+                            <div class="row">
+                             <div class="col-md-6">
+                        <fieldset class="form-group">
+                                <div [formGroup]="certificationForm">
+                                <label for="title">Certification Title</label>
+                                <input type="text" class="form-control" formControlName="title" name="title" />
+                                <span class="text-danger"
+                                *ngIf="(certificationFormControl.title.touched || certificationFormControl.title.drty) && certificationFormControl.title.invalid">
+                                Certification title is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div [formGroup]="certificationForm">
+                            <label for="institution">Institution</label>
+                            <input type="text" class="form-control" formControlName="institution" name="institution" />
+                            <span class="text-danger"
+                            *ngIf="(certificationFormControl.institution.touched || certificationFormControl.institution.drty) && certificationFormControl.institution.invalid">
+                            Institution name is required
+                        </span>
+                        </div>
+                    </fieldset>
+                        
+                        <fieldset class="form-group">
+                            <div [formGroup]="certificationForm">
+                                <label for="awardedDate">Awarded Date</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="dd/mm/yyyy"
+                                           name="awardedDate"  formControlName="awardedDate" ngbDatepicker #awardedDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="awardedDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                    </div>
+                                  </div>
+                                <span class="text-danger"
+                                *ngIf="(certificationFormControl.awardedDate.touched || certificationFormControl.awardedDate.drty) && certificationFormControl.awardedDate.invalid">
+                                Awarded date is required
+                            </span>
+                            </div>
+                        </fieldset>
+                        
+                        <button type="button" class="btn btn-primary" (click)="addCertification(certificationForm)">Add</button>                        
+                    </div>
+                    </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th>Certificate Title</th>
+                            <th scope="col">Institution</th>
+                            <th scope="col">Awarded Date</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="experiences != null">
+                          <tr *ngFor="let certificate of certifications; let i = index">
+                            <th scope="row">{{i + 1}}</th>
+                            <td>{{certificate.title}}</td>
+                            <td>{{certificate.institution}}</td>
+                            <td>{{certificate.awardedDate}}</td>
+                            <td><button type="button" class="btn" style="color: rgb(16, 105, 28);" (click)="editCertificate(certificate)"><i class="fa fa-edit fa-lg"></i></button> 
+                                <button type="button" class="btn" style="color: rgba(228, 19, 54);" (click)="deleteCertificate(certificate)"><i class="fa fa-trash fa-lg"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="experiences == null">
+                            <tr>
+                                <td>1</td>
+                            <td colspan="4">You didn't add experience yet</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      </div>
+                </ng-template>
+            </ngb-tab>
                 <ngb-tab title="Upload Your CV">
                     <ng-template ngbTabContent>
                         <br/>

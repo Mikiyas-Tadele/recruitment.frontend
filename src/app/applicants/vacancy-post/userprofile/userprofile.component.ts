@@ -2,10 +2,14 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
+import { Certification } from 'src/app/models/certification.model';
 import { Education } from 'src/app/models/education.model';
 import { LookupDetail } from 'src/app/models/lookup.model';
+import { CustomAdapter } from 'src/app/models/services/custom-adapter.service';
+import { CustomDateParserFormatter } from 'src/app/models/services/custom-date-parser-formatter.service';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 import { Userprofile } from 'src/app/models/userprofile.model';
 import { WorkExperience } from 'src/app/models/work-experience.model';
@@ -14,19 +18,24 @@ import { UserProfileService } from './user-profile.service';
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
-  styleUrls: ['./userprofile.component.scss']
+  styleUrls: ['./userprofile.component.scss'],
+  providers: [{ provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }]
 })
 export class UserprofileComponent implements OnInit {
   activeMainTab = 'basicInfoTab';
 education = new Education();
 experience = new WorkExperience();
+certification = new Certification();
 userprofile = new Userprofile();
 experiences: WorkExperience[] = [];
 educations: Education[] = [];
+certifications: Certification[] = [];
 userProfile: Userprofile;
 userForm: FormGroup;
 educationForm: FormGroup;
 experienceForm: FormGroup;
+certificationForm: FormGroup;
 uploadedFiles: any[] = [];
 isNewUser = true;
 qualifications: any = [];
@@ -62,6 +71,11 @@ private readonly CV_FILE = 0;
       cgpa: ['', Validators.required],
     });
 
+    this.certificationForm = this.fb.group({
+      title: ['', Validators.required],
+      institution: ['', Validators.required],
+      awardedDate: ['', Validators.required]
+    });
     this.loadQualificationLookups();
 
       this.userService.getApplicant().subscribe(res => {
@@ -82,6 +96,9 @@ private readonly CV_FILE = 0;
   }
   get experienceFormControl() {
     return this.experienceForm.controls;
+  }
+  get certificationFormControl() {
+    return this.certificationForm.controls;
   }
   setActiveTab(event, tab) {
     this.activeMainTab = tab;
@@ -120,7 +137,64 @@ private readonly CV_FILE = 0;
     this.experience = new WorkExperience();
     }
   }
-
+  addCertification({value, valid}: { value: Certification, valid: boolean }) {
+    if (valid) {
+      this.certifications.push(value);
+      this.certificationForm.reset();
+      this.certification = new Certification();
+      }
+  }
+  editEducation(education: Education) {
+    this.educationForm.setValue({
+      fieldOfEducation: education.fieldOfEducation,
+      specialization:education.specialization,
+      qualification: education.qualification,
+      university: education.university,
+      yearOfGraduation: education.yearOfGraduation,
+      cgpa: education.cgpa,
+    });
+    this.educations.forEach((value,index)=>{
+      if(value == education) this.educations.splice(index,1);
+    });
+  }
+  deleteEducation(education: Education) {
+    this.educations.forEach((value,index)=>{
+      if(value == education) this.educations.splice(index,1);
+    });
+  }
+  editExperience(experience: WorkExperience) {
+    this.experienceForm.setValue({
+      position: experience.position,
+      organization: experience.organization,
+      startDate: experience.startDate ,
+      endDate: experience.endDate,
+      salary: experience.salary,
+    });
+    this.experiences.forEach((value,index)=>{
+      if(value == experience) this.experiences.splice(index,1);
+    });
+}
+deleteExperience(experience: WorkExperience) {
+  this.experiences.forEach((value,index)=>{
+    if(value == experience) this.experiences.splice(index,1);
+  });
+}
+  editCertificate(certificate: Certification) {
+    console.log(" Certificate: "+ JSON.stringify(certificate.awardedDate));
+    this.certificationForm.setValue({
+       title: certificate.title,
+       institution: certificate.institution,
+       awardedDate: formatDate(certificate.awardedDate, 'yyyy-MM-dd', 'en')
+    });
+    this.certifications.forEach((value,index)=>{
+      if(value == certificate) this.certifications.splice(index,1);
+  });
+  }
+  deleteCertificate(certificate: Certification) {
+    this.certifications.forEach((value,index)=>{
+      if(value == certificate) this.certifications.splice(index,1);
+  });
+  }
   setForm(userProfile: Userprofile) {
     this.userForm.setValue({
       gender: userProfile.gender,

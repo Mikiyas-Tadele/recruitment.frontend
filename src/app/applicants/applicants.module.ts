@@ -23,10 +23,11 @@ import { AppliedJobComponent } from './applied-job/applied-job.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {DataViewModule} from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
-    UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent],
+    UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent, HelpComponent],
   imports: [
     CommonModule,
     ApplicantsRoutingModule,

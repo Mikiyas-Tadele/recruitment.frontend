@@ -16,7 +16,8 @@
            
                 <div class="card card-default mb-3">
                     <div class="card-header">
-                        <i class="fa fa-bell fa-fw"></i> {{vacancy.title}}
+                        <h4 *ngIf="!vacancy.closed" class="text-success"><i class="fa fa-bell fa-fw text-success"></i> {{vacancy.title}}</h4>
+                        <h4 *ngIf="vacancy.closed" class="text-danger"><i class="fa fa-bell fa-fw text-danger" ></i> {{vacancy.title}} </h4>
                     </div>
                     <div class="card-body">
                         <div class="timeline-panel">
@@ -24,6 +25,8 @@
                                 <h4 class="timeline-title">{{vacancy.workExperience}} Year Experience</h4>
                                 <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{vacancy.minutesElapsedSinceCreation}}</small>
                                 </p>
+                                <span class="text-success" *ngIf="!vacancy.closed" >Active</span>
+                                <span class="text-danger" *ngIf="vacancy.closed">Closed</span>
                             </div>
                             <div class="timeline-body">
                                 <p>{{vacancy.qualification}}

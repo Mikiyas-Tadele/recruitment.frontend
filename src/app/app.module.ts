@@ -16,7 +16,7 @@ import { RegistrationNotificationComponent } from './registration-notification/r
 
 //  const baseUrl = 'http://172.18.10.145:8080/api';
 
-const baseUrl = 'http://jobs.dbe.com.et:8080/recruitment/api';
+const baseUrl = 'https://jobs.dbe.com.et:8443/recruitment/api';
 
 @NgModule({
     imports: [

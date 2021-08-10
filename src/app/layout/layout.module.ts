@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TableModule} from 'primeng/table';
-import { NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ToastModule } from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
@@ -48,7 +48,8 @@ import { AppliedPersonelComponent } from './applied-personel/applied-personel.co
         MenuModule,
         TooltipModule,
         DialogModule,
-        DropdownModule
+        DropdownModule,
+        NgbDatepickerModule,
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,

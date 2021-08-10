@@ -8,7 +8,7 @@
     <div class="col-lg-6">
             <fieldset class="form-group">
                 <label for="title">Job title</label>
-                <input type="text" formControlName="title" class="form-control" class="form-control" name="title" required />
+                <input type="text" formControlName="title" class="form-control" class="form-control" name="title" placeholder="Enter job title" required />
             </fieldset>
 
             <fieldset class="form-group">
@@ -18,23 +18,52 @@
 
             <div class="form-group">
                 <label for="workExprience">Work Exprience</label>
-                <input type="text" formControlName="workExperience" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
+                <input type="number" formControlName="workExperience" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
             </div>
 
             <fieldset class="form-group">
-                <label for="location">Location</label>
+                <label for="location">Place of Work</label>
                 <input type="text"  formControlName="location"  class="form-control"  placeholder="Enter Location" name="location" required>
             </fieldset>
-
+            <fieldset class="form-group">
+                <label for="requiredNumber">Required Number of Vacant Post</label>
+                <input type="text"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="salary">Salary</label>
+                <input type="number"  formControlName="salary"  class="form-control"  placeholder="Enter salary" name="salary" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="salaryDescription">Salary Description</label>
+                <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="employementCondition">PEmployeement Condition</label>
+                <input type="text"  formControlName="employementCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition" required>
+            </fieldset>
             <fieldset class="form-group">
                 <label for="postedDate">Posted Date</label>
-                <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate" required/>
-            </fieldset>
+                <div class="input-group">
+                    <input class="form-control" placeholder="dd/mm/yyyy"
+                           name="postedDate"  formControlName="postedDate" ngbDatepicker #postedDate="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="postedDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                    </div>
+                  </div> 
+                  </fieldset>
 
             <fieldset class="form-group">
                 <label for="deadlineDate">Deadline Date</label>
-                <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate" required/>
+                <div class="input-group">
+                    <input class="form-control" placeholder="dd/mm/yyyy"
+                           name="deadlineDate"  formControlName="deadlineDate" ngbDatepicker #deadlineDate="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="deadlineDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                    </div>
+                  </div>
             </fieldset>
+           
+
     </div>
    
 </div>
