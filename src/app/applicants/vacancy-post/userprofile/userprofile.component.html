@@ -29,7 +29,7 @@
                             <label for="dateofBirth">Date of Birth</label>
                             <div class="input-group">
                                 <input class="form-control" placeholder="dd/mm/yyyy"
-                                       name="dateofBirth"  formControlName="dateofBirth" ngbDatepicker #dateofBirth="ngbDatepicker">
+                                       name="dateofBirth"  formControlName="dateofBirth" ngbDatepicker #dateofBirth="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-secondary calendar" (click)="dateofBirth.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                 </div>
@@ -221,7 +221,7 @@
                                 <label for="startDate">Start Date</label>
                                 <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
-                                           name="startDate"  formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker">
+                                           name="startDate"  formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                     </div>
@@ -237,7 +237,7 @@
                                 <label for="endDate">End Date </label>
                                 <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
-                                           name="endDate"  formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker">
+                                           name="endDate"  formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                     </div>
@@ -329,7 +329,7 @@
                                 <label for="awardedDate">Awarded Date</label>
                                 <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
-                                           name="awardedDate"  formControlName="awardedDate" ngbDatepicker #awardedDate="ngbDatepicker">
+                                           name="awardedDate"  formControlName="awardedDate" ngbDatepicker #awardedDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-secondary calendar" (click)="awardedDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                     </div>
