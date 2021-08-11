@@ -19,8 +19,8 @@
           <td>
             <select  name="agecriteria" formControlName="ageCriteria" >
               <option  value="">All</option>
-              <option  value="greaterthan">Greater Than</option>
-              <option value="lessthan">Less Than</option>
+              <option  value="greaterthan">Greater Than or Equal To</option>
+              <option value="lessthan">Less Than or Equal To</option>
             </select>
             </td>
             <td>
@@ -31,13 +31,39 @@
           </td>
           <td><select  name="cgpacriteria" formControlName="cgpaCriteria" >
             <option  value="">All</option>
-            <option  value="greaterthan">Greater Than</option>
-            <option value="lessthan">Less Than</option>
+            <option  value="greaterthan">Greater Than or Equal To</option>
+            <option value="lessthan">Less Than or Equal To</option>
           </select>
         </td>
         <td>
         <input type="number" formControlName="cgpa"  name="cgpa" /></td>
-        </tr><br />
+        </tr>
+        <tr>
+          <td>
+            <label for="we"> WorkExperience: </label>
+          </td>
+          <td>
+            <select  name="weCriteria" formControlName="workExperienceCriteria" >
+              <option  value="">All</option>
+              <option  value="greaterthan">Greater Than or Equal To</option>
+              <option value="lessthan">Less Than or Equal To</option>
+            </select>
+            </td>
+            <td>
+          <input type="number" formControlName="workExperience" name="we" />
+          </td>
+          <td>
+            <label for="gy">Graduation Year: </label>
+          </td>
+          <td><select  name="graduationYearCriteria" formControlName="graduationYearCriteria" >
+            <option  value="">All</option>
+            <option  value="greaterthan">Greater Than or Equal To</option>
+            <option value="lessthan">Less Than or Equal To</option>
+          </select>
+        </td>
+        <td>
+        <input type="number" formControlName="graduationYear"  name="gy" /></td>
+        </tr>
         <tr>
           <td><label for="gender">Gender:</label></td>
           <td> <select  name="gender" formControlName="gender">
@@ -57,14 +83,16 @@
             </td>
         </tr>
       </table>
-        <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
-    </fieldset>
-    
+      <div style="float:right;">
+        <button type="submit" class="btn btn-primary">Search</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-success"  (click)="reset()">Reset</button>
+        </div>
+    </fieldset>   
 </form>
 </p-panel>
 </div>
 <br />
-<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true">
+<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true" sortField="fullName" sortMode="single" (onSort)="onSort()">
   <ng-template pTemplate="caption">
     <div class="ui-helper-clearfix" style="text-align: left">
       <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
@@ -76,9 +104,14 @@
   </ng-template>
   <ng-template pTemplate="header">
       <tr>
-          <th rowspan="2">Name</th>
+          <th rowspan="2"  [pSortableColumn]="'fullName'">Name
+            <p-sortIcon [field]="'fullName'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
           <th rowspan="2">Email</th>
-          <th rowspan="2">Age</th>
+          <th rowspan="2" [pSortableColumn]="'age'">Age
+            <p-sortIcon [field]="'age'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+
+          </th>
           <th rowspan="2">Gender</th>
           <th rowspan="2">Disability</th>
           <th rowspan="2">Mobile</th>
@@ -93,13 +126,19 @@
           <th>Field of Education</th>
           <th>Qualification</th>
           <th>University</th>
-          <th>Year Of Graduation</th>
-          <th>CGPA</th>
+          <th [pSortableColumn]="'yearOfGraduation'">Year Of Graduation
+            <p-sortIcon [field]="'yearOfGraduation'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="'cgpa'">CGPA
+            <p-sortIcon [field]="'cgpa'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
           <th>Organization</th>
           <th>Position</th>
           <th>Salary</th>
           <th>Duration</th>
-          <th>Total Experience In Years</th>
+          <th [pSortableColumn]="'totalExperience'">Total Experience In Years
+            <p-sortIcon [field]="'totalExperience'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
@@ -115,7 +154,7 @@
           <td><button pButton icon="pi pi-download" class="ui-button-success" (click)="downloadQualificationDocument(appliedPersonel,2)" pTooltip="download qualification document" tooltipPosition="top"></button></td>
           <td><button pButton  class="ui-button-secondary" (click)="displayAL(appliedPersonel)">Application Letter</button></td>
           <td>{{appliedPersonel.fieldOfEducation}}</td>
-          <td>{{appliedPersonel.qualification}}</td>
+          <td>{{appliedPersonel.qualificationDesc}}</td>
           <td>{{appliedPersonel.university}}</td>
           <td>{{appliedPersonel.yearOfGraduation}}</td>
           <td>{{appliedPersonel.cgpa}}</td>

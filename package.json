@@ -40,10 +40,9 @@
         "tslib": "^1.9.0",
         "yarn": "1.16.0",
         "zone.js": "~0.9.1",
+        "xlsx": "^0.14.3",
         "file-saver": "^2.0.2",
-        "jspdf": "^1.5.3",
-        "jspdf-autotable": "^3.1.1",
-        "xlsx": "^0.14.3"
+        "exceljs": "4.0.1"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.800.0",

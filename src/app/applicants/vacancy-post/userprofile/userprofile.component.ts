@@ -39,6 +39,7 @@ certificationForm: FormGroup;
 uploadedFiles: any[] = [];
 isNewUser = true;
 qualifications: any = [];
+enableDisablity = false;
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
@@ -46,9 +47,11 @@ private readonly CV_FILE = 0;
 
   ngOnInit() {
     this.userForm = this.fb.group({
+      id: [''],
       gender: ['', Validators.required],
       dateOfBirth: [new Date(), Validators.required],
       disability: ['', Validators.required],
+      disabilityDescription: [''],
       mPhone1: ['', Validators.required],
       mPhone2: [''],
       fPhone: ['', Validators.required],
@@ -104,7 +107,7 @@ private readonly CV_FILE = 0;
     this.activeMainTab = tab;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
-    if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
+    if (valid && value.id != null && this.educations.length > 0 && this.uploadedFiles.length > 0) {
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       this.userService.saveApplicant(value).subscribe(res => {
@@ -112,11 +115,20 @@ private readonly CV_FILE = 0;
         formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
         this.userService.storeFile(formData, this.CV_FILE).subscribe(fileRes => {
           this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
+          this.enableDisablity = false;
       });
         });
         this.userForm.reset();
         this.educationForm.reset();
         this.experienceForm.reset();
+    } else if (valid && value.id != null) {
+       this.userService.saveApplicant(value).subscribe(res => {
+        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Updated Successfully!'});
+        this.enableDisablity = false;
+       });
+    } else if (this.educations.length === 0 || this.uploadedFiles.length === 0) {
+      this.messageService.add({severity: 'error', summary: 'Saved',
+      detail: 'You have not added either education background or uploaded a CV'});
     } else {
       this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Check for wrong data in the form'});
     }
@@ -200,9 +212,11 @@ deleteExperience(experience: WorkExperience) {
       gender: userProfile.gender,
       dateOfBirth: formatDate(userProfile.dateOfBirth, 'yyyy-MM-dd', 'en'),
       disability: userProfile.disability,
+      disabilityDescription: userProfile.disabilityDescription,
       mPhone1: userProfile.mPhone1,
       mPhone2: userProfile.mPhone2,
       fPhone: userProfile.fPhone,
+      id: userProfile.id
     });
     this.educations = userProfile.educationalBackgrounds;
     this.experiences = userProfile.workExperiences;
@@ -226,5 +240,10 @@ deleteExperience(experience: WorkExperience) {
       }
 
     });
+  }
+
+  checkDisablity(event) {
+   this.enableDisablity = event === 'Yes' ? true : false;
+   console.log(this.enableDisablity);
   }
 }

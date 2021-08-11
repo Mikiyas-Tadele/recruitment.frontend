@@ -25,4 +25,5 @@ export class AppliedPersonelModel {
      applicationLetter: string;
      applicationId: number;
      totalExperience: number;
+     qualificationDesc: string;
 }

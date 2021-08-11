@@ -15,6 +15,7 @@ export class ApplicantHeaderComponent implements OnInit {
   userEmail: String;
   displayUserInfo = false;
   isNotLoggedIn = true;
+  isMenuCollapsed = true;
 
     constructor(private translate: TranslateService, public router: Router,
         private loginService: LoginService, private tokenStorage: TokenStorage) {
