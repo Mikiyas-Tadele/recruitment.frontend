@@ -9,6 +9,7 @@ export class Userprofile {
      dateOfBirth: Date;
      gender: string;
      disability: string;
+     disabilityDescription: string;
      mPhone1: string;
      mPhone2: string;
      fPhone: string;

@@ -24,6 +24,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {DataViewModule} from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import { HelpComponent } from './help/help.component';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
@@ -45,7 +46,8 @@ import { HelpComponent } from './help/help.component';
     FileUploadModule,
     DropdownModule,
     DataViewModule,
-    TableModule
+    TableModule,
+    CalendarModule
   ],
   providers: [MessageService]
 })

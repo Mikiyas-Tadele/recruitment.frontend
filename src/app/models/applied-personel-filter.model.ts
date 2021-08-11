@@ -8,4 +8,6 @@ export class AppliedPersonelFilter {
     workExperienceCriteria: string;
     vacancyId: number;
     qualification: number;
+    graduationYear: number;
+    graduationYearCriteria: string;
 }

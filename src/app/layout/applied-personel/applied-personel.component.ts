@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +7,7 @@ import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
 import { LookupDetail } from 'src/app/models/lookup.model';
 import { RowGroupModel } from 'src/app/models/row.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
+import { ExcelExportService } from 'src/app/shared/services/excel-export-service';
 import { VancancyService } from '../post-vacancy/vacancy-detail/vancancy.service';
 import { AppliedPersonelService } from './applied-personel.service';
 
@@ -16,7 +18,7 @@ import { AppliedPersonelService } from './applied-personel.service';
 })
 export class AppliedPersonelComponent implements OnInit {
   constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
-    private vacancyService: VancancyService) { }
+    private vacancyService: VancancyService, private excelService: ExcelExportService) { }
   appliedPersonels: any = [];
   filteredAppliedPersonels: any[];
   appliedPersonelsCol: any = [];
@@ -30,12 +32,6 @@ export class AppliedPersonelComponent implements OnInit {
   rowGroupFullName: RowGroupModel;
   rowGroupEmail: RowGroupModel;
   rowGroupTotal: RowGroupModel;
-
-  readonly columns = [
-    'SrNo', 'Name', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
-    'Email', 'Educational Background', 'Work Experience', 'Field of Education',
-    'Qualification', 'University', 'Year of Graduation', 'CGPA', 'Organization',
-    'Position', 'Salary', 'Duration', 'Total Experience (Years)'];
 
   onClick(event: Event, menu) {
     menu.toggle(event);
@@ -91,37 +87,45 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
       cgpaCriteria: new FormControl(''),
       ageCriteria: new FormControl(''),
       qualification: new FormControl(''),
+      workExperienceCriteria: new FormControl(''),
+      workExperience: new FormControl(''),
+      graduationYear: new FormControl(''),
+      graduationYearCriteria: new FormControl('')
     });
     this.loadQualificationLookups();
   }
-  exportPdf() {
-    import('jspdf').then(jsPDF => {
-        import('jspdf-autotable').then(x => {
-            const doc = new jsPDF.default(0, 0);
-            doc.autoTable(this.columns, this.appliedPersonels);
-            doc.save(this.vacancyName + '_applicants.pdf');
-        });
-    });
-}
 
 exportExcel() {
-    import('xlsx').then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.appliedPersonels);
-        const workbook = { Sheets: { 'data': worksheet , 'header': this.columns}, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, this.vacancyName + '_applicants');
-    });
-}
+        const excelContents: any = [];
+       const headers = ['Name', 'Email', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
+        'Field of Education',
+        'Qualification', 'University', 'Year of Graduation', 'CGPA', 'Organization',
+        'Position', 'Salary', 'Duration', 'Total Experience (Years)'];
+        for (let index = 0; index < this.appliedPersonels.length; index++) {
+          const element = this.appliedPersonels[index];
+           console.log(element);
+           excelContents.push([element.fullName,
+           element.email,
+           element.age,
+           element.gender,
+           element.disability,
+           element.mobilePhone1,
+           element.fixedLinePhone,
+           element.fieldOfEducation,
+           element.qualificationDesc,
+           element.university,
+           element.yearOfGraduation,
+           element.cgpa,
+           element.organization,
+           element.position,
+           element.salary,
+           this.getDateFormatted(element.startDate, element.endDate),
+           element.totalExperience]);
+        }
+        const title = 'Human Resource Management Directorate Applicants profile Summary for the Position ' + this.vacancyName;
+           const fileName = this.vacancyName + Date();
 
-saveAsExcelFile(buffer: any, fileName: string): void {
-    import('file-saver').then(FileSaver => {
-        const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-        const EXCEL_EXTENSION = '.xlsx';
-        const data: Blob = new Blob([buffer], {
-            type: EXCEL_TYPE
-        });
-        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    });
+           this.excelService.exportAsExcelFileExcelJs(headers, excelContents, fileName, title );
 }
 
 loadQualificationLookups() {
@@ -212,6 +216,38 @@ updateTotalRowGroupMetaData1() {
           }
       }
   }
+}
+
+getDateFormatted(startDate: Date, endDate: Date) {
+  if (startDate != null && endDate != null) {
+     return formatDate(startDate, 'yyyy-MM-dd', 'en') + '/' + formatDate(endDate, 'yyyy-MM-dd', 'en');
+  } else if (startDate != null && endDate == null) {
+    return formatDate(startDate, 'yyyy-MM-dd', 'en');
+  } else if (endDate != null && startDate == null) {
+    return formatDate(startDate, 'yyyy-MM-dd', 'en');
+  } else {
+    return '';
+  }
+}
+
+reset() {
+  this.filterForm.reset({
+    age: '',
+    gender: '',
+    cgpa: '',
+    cgpaCriteria: '',
+    ageCriteria: '',
+    qualification: '',
+    workExperienceCriteria: '',
+    workExperience: '',
+    graduationYear: '',
+    graduationYearCriteria: ''
+  });
+}
+onSort() {
+  this.updateFullNameRowGroupMetaData1();
+        this.updateEmailRowGroupMetaData1();
+        this.updateTotalRowGroupMetaData1();
 }
 
 }
