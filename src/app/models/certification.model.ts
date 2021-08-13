@@ -2,7 +2,7 @@ export class Certification {
     id: number;
     title: string;
     institution: string;
-    awardedDate: Date;
+    awardDate: Date;
     applicantId: number;
 
 }

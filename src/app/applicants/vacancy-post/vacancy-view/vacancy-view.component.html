@@ -19,10 +19,25 @@
           </div>
 
           <fieldset class="form-group">
-              <label for="location">Location</label>
+              <label for="location">Place of Work</label>
               <input type="text"  formControlName="location"  class="form-control"  name="location">
           </fieldset>
-
+          <fieldset class="form-group">
+            <label for="requiredNumber">Required Number of Vacant Post</label>
+            <input type="text"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="salary">Salary</label>
+            <input type="number"  formControlName="salary"  class="form-control"  placeholder="Enter salary" name="salary" required>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="salaryDescription">Salary Description</label>
+            <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription" required>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="employementCondition">Employeement Condition</label>
+            <input type="text"  formControlName="employmentCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition" required>
+        </fieldset>
           <fieldset class="form-group">
               <label for="postedDate">Posted Date</label>
               <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate">

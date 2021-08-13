@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm, FormGroupDirective, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbDateStruct,NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'primeng/api';
 import { CustomAdapter } from 'src/app/models/services/custom-adapter.service';
 import { CustomDateParserFormatter } from 'src/app/models/services/custom-date-parser-formatter.service';
@@ -69,8 +69,12 @@ setForm(vacancy: Vacancy) {
     qualification: vacancy.qualification,
     workExperience: vacancy.workExperience,
     location: vacancy.location,
-    postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
-    deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en')
+    postedDate: new Date(vacancy.postedDate),
+    deadlineDate: new Date(vacancy.deadlineDate),
+    salary: vacancy.salary,
+    salaryDescription: vacancy.salaryDescription,
+    requiredNumber: vacancy.requiredNumber,
+    employementCondition: vacancy.employmentCondition,
   });
 }
 

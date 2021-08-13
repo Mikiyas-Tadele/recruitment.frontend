@@ -24,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { AppliedPersonelComponent } from './applied-personel/applied-personel.co
         DialogModule,
         DropdownModule,
         NgbDatepickerModule,
+        CalendarModule
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,

@@ -43,7 +43,8 @@ enableDisablity = false;
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
-     private fb: FormBuilder, private router: Router, private messageService: MessageService ) { }
+     private fb: FormBuilder, private router: Router,
+     private messageService: MessageService ) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -56,13 +57,14 @@ private readonly CV_FILE = 0;
       mPhone2: [''],
       fPhone: ['', Validators.required],
     });
-
     this.experienceForm = this.fb.group({
       position: ['', Validators.required],
       organization: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       salary: ['', Validators.required],
+      id: [''],
+      applicantId: ['']
     });
 
     this.educationForm = this.fb.group ({
@@ -72,12 +74,16 @@ private readonly CV_FILE = 0;
       university: ['', Validators.required],
       yearOfGraduation: ['', Validators.required],
       cgpa: ['', Validators.required],
+      id: [''],
+      applicantId: ['']
     });
 
     this.certificationForm = this.fb.group({
       title: ['', Validators.required],
       institution: ['', Validators.required],
-      awardedDate: ['', Validators.required]
+      awardDate: ['', Validators.required],
+      id: [''],
+      applicantId: ['']
     });
     this.loadQualificationLookups();
 
@@ -108,12 +114,9 @@ private readonly CV_FILE = 0;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     if (valid && value.id != null && this.educations.length > 0 && this.uploadedFiles.length > 0) {
-      
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
-      
-    console.log("Certifications " + JSON.stringify(value.certifications));
       this.userService.saveApplicant(value).subscribe(res => {
         const formData: FormData = new FormData();
         formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
@@ -126,6 +129,10 @@ private readonly CV_FILE = 0;
         this.educationForm.reset();
         this.experienceForm.reset();
     } else if (valid && value.id != null) {
+      value.educationalBackgrounds = this.educations;
+      value.workExperiences = this.experiences;
+      value.certifications = this.certifications;
+      value.dateOfBirth = formatDate(value.dateOfBirth, 'yyyy-MM-dd', 'en') as unknown as Date;
        this.userService.saveApplicant(value).subscribe(res => {
         this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Updated Successfully!'});
         this.enableDisablity = false;
@@ -154,6 +161,7 @@ private readonly CV_FILE = 0;
     }
   }
   addCertification({value, valid}: { value: Certification, valid: boolean }) {
+     console.log(value.awardDate);
     if (valid) {
       this.certifications.push(value);
       this.certificationForm.reset();
@@ -163,52 +171,55 @@ private readonly CV_FILE = 0;
   editEducation(education: Education) {
     this.educationForm.setValue({
       fieldOfEducation: education.fieldOfEducation,
-      specialization:education.specialization,
+      specialization: education.specialization,
       qualification: education.qualification,
       university: education.university,
       yearOfGraduation: education.yearOfGraduation,
       cgpa: education.cgpa,
+      id: education.id,
+      applicantId: education.applicantId
     });
-    this.educations.forEach((value,index)=>{
-      if(value == education) this.educations.splice(index,1);
+    this.educations.forEach((value, index) => {
+      if (value === education) { this.educations.splice(index, 1); }
     });
   }
   deleteEducation(education: Education) {
-    this.educations.forEach((value,index)=>{
-      if(value == education) this.educations.splice(index,1);
+    this.educations.forEach((value, index) => {
+      if (value === education) { this.educations.splice(index, 1); }
     });
   }
   editExperience(experience: WorkExperience) {
     this.experienceForm.setValue({
       position: experience.position,
       organization: experience.organization,
-      startDate: experience.startDate ,
-      endDate: experience.endDate,
+      startDate: new Date(experience.startDate),
+      endDate: new Date(experience.endDate),
       salary: experience.salary,
+      id: experience.id,
+      applicantId: experience.applicantId
     });
-    this.experiences.forEach((value,index)=>{
-      if(value == experience) this.experiences.splice(index,1);
+    this.experiences.forEach((value, index) => {
+      if (value === experience) { this.experiences.splice(index, 1); }
     });
 }
 deleteExperience(experience: WorkExperience) {
-  this.experiences.forEach((value,index)=>{
-    if(value == experience) this.experiences.splice(index,1);
+  this.experiences.forEach((value, index) => {
+    if (value === experience) { this.experiences.splice(index, 1); }
   });
 }
   editCertificate(certificate: Certification) {
-    console.log(" Certificate: "+ JSON.stringify(certificate.awardedDate));
     this.certificationForm.setValue({
        title: certificate.title,
        institution: certificate.institution,
        awardedDate: formatDate(certificate.awardedDate, 'yyyy-MM-dd', 'en')
     });
-    this.certifications.forEach((value,index)=>{
-      if(value == certificate) this.certifications.splice(index,1);
+    this.certifications.forEach((value, index) => {
+      if (value === certificate) { this.certifications.splice(index, 1); }
   });
   }
   deleteCertificate(certificate: Certification) {
-    this.certifications.forEach((value,index)=>{
-      if(value == certificate) this.certifications.splice(index,1);
+    this.certifications.forEach((value, index) => {
+      if (value === certificate) { this.certifications.splice(index, 1); }
   });
   }
   setForm(userProfile: Userprofile) {
@@ -224,6 +235,7 @@ deleteExperience(experience: WorkExperience) {
     });
     this.educations = userProfile.educationalBackgrounds;
     this.experiences = userProfile.workExperiences;
+    this.certifications = userProfile.certifications;
   }
 
   back() {
@@ -241,7 +253,6 @@ deleteExperience(experience: WorkExperience) {
         const q = {label: element.description, value: element.id};
         this.qualifications.push(q);
       }
-
     });
   }
 

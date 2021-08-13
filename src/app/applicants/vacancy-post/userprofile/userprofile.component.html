@@ -350,7 +350,7 @@
                                     </div>
                                   </div> -->
                                 <span class="text-danger"
-                                *ngIf="(certificationFormControl.awardedDate.touched || certificationFormControl.awardedDate.drty) && certificationFormControl.awardedDate.invalid">
+                                *ngIf="(certificationFormControl.awardDate.touched || certificationFormControl.awardDate.drty) && certificationFormControl.awardDate.invalid">
                                 Awarded date is required
                             </span>
                             </div>
@@ -377,7 +377,7 @@
                             <th scope="row">{{i + 1}}</th>
                             <td>{{certificate.title}}</td>
                             <td>{{certificate.institution}}</td>
-                            <td>{{certificate.awardedDate}}</td>
+                            <td>{{certificate.awardDate | date: 'dd/MM/yyyy'}}</td>
                             <td><button type="button" class="btn" style="color: rgb(16, 105, 28);" (click)="editCertificate(certificate)"><i class="fa fa-edit fa-lg"></i></button> 
                                 <button type="button" class="btn" style="color: rgba(228, 19, 54);" (click)="deleteCertificate(certificate)"><i class="fa fa-trash fa-lg"></i></button>
                             </td>

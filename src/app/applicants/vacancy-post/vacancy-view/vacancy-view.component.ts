@@ -37,6 +37,10 @@ export class VacancyViewComponent implements OnInit {
       qualification: new FormControl({value: null, disabled: true}),
       workExperience: new FormControl({value: null, disabled: true}),
       location: new FormControl({value: null, disabled: true}),
+      salary: new FormControl({value: null, disabled: true}),
+      salaryDescription: new FormControl({value: null, disabled: true}),
+      requiredNumber: new FormControl({value: null, disabled: true}),
+      employmentCondition: new FormControl({value: null, disabled: true}),
       postedDate: new FormControl({value: Date(), disabled: true}),
       deadlineDate: new FormControl({value: Date(), disabled: true})
     });
@@ -51,6 +55,10 @@ export class VacancyViewComponent implements OnInit {
       location: vacancy.location,
       postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
       deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en'),
+      salary : vacancy.salary,
+      salaryDescription : vacancy.salaryDescription,
+      requiredNumber: vacancy.requiredNumber,
+      employmentCondition: vacancy.employmentCondition
     });
     this.vacancyDetails = vacancy.vacancyModelDetailList;
   }

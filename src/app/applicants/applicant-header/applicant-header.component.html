@@ -11,7 +11,7 @@
                   {{ 'Help' | translate }}
               </a>
             </li> &nbsp;&nbsp;
-            <li class="nav-item d-none d-xl-block" *ngIf="isNotLoggedIn">
+            <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/login']">
                   {{ 'Log In' | translate }}
               </a>

@@ -42,7 +42,8 @@
         "zone.js": "~0.9.1",
         "xlsx": "^0.14.3",
         "file-saver": "^2.0.2",
-        "exceljs": "4.0.1"
+        "exceljs": "4.0.1",
+        "moment":"2.29.1"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.800.0",

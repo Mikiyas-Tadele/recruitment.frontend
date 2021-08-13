@@ -11,4 +11,8 @@ export class Vacancy {
       minutesElapsedSinceCreation: string;
       closed: boolean;
       vacancyModelDetailList: Array<VacancyDetail>;
+      employmentCondition: string;
+requiredNumber: number;
+    salary: number;
+    salaryDescription: string;
 }
