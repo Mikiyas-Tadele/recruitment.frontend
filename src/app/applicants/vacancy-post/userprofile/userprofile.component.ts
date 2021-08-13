@@ -108,8 +108,12 @@ private readonly CV_FILE = 0;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     if (valid && value.id != null && this.educations.length > 0 && this.uploadedFiles.length > 0) {
+      
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
+      value.certifications = this.certifications;
+      
+    console.log("Certifications " + JSON.stringify(value.certifications));
       this.userService.saveApplicant(value).subscribe(res => {
         const formData: FormData = new FormData();
         formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
@@ -223,7 +227,6 @@ deleteExperience(experience: WorkExperience) {
   }
 
   back() {
-    console.log('I am here');
     this.router.navigate(['vacancies']);
   }
   onUpload(event) {
@@ -244,6 +247,5 @@ deleteExperience(experience: WorkExperience) {
 
   checkDisablity(event) {
    this.enableDisablity = event === 'Yes' ? true : false;
-   console.log(this.enableDisablity);
   }
 }

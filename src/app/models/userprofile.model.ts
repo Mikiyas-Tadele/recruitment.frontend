@@ -1,3 +1,4 @@
+import { Certification } from './certification.model';
 import { Education } from './education.model';
 import { WorkExperience } from './work-experience.model';
 
@@ -15,4 +16,5 @@ export class Userprofile {
      fPhone: string;
      educationalBackgrounds: Education[] = [];
      workExperiences: WorkExperience[] = [];
+     certifications: Certification[] = [];
 }

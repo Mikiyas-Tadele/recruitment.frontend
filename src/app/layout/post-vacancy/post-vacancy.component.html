@@ -43,23 +43,25 @@
             </fieldset>
             <fieldset class="form-group">
                 <label for="postedDate">Posted Date</label>
-                <div class="input-group">
+                <input type="date" name="postedDate"  formControlName="postedDate" required/>
+                <!-- <div class="input-group">
                     <input class="form-control" placeholder="dd/mm/yyyy"
                            name="postedDate"  formControlName="postedDate" ngbDatepicker #postedDate="ngbDatepicker">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="postedDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                     </div>
-                  </div> 
+                  </div>  -->
                   </fieldset>
 
             <fieldset class="form-group">
                 <label for="deadlineDate">Deadline Date</label>
-                <div class="input-group">
+                <input type="date" name="deadlineDate"  formControlName="deadlineDate" required/>
+                <!-- <div class="input-group">
                     <input class="form-control" placeholder="dd/mm/yyyy"
                            name="deadlineDate"  formControlName="deadlineDate" ngbDatepicker #deadlineDate="ngbDatepicker" [minDate]="{year: 1950, month: 1, day: 1}>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="deadlineDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                    </div>
+                    </div> -->
                   </div>
             </fieldset>
            
