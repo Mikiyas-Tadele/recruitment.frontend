@@ -192,8 +192,8 @@ private readonly CV_FILE = 0;
     this.experienceForm.setValue({
       position: experience.position,
       organization: experience.organization,
-      startDate: new Date(experience.startDate),
-      endDate: new Date(experience.endDate),
+      startDate: formatDate(experience.startDate, 'yyyy-MM-dd', 'en'),
+      endDate: formatDate(experience.endDate, 'yyyy-MM-dd', 'en'),
       salary: experience.salary,
       id: experience.id,
       applicantId: experience.applicantId
@@ -211,7 +211,9 @@ deleteExperience(experience: WorkExperience) {
     this.certificationForm.setValue({
        title: certificate.title,
        institution: certificate.institution,
-       awardedDate: formatDate(certificate.awardedDate, 'yyyy-MM-dd', 'en')
+       awardDate: formatDate(certificate.awardDate, 'yyyy-MM-dd', 'en'),
+       id: certificate.id,
+       applicantId: certificate.applicantId
     });
     this.certifications.forEach((value, index) => {
       if (value === certificate) { this.certifications.splice(index, 1); }
@@ -248,6 +250,9 @@ deleteExperience(experience: WorkExperience) {
   loadQualificationLookups() {
     this.userService.getLookkups(this.qualificationLookupCode).subscribe(res => {
       const results = res as LookupDetail[];
+       results.sort((v1, v2) => {
+         return v1.value - v2.value;
+       });
       for (let index = 0; index < results.length; index++) {
         const element = results[index];
         const q = {label: element.description, value: element.id};

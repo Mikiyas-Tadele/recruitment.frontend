@@ -1,8 +1,8 @@
+<p-toast [style]="{marginTop: '100px'}"></p-toast>
 <div class="card" style="margin-top: 5%;">
     <div class="card-header">
        <h4>Vacancy Posting Form</h4> 
     </div>
-    <p-toast [style]="{marginTop: '100px'}"></p-toast>
     <form  role="form" [formGroup]="vacancyForm" (ngSubmit)="save(vacancyForm)"  class="p-5">
 <div class="card-body">
     <div class="col-lg-6">
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="workExprience">Work Exprience</label>
-                <input type="number" formControlName="workExperience" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
+                <input type="text" formControlName="workExperience" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
             </div>
 
             <fieldset class="form-group">
@@ -27,42 +27,28 @@
             </fieldset>
             <fieldset class="form-group">
                 <label for="requiredNumber">Required Number of Vacant Post</label>
-                <input type="text"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
+                <input type="number"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
             </fieldset>
             <fieldset class="form-group">
                 <label for="salary">Salary</label>
-                <input type="number"  formControlName="salary"  class="form-control"  placeholder="Enter salary" name="salary" required>
+                <input type="number"  formControlName="salary"  class="form-control"  placeholder="Enter salary" name="salary">
             </fieldset>
             <fieldset class="form-group">
                 <label for="salaryDescription">Salary Description</label>
-                <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription" required>
+                <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription">
             </fieldset>
             <fieldset class="form-group">
-                <label for="employementCondition">PEmployeement Condition</label>
-                <input type="text"  formControlName="employementCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition" required>
+                <label for="employementCondition">Employeement Condition</label>
+                <input type="text"  formControlName="employmentCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition" required>
             </fieldset>
             <fieldset class="form-group">
                 <label for="postedDate">Posted Date</label>
-                <input type="date" name="postedDate"  formControlName="postedDate" required/>
-                <!-- <div class="input-group">
-                    <input class="form-control" placeholder="dd/mm/yyyy"
-                           name="postedDate"  formControlName="postedDate" ngbDatepicker #postedDate="ngbDatepicker">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="postedDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                    </div>
-                  </div>  -->
-                  </fieldset>
-
+                <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate">
+            </fieldset>
+  
             <fieldset class="form-group">
                 <label for="deadlineDate">Deadline Date</label>
-                <input type="date" name="deadlineDate"  formControlName="deadlineDate" required/>
-                <!-- <div class="input-group">
-                    <input class="form-control" placeholder="dd/mm/yyyy"
-                           name="deadlineDate"  formControlName="deadlineDate" ngbDatepicker #deadlineDate="ngbDatepicker" [minDate]="{year: 1950, month: 1, day: 1}>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="deadlineDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                    </div> -->
-                  </div>
+                <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate">
             </fieldset>
            
 

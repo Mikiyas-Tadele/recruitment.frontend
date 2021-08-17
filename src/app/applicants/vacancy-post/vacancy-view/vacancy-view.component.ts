@@ -55,7 +55,7 @@ export class VacancyViewComponent implements OnInit {
       location: vacancy.location,
       postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
       deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en'),
-      salary : vacancy.salary,
+      salary : vacancy.salary != null ? vacancy.salary + ' birr' : null,
       salaryDescription : vacancy.salaryDescription,
       requiredNumber: vacancy.requiredNumber,
       employmentCondition: vacancy.employmentCondition

@@ -65,7 +65,7 @@ export class VacancyDetailComponent implements OnInit {
     }
 
     back() {
-      this.router.navigate(['admin/dashboard']);
+      this.router.navigate(['admin/post-vacancy/' + this.vacancyId]);
     }
 
   }

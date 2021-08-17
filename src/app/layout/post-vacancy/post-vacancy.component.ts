@@ -31,19 +31,24 @@ vacancy: any;
     if (id !== '0') {
     this.vacancyService.getVacancy(id).subscribe(res => {
       this.vacancy = res as Vacancy;
-      if (this.vacancy != null) {
-        this.setForm(this.vacancy);
-      }
+      this.setForm(this.vacancy);
+
     });
   }
   }
 save({value, valid}: { value: Vacancy, valid: boolean }) {
+  if (valid) {
    this.vacancyService.saveVacancy(value).subscribe(res => {
      this.vacancy = res;
     this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Data Saved Successfully'});
+    this.clear();
    }, err => {
     this.messageService.add({severity: 'error', summary: 'Saved', detail: err});
    });
+  } else {
+    this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Please fill the form data properly!'});
+    console.log(valid);
+  }
 }
 
 initForm() {
@@ -53,12 +58,12 @@ initForm() {
     qualification: new FormControl('', Validators.required),
     workExperience: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
-    postedDate: new FormControl(new Date),
-    deadlineDate: new FormControl(new Date),
-    salary: new FormControl('', Validators.required),
-    salaryDescription: new FormControl('', Validators.required),
+    postedDate: new FormControl(new Date, Validators.required),
+    deadlineDate: new FormControl(new Date, Validators.required),
+    salary: new FormControl(''),
+    salaryDescription: new FormControl(''),
     requiredNumber: new FormControl('', Validators.required),
-    employementCondition: new FormControl('', Validators.required),
+    employmentCondition: new FormControl('', Validators.required),
   });
 }
 
@@ -69,13 +74,14 @@ setForm(vacancy: Vacancy) {
     qualification: vacancy.qualification,
     workExperience: vacancy.workExperience,
     location: vacancy.location,
-    postedDate: new Date(vacancy.postedDate),
-    deadlineDate: new Date(vacancy.deadlineDate),
+    postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
+    deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en'),
     salary: vacancy.salary,
     salaryDescription: vacancy.salaryDescription,
     requiredNumber: vacancy.requiredNumber,
-    employementCondition: vacancy.employmentCondition,
+    employmentCondition: vacancy.employmentCondition,
   });
+  console.log(this.vacancyForm);
 }
 
 detailForm() {
