@@ -8,27 +8,27 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item d-none d-xl-block">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/help']">
-                  {{ 'Help' | translate }}
+                  {{ 'Help'}}
               </a>
             </li> &nbsp;&nbsp;
             <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/login']">
-                  {{ 'Log In' | translate }}
+                  {{ 'Log In'}}
               </a>
             </li> &nbsp;&nbsp;
             <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/signup']">
-                  {{ 'Register' | translate }}
+                  {{ 'Register'}}
               </a>
             </li> &nbsp;&nbsp;
             <li class="nav-item" *ngIf="displayUserInfo">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/appliedJobs']">
-                  {{ 'Applied Jobs' | translate }}
+                  {{ 'Applied Jobs'}}
               </a>
             </li> &nbsp;&nbsp;
             <li class="nav-item" *ngIf="displayUserInfo">
                 <a class="dropdown-item" (click)="gotoProfile()" class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;">
-                    <i class="fa fa-fw fa-user"></i> {{ 'User Profile' | translate }}
+                    <i class="fa fa-fw fa-user"></i> {{ 'User Profile' }}
                 </a>
             </li> &nbsp;&nbsp;
             <li class="nav-item dropdown" ngbDropdown *ngIf="displayUserInfo">
@@ -46,7 +46,7 @@
                         <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
                     </a> -->
                     <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
-                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }}
                     </a>
                 </div>
             </li>

@@ -32,4 +32,9 @@ export class AppliedPersonelService {
   getLookups(code: string) {
     return this.repoService.sendRequest('GET', this.baseUrl + this.GET_LOOKUPS + code);
   }
+
+  advanceSearchForExcel(data: AppliedPersonelFilter) {
+    const options = {body: data};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/search-excel', options);
+  }
 }

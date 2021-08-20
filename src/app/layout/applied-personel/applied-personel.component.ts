@@ -20,6 +20,7 @@ export class AppliedPersonelComponent implements OnInit {
   constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
     private vacancyService: VancancyService, private excelService: ExcelExportService) { }
   appliedPersonels: any = [];
+  appliedPersonelsExcel: any = [];
   filteredAppliedPersonels: any[];
   appliedPersonelsCol: any = [];
   vacancyName: string;
@@ -41,12 +42,17 @@ export class AppliedPersonelComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     const vacancyId = this.route.snapshot.params['id'];
-    this.appliedPersonelService.getAppliedPersonelForVacancy(vacancyId).subscribe(res => {
+    const searchModel: AppliedPersonelFilter = new AppliedPersonelFilter();
+    searchModel.vacancyId = vacancyId;
+    this.appliedPersonelService.advanceSearch(searchModel).subscribe(res => {
       this.counter = 0;
            this.appliedPersonels = res;
            this.updateFullNameRowGroupMetaData1();
            this.updateEmailRowGroupMetaData1();
            this.updateTotalRowGroupMetaData1();
+           this.appliedPersonelService.advanceSearchForExcel(searchModel).subscribe(resI => {
+            this.appliedPersonelsExcel = resI;
+         });
     });
 this.filteredAppliedPersonels = this.appliedPersonels;
 console.log('Filtered Applied Personel: ' + this.appliedPersonels);
@@ -76,7 +82,11 @@ console.log('Filtered Applied Personel: ' + this.appliedPersonels);
         this.updateFullNameRowGroupMetaData1();
         this.updateEmailRowGroupMetaData1();
         this.updateTotalRowGroupMetaData1();
+        this.appliedPersonelService.advanceSearchForExcel(value).subscribe(resI => {
+           this.appliedPersonelsExcel = resI;
+        });
     });
+
 
   }
   initForm() {
@@ -101,8 +111,8 @@ exportExcel() {
         'Field of Education',
         'Qualification', 'University', 'Year of Graduation', 'CGPA', 'Organization',
         'Position', 'Salary', 'Duration', 'Total Experience (Years)'];
-        for (let index = 0; index < this.appliedPersonels.length; index++) {
-          const element = this.appliedPersonels[index];
+        for (let index = 0; index < this.appliedPersonelsExcel.length; index++) {
+          const element = this.appliedPersonelsExcel[index];
            console.log(element);
            excelContents.push([element.fullName,
            element.email,

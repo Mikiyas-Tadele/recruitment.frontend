@@ -34,9 +34,7 @@ export class SignupComponent implements OnInit {
          this.submitted = true;
         if (valid) {
             this.logiService.registerNewUser(value).subscribe(res => {
-                this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.' +
-                 'Please go to your email and click the verify link. ' +
-                 'Note that if the email is not on your inbox folder check it on spam folder'});
+                this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.'});
                  this.route.navigate(['/notification']);
                  this.submitted = false;
             }, error => {

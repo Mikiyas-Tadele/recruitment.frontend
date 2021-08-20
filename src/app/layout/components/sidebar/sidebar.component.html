@@ -2,15 +2,15 @@
     <div class="list-group">
         <a routerLink="/admin/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
-            <span>{{ 'Dashboard' | translate }}</span>
+            <span>{{ 'Dashboard'}}</span>
         </a>
         <a routerLink="/admin/post-vacancy/0" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
-            <span>{{ 'Post Vacancy' | translate }}</span>
+            <span>{{ 'Post Vacancy'}}</span>
         </a>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
-        <span>{{ 'Collapse Sidebar' | translate }}</span>
+        <span>{{ 'Collapse Sidebar'}}</span>
     </div>
     </div>
 </nav>

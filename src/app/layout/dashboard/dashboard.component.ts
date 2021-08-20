@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     vacancyFilterForm: FormGroup;
     vacanvyTitles: SelectItem[] = [];
 
-    constructor(private vacancyService: VancancyService, private router: Router, private repo: RepositoryService) { }
+    constructor(private vacancyService: VancancyService, private router: Router, private zone: NgZone) { }
 
     ngOnInit() {
        this.initForm();
@@ -38,7 +38,9 @@ export class DashboardComponent implements OnInit {
      }
 
     appliedPersonel(data: Vacancy) {
-        this.router.navigate(['admin/appliedPersonel/' + data.id]);
+        this.zone.run(() => {
+          this.router.navigateByUrl('admin/appliedPersonel/' + data.id);
+        });
     }
 
     goToView(data: Vacancy) {
@@ -53,7 +55,6 @@ export class DashboardComponent implements OnInit {
            } else {
               this.getVacancies();
            }
-    // this.repo.getVacancies(value.title);
 
     }
     initForm() {

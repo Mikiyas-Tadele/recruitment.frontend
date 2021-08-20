@@ -45,7 +45,6 @@ get f() {
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
         this.loginService.login(value.username, value.password).subscribe(
             (data) => {
-               console.log(data);
                 this.token.saveToken(data['accessToken']);
                 this.token.setUserName(value.username);
                 this.token.setAuthorities(data['authorities'][0].authority);

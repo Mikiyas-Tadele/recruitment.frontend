@@ -27,9 +27,9 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                             <label for="dateOfBirth">Date of Birth</label>
-                            <input type="date" name="dateOfBirth"  formControlName="dateOfBirth" class="form-control" required />
+                            <input type="date" name="dateOfBirth"  formControlName="dateOfBirth" class="form-control"  placeholder="dd-mm-yyyy" required />
                             <!-- <div class="input-group">
-                                <input class="form-control" placeholder="dd/mm/yyyy"
+                                <input class="form-control" placeholder="mm/dd/yyyy"
                                        name="dateofBirth"  formControlName="dateofBirth" ngbDatepicker #dateofBirth="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-secondary calendar" (click)="dateofBirth.toggle()" type="button"><i class="fa fa-calendar"></i></button>
@@ -52,7 +52,7 @@
                                 <option value="No">No</option>
                               </select>
                             <span class="text-danger"
-                            *ngIf="(userFormControl.disability.touched || userFormControl.disability.drty) && userFormControl.disability.invalid">
+                            *ngIf="(userFormControl.disability.touched || userFormControl.disability.drty) && userFormControl.invalid">
                             Disability is required
                         </span>
                     </div>
@@ -67,25 +67,22 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone">Primary Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="mPhone1"  name="mphone1" />
-                            
-                            <span class="text-danger"
-                            *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty) && userFormControl.invalid">
-                            Primary Phone number is required
-                        </span>
+                                <input type="text" class="form-control" formControlName="mPhone1"  name="mphone1" minlength="10" maxlength="12" required/>
+                                <span class="text-danger" *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty) && userFormControl.invalid">
+                                mobile phone is required
+                            </span>
                     </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone2">Secondary Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" />
-                                
+                                <input type="text" class="form-control" formControlName="mPhone2"  name="mphone2" minlength="10" maxlength="12"/>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
-                                <label for="fphone">Office Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone" />
+                                <label for="fphone">Fixed-Line Phone Number</label>
+                                <input type="text" class="form-control" formControlName="fPhone"  name="fphone" minlength="10" maxlength="12" />
                             </div>
                         </fieldset>
                         </div>
@@ -121,7 +118,7 @@
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
                                 <label for="qualification">Qualification</label><br>
-                                <p-dropdown formControlName="qualification"  class="dropdownInput" [options]="qualifications" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
+                                <p-dropdown formControlName="qualification"  class="dropdownInput" [filter]="true" [options]="qualifications" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.qualification.touched || educationFormControl.qualification.drty) && educationFormControl.qualification.invalid">
                                 Qualification is required
@@ -130,7 +127,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="university">University Name</label>
+                                <label for="university">University/College</label>
                                 <input type="text" class="form-control" formControlName="university"  name="university" />
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.university.touched || educationFormControl.university.drty) && educationFormControl.university.invalid">
@@ -142,16 +139,20 @@
                             <div [formGroup]="educationForm">
                                 <label for="cgpa">CGPA</label>
                                 <input type="number" name="cgpa" class="form-control" formControlName="cgpa"  />
-                                <span class="text-danger"
-                                *ngIf="(educationFormControl.cgpa.touched || educationFormControl.cgpa.drty) && educationFormControl.cgpa.invalid">
-                                CGPA is required
-                            </span>
+                                <div *ngIf="(educationFormControl.cgpa.touched || educationFormControl.cgpa.drty) && educationFormControl.cgpa.invalid">
+                                    <span class="text-danger" *ngIf="educationFormControl.cgpa.errors?.required">
+                                        CGPA is required.
+                                    </span>
+                                      <span class="text-danger" *ngIf="educationFormControl.cgpa.errors?.min || educationFormControl.cgpa.errors?.max">
+                                        CGPA should not be greater than 4
+                                      </span>
+                                      </div>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="yearOfGraduation">Year of Graduation</label>
-                                <input type="Year" class="form-control" formControlName="yearOfGraduation"  name="yearOfGraduation" />
+                                <label for="yearOfGraduation">Year of Graduation</label><br>
+                                <p-dropdown formControlName="yearOfGraduation" [filter]="true" class="dropdownInput" [options]="years" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.yearOfGraduation.touched || educationFormControl.yearOfGraduation.drty) && educationFormControl.yearOfGraduation.invalid">
                                 Year of Graduation is required
@@ -399,9 +400,9 @@
                         <br/>
                         <div class="row">
                             <div class="col-md-6">
-                                <label><em>Upload Yours CV not greater than 2MB.<br> By clicking choose file button then clicking the upload button</em></label><br>
+                                <label><em>Upload Yours CV not greater than 2MB.<br> By clicking choose button then clicking the upload button</em></label><br>
                                 <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)"
-                                accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" fileLimit="1">
+                                accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" >
                             </p-fileUpload>
                             <br><br>
                             </div>

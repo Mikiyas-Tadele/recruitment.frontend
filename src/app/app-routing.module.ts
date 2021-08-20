@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ApplyVacancyComponent } from './applicants/vacancy-post/apply-vacancy/apply-vacancy.component';
-import { VacancyPostComponent } from './applicants/vacancy-post/vacancy-post.component';
-import { VacancyViewComponent } from './applicants/vacancy-post/vacancy-view/vacancy-view.component';
 import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 
 const routes: Routes = [

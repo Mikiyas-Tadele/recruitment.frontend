@@ -40,6 +40,7 @@ uploadedFiles: any[] = [];
 isNewUser = true;
 qualifications: any = [];
 enableDisablity = false;
+years: any = [];
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
@@ -50,12 +51,12 @@ private readonly CV_FILE = 0;
     this.userForm = this.fb.group({
       id: [''],
       gender: ['', Validators.required],
-      dateOfBirth: [new Date(), Validators.required],
+      dateOfBirth: ['', Validators.required],
       disability: ['', Validators.required],
       disabilityDescription: [''],
       mPhone1: ['', Validators.required],
       mPhone2: [''],
-      fPhone: ['', Validators.required],
+      fPhone: [''],
     });
     this.experienceForm = this.fb.group({
       position: ['', Validators.required],
@@ -73,7 +74,7 @@ private readonly CV_FILE = 0;
       qualification: ['', Validators.required],
       university: ['', Validators.required],
       yearOfGraduation: ['', Validators.required],
-      cgpa: ['', Validators.required],
+      cgpa: ['', [Validators.required, Validators.max(4)]],
       id: [''],
       applicantId: ['']
     });
@@ -86,6 +87,7 @@ private readonly CV_FILE = 0;
       applicantId: ['']
     });
     this.loadQualificationLookups();
+    this.loadYears();
 
       this.userService.getApplicant().subscribe(res => {
          this.userProfile = res;
@@ -113,7 +115,7 @@ private readonly CV_FILE = 0;
     this.activeMainTab = tab;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
-    if (valid && value.id != null && this.educations.length > 0 && this.uploadedFiles.length > 0) {
+    if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -141,13 +143,13 @@ private readonly CV_FILE = 0;
       this.messageService.add({severity: 'error', summary: 'Saved',
       detail: 'You have not added either education background or uploaded a CV'});
     } else {
+      console.log(valid);
       this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Check for wrong data in the form'});
     }
   }
   addEducation({value, valid}: { value: Education, valid: boolean }) {
-    console.log('education form submitted Valid:' + valid);
-    console.log(JSON.stringify(value));
     if (valid) {
+     value.qualificationDesc = this.getQualificationDesc(value.qualification);
     this.educations.push(value);
     this.educationForm.reset();
     this.education = new Education();
@@ -247,18 +249,38 @@ deleteExperience(experience: WorkExperience) {
     this.uploadedFiles.push(event.files[0]);
   }
 
+  getQualificationDesc(qual: number) {
+    for (let index = 0; index < this.qualifications.length; index++) {
+      const element = this.qualifications[index];
+      if (element.value === qual) {
+       return element.label;
+      }
+    }
+  }
+
   loadQualificationLookups() {
     this.userService.getLookkups(this.qualificationLookupCode).subscribe(res => {
       const results = res as LookupDetail[];
        results.sort((v1, v2) => {
          return v1.value - v2.value;
        });
+       this.qualifications.push({label: null, value: null});
       for (let index = 0; index < results.length; index++) {
         const element = results[index];
         const q = {label: element.description, value: element.id};
         this.qualifications.push(q);
       }
     });
+  }
+
+  loadYears() {
+    const startYear = 1940;
+    this.years.push({label: null, value: null});
+    for (let index = 1; index < 150; index++) {
+      const year = startYear + index;
+      const q = {label: year   , value: year};
+      this.years.push(q);
+    }
   }
 
   checkDisablity(event) {

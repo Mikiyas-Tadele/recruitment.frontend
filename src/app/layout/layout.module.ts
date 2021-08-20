@@ -25,6 +25,9 @@ import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
 import { CalendarModule } from 'primeng/calendar';
+import { AuthGuard } from '../shared';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHeaderInterceptor } from '../shared/guard/auth-header.interceptor';
 
 
 @NgModule({
@@ -56,6 +59,12 @@ import { CalendarModule } from 'primeng/calendar';
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
          PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent],
-    providers: [MessageService]
+    providers: [MessageService,
+        [AuthGuard,
+            {
+                provide: HTTP_INTERCEPTORS,
+                useClass: AuthHeaderInterceptor,
+                multi: true
+              }, ]]
 })
 export class LayoutModule {}
