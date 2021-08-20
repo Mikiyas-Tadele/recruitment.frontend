@@ -261,6 +261,7 @@ deleteExperience(experience: WorkExperience) {
   }
   onUpload(event) {
     this.uploadedFiles.push(event.files[0]);
+    this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
   }
 
   getQualificationDesc(qual: number) {

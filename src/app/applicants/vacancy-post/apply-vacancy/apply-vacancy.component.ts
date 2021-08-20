@@ -49,18 +49,18 @@ export class ApplyVacancyComponent implements OnInit {
       });
       },
       err => {
-        console.log(err);
-        this.messageService.add({severity: 'error', summary: 'Saved', detail: err.error.message});
+        this.messageService.add({severity: 'error', summary: 'Error', detail: err.error.message});
       }
       );
     } else {
-      this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Application Letter not entered and/or File not uploaded!'});
+      this.messageService.add({severity: 'error', summary: 'Success', detail: 'Application Letter not entered and/or File not uploaded!'});
     }
 
   }
 
   onUpload(event) {
     this.uploadedFiles.push(event.files[0]);
+    this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
   }
 
 }
