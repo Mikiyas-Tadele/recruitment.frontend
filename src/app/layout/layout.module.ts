@@ -16,6 +16,7 @@ import { MenuModule } from 'primeng/menu';
 import { TooltipModule } from 'primeng/tooltip';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -37,6 +38,7 @@ import { AuthHeaderInterceptor } from '../shared/guard/auth-header.interceptor';
         TranslateModule,
         NgbModule,
         NgbDropdownModule,
+        BsDatepickerModule,
         FormsModule,
         ReactiveFormsModule,
         TableModule,

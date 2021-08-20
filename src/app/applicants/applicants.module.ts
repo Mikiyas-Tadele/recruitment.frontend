@@ -11,6 +11,8 @@ import { VacancyPostComponent } from './vacancy-post/vacancy-post.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -43,6 +45,7 @@ import {CalendarModule} from 'primeng/calendar';
     EditorModule,
     ButtonModule,
     PanelModule,
+    BsDatepickerModule.forRoot(),
     FileUploadModule,
     DropdownModule,
     DataViewModule,

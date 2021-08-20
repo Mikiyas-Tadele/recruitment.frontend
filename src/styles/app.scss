@@ -5,6 +5,7 @@
 @import "utils";
 @import "rtl";
 @import "responsive";
+@import "ngx-bootstrap/datepicker/bs-datepicker.scss";
 @media print {
     .breadcrumb {
         display: none !important;

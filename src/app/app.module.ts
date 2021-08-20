@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // const baseUrl = 'http://localhost:8080/api';
 
@@ -30,6 +31,7 @@ import { RegistrationNotificationComponent } from './registration-notification/r
         AppRoutingModule,
         EditorModule,
         NgbModule,
+        BsDatepickerModule.forRoot(),
 
     ],
     declarations: [AppComponent, RegistrationNotificationComponent],

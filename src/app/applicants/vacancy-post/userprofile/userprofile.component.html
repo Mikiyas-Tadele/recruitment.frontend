@@ -27,7 +27,7 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                             <label for="dateOfBirth">Date of Birth</label>
-                            <input type="date" name="dateOfBirth"  formControlName="dateOfBirth" class="form-control"  placeholder="dd-mm-yyyy" required />
+                            <!-- <input type="date" name="dateOfBirth"  formControlName="dateOfBirth" class="form-control"  placeholder="dd-mm-yyyy" required /> -->
                             <!-- <div class="input-group">
                                 <input class="form-control" placeholder="mm/dd/yyyy"
                                        name="dateofBirth"  formControlName="dateofBirth" ngbDatepicker #dateofBirth="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
@@ -35,10 +35,14 @@
                                   <button class="btn btn-outline-secondary calendar" (click)="dateofBirth.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                                 </div>
                               </div> -->
-                            <span class="text-danger"
-                            *ngIf="(userFormControl.dateOfBirth.touched || userFormControl.dateOfBirth.drty) && userFormControl.dateOfBirth.invalid">
-                            Date of Birth is required
-                        </span>
+                              <input type="text" formControlName="dateOfBirth" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                     class="form-control"
+                                     bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                                     <span class="text-danger"
+                                     *ngIf="(userFormControl.dateOfBirth.touched || userFormControl.dateOfBirth.drty) && userFormControl.dateOfBirth.invalid">
+                                     Date of Birth is required
+                                 </span>
+                          
                     </div>
                         </fieldset>
 
@@ -67,9 +71,12 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone">Primary Phone Number</label>
-                                <input type="text" class="form-control" formControlName="mPhone1"  name="mphone1" minlength="10" maxlength="12" required/>
-                                <span class="text-danger" *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty) && userFormControl.invalid">
-                                mobile phone is required
+                                <input type="text" class="form-control" formControlName="mPhone1"  name="mPhone1" />
+                                <span class="text-danger" *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty)">
+                                    <!-- <div *ngIf="userFormControl.get('mPhone1').hasError('minlength')">
+                                        mobile phone is not valid phone number
+                                    </div> -->
+                                
                             </span>
                     </div>
                         </fieldset>
@@ -232,7 +239,10 @@
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" name="startDate"  formControlName="startDate" class="form-control" placeholder="dd-mm-yyyy" required/>
+                                <input type="text" formControlName="startDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                class="form-control"
+                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                                <!-- <input type="date" name="startDate"  formControlName="startDate" class="form-control" placeholder="dd-mm-yyyy" required/> -->
                                 <!-- <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
                                            name="startDate"  formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
@@ -249,7 +259,10 @@
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
                                 <label for="endDate">End Date </label>
-                                <input type="date" name="endDate"  formControlName="endDate" class="form-control" required/>
+                                <input type="text" formControlName="endDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                class="form-control"
+                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                                <!-- <input type="date" name="endDate"  formControlName="endDate" class="form-control" required/> -->
                                 <!-- <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
                                            name="endDate"  formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
@@ -342,7 +355,10 @@
                         <fieldset class="form-group">
                             <div [formGroup]="certificationForm">
                                 <label for="awardedDate">Awarded Date</label>
-                                <input type="date" name="awardedDate"  formControlName="awardDate" class="form-control" required/>
+                                <input type="text" formControlName="awardDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                class="form-control"
+                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate"  /> 
+                                <!-- <input type="date" name="awardedDate"  formControlName="awardDate" class="form-control" required/> -->
                                 <!-- <div class="input-group">
                                     <input class="form-control" placeholder="dd/mm/yyyy"
                                            name="awardedDate"  formControlName="awardedDate" ngbDatepicker #awardedDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">

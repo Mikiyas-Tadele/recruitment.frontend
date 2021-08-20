@@ -41,11 +41,21 @@ isNewUser = true;
 qualifications: any = [];
 enableDisablity = false;
 years: any = [];
+phoneno = "^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$";
+minDate: Date;
+  maxDate: Date;
+
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
      private fb: FormBuilder, private router: Router,
-     private messageService: MessageService ) { }
+     private messageService: MessageService ) { 
+
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 40);
+    this.maxDate.setDate(this.maxDate.getDate());
+     }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -54,7 +64,7 @@ private readonly CV_FILE = 0;
       dateOfBirth: ['', Validators.required],
       disability: ['', Validators.required],
       disabilityDescription: [''],
-      mPhone1: ['', Validators.required],
+      mPhone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],  
       mPhone2: [''],
       fPhone: [''],
     });
@@ -116,6 +126,7 @@ private readonly CV_FILE = 0;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
+      
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -131,6 +142,7 @@ private readonly CV_FILE = 0;
         this.educationForm.reset();
         this.experienceForm.reset();
     } else if (valid && value.id != null) {
+      console.log("Date " + value.dateOfBirth);
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -194,8 +206,8 @@ private readonly CV_FILE = 0;
     this.experienceForm.setValue({
       position: experience.position,
       organization: experience.organization,
-      startDate: formatDate(experience.startDate, 'yyyy-MM-dd', 'en'),
-      endDate: formatDate(experience.endDate, 'yyyy-MM-dd', 'en'),
+      startDate: new Date(experience.startDate),
+      endDate: new Date(experience.endDate),
       salary: experience.salary,
       id: experience.id,
       applicantId: experience.applicantId
@@ -213,7 +225,7 @@ deleteExperience(experience: WorkExperience) {
     this.certificationForm.setValue({
        title: certificate.title,
        institution: certificate.institution,
-       awardDate: formatDate(certificate.awardDate, 'yyyy-MM-dd', 'en'),
+       awardDate: new Date (certificate.awardDate),
        id: certificate.id,
        applicantId: certificate.applicantId
     });
@@ -226,10 +238,12 @@ deleteExperience(experience: WorkExperience) {
       if (value === certificate) { this.certifications.splice(index, 1); }
   });
   }
+  
   setForm(userProfile: Userprofile) {
+    console.log("Set Date " + userProfile.dateOfBirth)
     this.userForm.setValue({
       gender: userProfile.gender,
-      dateOfBirth: formatDate(userProfile.dateOfBirth, 'yyyy-MM-dd', 'en'),
+      dateOfBirth: new Date(userProfile.dateOfBirth),
       disability: userProfile.disability,
       disabilityDescription: userProfile.disabilityDescription,
       mPhone1: userProfile.mPhone1,

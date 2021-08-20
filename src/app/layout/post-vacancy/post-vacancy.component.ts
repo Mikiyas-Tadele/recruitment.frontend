@@ -21,8 +21,15 @@ import { VancancyService } from './vacancy-detail/vancancy.service';
 export class PostVacancyComponent implements OnInit {
 vacancyForm: FormGroup;
 vacancy: any;
+minDate: Date;
+maxDate: Date;
   constructor(private vacancyService: VancancyService, private messageService: MessageService,
-     private router: Router, private route: ActivatedRoute, ) { }
+     private router: Router, private route: ActivatedRoute, ) { 
+      this.minDate = new Date();
+      this.maxDate = new Date();
+      this.minDate.setFullYear(this.minDate.getFullYear());
+      this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
+     }
 
 
   ngOnInit() {
@@ -74,8 +81,8 @@ setForm(vacancy: Vacancy) {
     qualification: vacancy.qualification,
     workExperience: vacancy.workExperience,
     location: vacancy.location,
-    postedDate: formatDate(vacancy.postedDate, 'yyyy-MM-dd', 'en'),
-    deadlineDate: formatDate(vacancy.deadlineDate, 'yyyy-MM-dd', 'en'),
+    postedDate: new Date(vacancy.postedDate),
+    deadlineDate: new Date(vacancy.deadlineDate),
     salary: vacancy.salary,
     salaryDescription: vacancy.salaryDescription,
     requiredNumber: vacancy.requiredNumber,
