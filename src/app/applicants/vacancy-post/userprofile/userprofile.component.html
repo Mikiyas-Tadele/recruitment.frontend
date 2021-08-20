@@ -67,7 +67,7 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone">Primary Phone Number</label>
-                                <input type="text" class="form-control" formControlName="mPhone1"  name="mphone1" minlength="10" maxlength="12" required/>
+                                <input type="tel" class="form-control" formControlName="mPhone1"  name="mphone1" minlength="10" maxlength="12" required/>
                                 <span class="text-danger" *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty) && userFormControl.invalid">
                                 mobile phone is required
                             </span>
@@ -76,13 +76,13 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone2">Secondary Phone Number</label>
-                                <input type="text" class="form-control" formControlName="mPhone2"  name="mphone2" minlength="10" maxlength="12"/>
+                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" minlength="10" maxlength="12"/>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="fphone">Fixed-Line Phone Number</label>
-                                <input type="text" class="form-control" formControlName="fPhone"  name="fphone" minlength="10" maxlength="12" />
+                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone" minlength="10" maxlength="12" />
                             </div>
                         </fieldset>
                         </div>

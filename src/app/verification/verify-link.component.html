@@ -1,5 +1,5 @@
 <div class="row" style="margin-left: 20%;margin-top: 5%;">
  <h3 *ngIf="isActivated"> Your email has been successfully verified!<br>
    You can now log into the system  <a [routerLink]="['/']">Home Page</a></h3>
- <h3 *ngIf="!isActivated"> Your link is either expired or not found!  <a [routerLink]="['/']">Home Page</a></h3>
+ <h3 *ngIf="!isActivated"> Your link is either expired or not found! return to <a [routerLink]="['/']">Home Page</a></h3>
 </div>
