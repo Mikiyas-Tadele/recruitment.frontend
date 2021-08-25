@@ -15,9 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-const baseUrl = 'http://localhost:8080/api';
+// const baseUrl = 'http://localhost:8080/api';
 
-//  const baseUrl = 'https://jobs.dbe.com.et/recruitment/api';
+ const baseUrl = 'https://jobs.dbe.com.et/recruitment/api';
 
 @NgModule({
     imports: [

@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
+import { Certification } from 'src/app/models/certification.model';
+import { Education } from 'src/app/models/education.model';
+import { Userprofile } from 'src/app/models/userprofile.model';
 import { VacancieslFilter } from 'src/app/models/vacanciesl-filter.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
+import { WorkExperience } from 'src/app/models/work-experience.model';
 import { TokenStorage } from 'src/app/shared/guard/token.storage';
+import { UserProfileService } from './userprofile/user-profile.service';
 import { VancancyService } from './vancancy.service';
 
 @Component({
@@ -17,10 +22,13 @@ export class VacancyPostComponent implements OnInit {
   vacancies: Vacancy[] = [];
   vacancyFilterForm: FormGroup;
   vacanvyTitles: any = [];
-
+  experiences: WorkExperience[] = [];
+  educations: Education[] = [];
+  certifications: Certification[] = [];
+  userProfile: Userprofile;
 
   constructor(private vacancyService: VancancyService,
-    private router: Router, private tokenStorage: TokenStorage) { }
+    private router: Router, private tokenStorage: TokenStorage, private userService: UserProfileService) { }
 
   ngOnInit() {
     this.initForm();
@@ -47,7 +55,23 @@ export class VacancyPostComponent implements OnInit {
   }
   apply(data: Vacancy) {
     if (this.tokenStorage.getToken() != null) {
-      this.router.navigate(['apply/' + data.id + '/' + data.title]);
+      //fetch user profile and check if user has enough profile fille to appl for a vacancy
+      
+      this.userService.getApplicant().subscribe(userProfile => {
+        this.userProfile = userProfile;
+        this.experiences = userProfile.workExperiences;
+        this.educations = userProfile.educationalBackgrounds;
+        this.certifications = userProfile.certifications;
+      },
+      error => {
+        console.log("Error: " + error)
+      }, () => {
+        if  (this.userProfile && this.educations.length > 0 )
+        this.router.navigate(['apply/' + data.id + '/' + data.title]);
+        else 
+        this.router.navigate(['userProfile/']);
+      });
+      
     } else {
       this.router.navigate(['login']);
     }

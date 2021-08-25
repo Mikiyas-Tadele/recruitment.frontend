@@ -53,7 +53,7 @@ private readonly CV_FILE = 0;
 
     this.minDate = new Date();
     this.maxDate = new Date();
-    this.minDate.setFullYear(this.minDate.getFullYear() - 40);
+    this.minDate.setFullYear(this.minDate.getFullYear() - 60);
     this.maxDate.setDate(this.maxDate.getDate());
      }
 
