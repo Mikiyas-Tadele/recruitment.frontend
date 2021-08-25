@@ -45,8 +45,6 @@ export class VacancyPostComponent implements OnInit {
         const l = { label: element.title, value: element.id };
         this.vacanvyTitles.push(l);
       }
-
-
     });
   }
 

@@ -16,8 +16,15 @@ export class VacancyViewComponent implements OnInit {
 
   vacancyForm: FormGroup;
   vacancyDetails: any = [];
+  minDate: Date;
+  maxDate: Date;
   constructor(private vacancyService: VancancyService, private route: ActivatedRoute,
-     private router: Router) { }
+     private router: Router) {
+      this.minDate = new Date();
+      this.maxDate = new Date();
+      this.minDate.setFullYear(this.minDate.getFullYear() - 40);
+      this.maxDate.setDate(this.maxDate.getDate());
+     }
 
   ngOnInit() {
     this.initForm();

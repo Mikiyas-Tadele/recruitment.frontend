@@ -22,6 +22,7 @@ export class ApplyVacancyComponent implements OnInit {
   vacancyId: number;
   vacancyname; string;
   uploadedFiles: any[] = [];
+  applicantProfile: any = [];
   private readonly QUALIFICATION_FILE = 1;
   private routeSub: Subscription;
   ngOnInit() {
