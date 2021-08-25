@@ -1,4 +1,5 @@
 import { formatDate } from '@angular/common';
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -41,15 +42,16 @@ isNewUser = true;
 qualifications: any = [];
 enableDisablity = false;
 years: any = [];
-phoneno = "^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$";
+phoneno = '^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$';
 minDate: Date;
   maxDate: Date;
+  @ViewChild('tabset', { static: true }) tabset: any;
 
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
   constructor(private userService: UserProfileService,
      private fb: FormBuilder, private router: Router,
-     private messageService: MessageService ) { 
+     private messageService: MessageService ) {
 
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -64,7 +66,7 @@ private readonly CV_FILE = 0;
       dateOfBirth: ['', Validators.required],
       disability: ['', Validators.required],
       disabilityDescription: [''],
-      mPhone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],  
+      mPhone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
       mPhone2: [''],
       fPhone: [''],
     });
@@ -102,7 +104,6 @@ private readonly CV_FILE = 0;
       this.userService.getApplicant().subscribe(res => {
          this.userProfile = res;
          if (this.userProfile != null) {
-           console.log(this.isNewUser);
            this.isNewUser = false;
            this.setForm(this.userProfile);
          }
@@ -126,7 +127,7 @@ private readonly CV_FILE = 0;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
-      
+
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -142,7 +143,7 @@ private readonly CV_FILE = 0;
         this.educationForm.reset();
         this.experienceForm.reset();
     } else if (valid && value.id != null) {
-      console.log("Date " + value.dateOfBirth);
+      console.log('Date ' + value.dateOfBirth);
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -238,9 +239,9 @@ deleteExperience(experience: WorkExperience) {
       if (value === certificate) { this.certifications.splice(index, 1); }
   });
   }
-  
+
   setForm(userProfile: Userprofile) {
-    console.log("Set Date " + userProfile.dateOfBirth)
+    console.log('Set Date ' + userProfile.dateOfBirth);
     this.userForm.setValue({
       gender: userProfile.gender,
       dateOfBirth: new Date(userProfile.dateOfBirth),
@@ -300,5 +301,9 @@ deleteExperience(experience: WorkExperience) {
 
   checkDisablity(event) {
    this.enableDisablity = event === 'Yes' ? true : false;
+  }
+
+  nextTab(event) {
+    console.log(event);
   }
 }

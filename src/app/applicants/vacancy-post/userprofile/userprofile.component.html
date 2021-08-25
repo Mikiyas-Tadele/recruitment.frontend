@@ -3,7 +3,7 @@
        <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="form">
             <ngb-tabset [destroyOnHide]="false">
   
-                <ngb-tab title="Basic Info">
+                <ngb-tab title="Basic Info" id="tab1">
                   <ng-template ngbTabContent>
                       <div class="row">
                           <div class="col-md-6">
@@ -15,8 +15,7 @@
                               <option  value="">Please select your gender</option>
                               <option  value="Male">Male</option>
                               <option value="Female">Female</option>
-                            </select>
-                            
+                            </select>                         
                             <span class="text-danger"
                             *ngIf="(userFormControl.gender.touched || userFormControl.gender.drty) && userFormControl.gender.invalid">
                             Gender is required
@@ -93,7 +92,7 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab>
+                <ngb-tab id="tab2">
                     <ng-template ngbTabTitle>Education Background</ng-template>
                     <ng-template ngbTabContent>
                         <form [formGroup]="educationForm">
@@ -155,7 +154,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="yearOfGraduation">Year of Graduation</label><br>
+                                <label for="yearOfGraduation">Year of Graduation In G.C</label><br>
                                 <p-dropdown formControlName="yearOfGraduation" [filter]="true" class="dropdownInput" [options]="years" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.yearOfGraduation.touched || educationFormControl.yearOfGraduation.drty) && educationFormControl.yearOfGraduation.invalid">
@@ -163,7 +162,7 @@
                             </span>
                             </div>
                         </fieldset>
-                        <button type="button" class="btn btn-primary" (click)="addEducation(educationForm)">Add</button>                        
+                        <button type="button" class="btn btn-primary" (click)="addEducation(educationForm)">Save To List</button>                        
                     </div>
                     </div>
                     </form>
@@ -206,7 +205,7 @@
                       </div>
                 </ng-template>
             </ngb-tab>
-                <ngb-tab>
+                <ngb-tab id="tab3">
                     <ng-template ngbTabTitle>Work Experience</ng-template>
                     <ng-template ngbTabContent>
                      
@@ -279,7 +278,7 @@
                                 <input type="number" class="form-control" formControlName="salary"  name="salary" />
                              </div>
                         </fieldset>
-                        <button type="button" class="btn btn-primary" (click)="addExperiences(experienceForm)">Add</button>
+                        <button type="button" class="btn btn-primary" (click)="addExperiences(experienceForm)">Save To List</button>
                     </div>
                     
                 </div>
@@ -322,7 +321,7 @@
                       </div>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab>
+                <ngb-tab id="tab4">
                     <ng-template ngbTabTitle>Certifications</ng-template>
                     <ng-template ngbTabContent>
                         <form [formGroup]="certificationForm">
@@ -370,7 +369,7 @@
                             </div>
                         </fieldset>
                         
-                        <button type="button" class="btn btn-primary" (click)="addCertification(certificationForm)">Add</button>                        
+                        <button type="button" class="btn btn-primary" (click)="addCertification(certificationForm)">Save To List</button>                        
                     </div>
                     </div>
                     </form>
@@ -408,7 +407,7 @@
                       </div>
                 </ng-template>
             </ngb-tab>
-                <ngb-tab title="Upload Your CV">
+                <ngb-tab title="Upload Your CV" id="tab5">
                     <ng-template ngbTabContent>
                         <br/>
                         <div class="row">
@@ -422,8 +421,8 @@
                             </div>
                             </ng-template>
                   </ngb-tab>
-        </ngb-tabset>
-            <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-success" (click)="back()">Back</button>
+        </ngb-tabset><br><br>
+            <button type="button" class="btn btn-success" (click)="back()">Back To Home</button>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary">Finish</button>&nbsp;&nbsp;
         </form>
         </div>

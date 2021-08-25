@@ -38,15 +38,21 @@
             <label for="employementCondition">Employeement Condition</label>
             <input type="text"  formControlName="employmentCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition">
         </fieldset>
-          <fieldset class="form-group">
-              <label for="postedDate">Posted Date</label>
-              <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate">
-          </fieldset>
+        <fieldset class="form-group">
+          <label for="postedDate">Posted Date</label>
+          <input type="text" formControlName="postedDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                               class="form-control"
+                               bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+          <!-- <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate"> -->
+      </fieldset>
 
-          <fieldset class="form-group">
-              <label for="deadlineDate">Deadline Date</label>
-              <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate">
-          </fieldset>
+      <fieldset class="form-group">
+          <label for="deadlineDate">Deadline Date</label>
+          <input type="text" formControlName="deadlineDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                               class="form-control"
+                               bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+          <!-- <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate"> -->
+      </fieldset>
   </div>
 </form>
   <div class="row" *ngFor="let item of vacancyDetails">

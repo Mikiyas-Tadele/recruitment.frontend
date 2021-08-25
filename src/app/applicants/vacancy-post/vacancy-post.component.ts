@@ -5,6 +5,7 @@ import { SelectItem } from 'primeng/api';
 import { VacancieslFilter } from 'src/app/models/vacanciesl-filter.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
 import { TokenStorage } from 'src/app/shared/guard/token.storage';
+import { UserProfileService } from './userprofile/user-profile.service';
 import { VancancyService } from './vancancy.service';
 
 @Component({
@@ -37,8 +38,6 @@ export class VacancyPostComponent implements OnInit {
         const l = { label: element.title, value: element.id };
         this.vacanvyTitles.push(l);
       }
-
-
     });
   }
 
