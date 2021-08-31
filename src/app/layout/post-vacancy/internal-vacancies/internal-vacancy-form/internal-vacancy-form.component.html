@@ -1,0 +1,57 @@
+<p-toast [style]="{marginTop: '100px'}"></p-toast>
+<div class="card" style="margin-top: 3%;">
+    <div class="card-header">
+       <h4>Vacancy Posting Form</h4> 
+    </div>
+    <form  role="form" [formGroup]="vacancyForm" (ngSubmit)="save(vacancyForm)"  class="p-5">
+<div class="card-body">
+    <div class="col-lg-6">
+            <fieldset class="form-group">
+                <label for="title">Position</label>
+                <input type="text" formControlName="position" class="form-control" class="form-control" name="title" placeholder="Enter job title" required />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="qualification">Qualification</label>
+                <input type="text" formControlName="qualifications" class="form-control"  placeholder="Enter Qualification" name="qualification" required />
+            </fieldset>
+
+            <div class="form-group">
+                <label for="workExprience">Job Grade</label>
+                <input type="number" formControlName="jobGrade" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
+            </div>
+            <fieldset class="form-group">
+              <label for="requiredNumber">Required Number of Vacant Post</label>
+              <input type="number"  formControlName="noRequired"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
+          </fieldset>
+            <fieldset class="form-group">
+                <label for="location">Place of Work</label>
+                <input type="text"  formControlName="placementOfWork"  class="form-control"  placeholder="Enter Location" name="location" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="postedDate">Posted Date</label>
+                <input type="text" formControlName="postDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                     class="form-control"
+                                     bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                <!-- <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate"> -->
+            </fieldset>
+  
+            <fieldset class="form-group">
+                <label for="deadlineDate">Deadline Date</label>
+                <input type="text" formControlName="endDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                                     class="form-control"
+                                     bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                <!-- <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate"> -->
+            </fieldset>
+           
+
+    </div>
+   
+</div>
+<div class="card-footer col-lg-6">
+    <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+    <button type="button" class="btn btn-success" (click)="clear()">Clear</button>&nbsp;
+    <button type="button" class="btn btn-defualt" (click)="back()">Back</button>&nbsp;
+</div>
+</form>
+</div>

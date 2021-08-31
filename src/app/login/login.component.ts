@@ -45,12 +45,15 @@ get f() {
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
         this.loginService.login(value.username, value.password).subscribe(
             (data) => {
+              console.log(data['staff']);
                 this.token.saveToken(data['accessToken']);
                 this.token.setUserName(value.username);
                 this.token.setAuthorities(data['authorities'][0].authority);
                 // tslint:disable-next-line:triple-equals
                 if (this.token.getAuthorities() === this.ADMIN) {
                   this.router.navigate(['admin/dashboard']);
+                } else if (data['staff']) {
+                  this.router.navigate(['/Ivacancies']);
                 } else {
                   this.router.navigate([this.returnUrl]);
                 }

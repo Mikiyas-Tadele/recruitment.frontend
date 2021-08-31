@@ -1,0 +1,127 @@
+
+<!-- <div class="filterFields">
+<p-panel header="Expand this pannel to Filter applicants" [toggleable]="true" toggler="header" [collapsed] ="true">
+	<ng-template>
+		<button pButton (click)="onClick($event, menu)">
+        </button>
+	</ng-template>
+
+<form role="form" [formGroup]="filterForm" (ngSubmit)="search(filterForm)"  class="p-5">
+  
+    <fieldset class="form-group">
+      <table class=" table table-borderless table-responsive">
+        <tr>
+          <td>
+            <label for="age">Age: </label>
+          </td>
+          <td>
+            <select  name="agecriteria" formControlName="ageCriteria" >
+              <option  value="">All</option>
+              <option  value="greaterthan">Greater Than or Equal To</option>
+              <option value="lessthan">Less Than or Equal To</option>
+            </select>
+            </td>
+            <td>
+          <input type="number" formControlName="age" name="age" />
+          </td>
+          <td>
+            <label for="cgpa">CGPA: </label>
+          </td>
+          <td><select  name="cgpacriteria" formControlName="cgpaCriteria" >
+            <option  value="">All</option>
+            <option  value="greaterthan">Greater Than or Equal To</option>
+            <option value="lessthan">Less Than or Equal To</option>
+          </select>
+        </td>
+        <td>
+        <input type="number" formControlName="cgpa"  name="cgpa" /></td>
+        </tr>
+        <tr>
+          <td>
+            <label for="we"> WorkExperience: </label>
+          </td>
+          <td>
+            <select  name="weCriteria" formControlName="workExperienceCriteria" >
+              <option  value="">All</option>
+              <option  value="greaterthan">Greater Than or Equal To</option>
+              <option value="lessthan">Less Than or Equal To</option>
+            </select>
+            </td>
+            <td>
+          <input type="number" formControlName="workExperience" name="we" />
+          </td>
+          <td>
+            <label for="gy">Graduation Year: </label>
+          </td>
+          <td><select  name="graduationYearCriteria" formControlName="graduationYearCriteria" >
+            <option  value="">All</option>
+            <option  value="greaterthan">Greater Than or Equal To</option>
+            <option value="lessthan">Less Than or Equal To</option>
+          </select>
+        </td>
+        <td>
+        <input type="number" formControlName="graduationYear"  name="gy" /></td>
+        </tr>
+        <tr>
+          <td><label for="gender">Gender:</label></td>
+          <td> <select  name="gender" formControlName="gender">
+            <option  value="">All</option>
+            <option  value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          </td>
+          <td>
+            <label for="qualification">Qualification: </label>
+          </td>
+          <td>
+            <select  name="qualification" formControlName="qualification" >
+              <option  value="">All</option>
+              <option *ngFor="let d of qualifications" [ngValue]="d.value">{{d.label}}</option>
+            </select>
+            </td>
+        </tr>
+      </table>
+      <div style="float:right;">
+        <button type="submit" class="btn btn-primary">Search</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-success"  (click)="reset()">Reset</button>
+        </div>
+    </fieldset>   
+</form>
+</p-panel>
+</div> -->
+<br />
+<br />
+<br />
+<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true" sortField="fullName" sortMode="single" (onSort)="onSort()">
+  <ng-template pTemplate="caption">
+    <div class="ui-helper-clearfix" style="text-align: left">
+      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+  </div>
+    <h5>Development Bank of Ethiopia<br>
+      Human Resource Management Directorate<br>
+      Applicants profile Summary for the Position of {{vacancyName}}
+     </h5>
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th  [pSortableColumn]="'name'">Employee Name
+            <p-sortIcon [field]="'name'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+          <th>Position</th>
+          <th>Work Unit</th>
+          <th>Location</th>
+          <th>Applied Date</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
+      <tr>
+          <td>{{appliedPersonel.name}}</td>
+          <td>{{appliedPersonel.position}}</td>
+          <td>{{appliedPersonel.workUnit}}</td>
+          <td>{{appliedPersonel.location}}</td>
+          <td>{{appliedPersonel.appliedDate | date :'dd/MM/yyyy'}}</td>
+        </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+  </ng-template>
+</p-table>

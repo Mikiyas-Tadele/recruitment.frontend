@@ -26,9 +26,13 @@ import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DataViewModule } from 'primeng/dataview';
 import { AuthGuard } from '../shared';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHeaderInterceptor } from '../shared/guard/auth-header.interceptor';
+import { InternalVacanciesComponent } from './post-vacancy/internal-vacancies/internal-vacancies.component';
+import { InternalVacancyFormComponent } from './post-vacancy/internal-vacancies/internal-vacancy-form/internal-vacancy-form.component';
+import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/internal-applicants/internal-applicants.component';
 
 
 @NgModule({
@@ -55,12 +59,13 @@ import { AuthHeaderInterceptor } from '../shared/guard/auth-header.interceptor';
         TooltipModule,
         DialogModule,
         DropdownModule,
+        DataViewModule,
         NgbDatepickerModule,
         CalendarModule
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
-         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent],
+         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent],
     providers: [MessageService,
         [AuthGuard,
             {

@@ -53,8 +53,8 @@ export class VacancyPostComponent implements OnInit {
   }
   apply(data: Vacancy) {
     if (this.tokenStorage.getToken() != null) {
-      //fetch user profile and check if user has enough profile fille to appl for a vacancy
-      
+      // fetch user profile and check if user has enough profile fille to appl for a vacancy
+
       this.userService.getApplicant().subscribe(userProfile => {
         this.userProfile = userProfile;
         this.experiences = userProfile.workExperiences;
@@ -62,14 +62,15 @@ export class VacancyPostComponent implements OnInit {
         this.certifications = userProfile.certifications;
       },
       error => {
-        console.log("Error: " + error)
+        console.log('Error: ' + error);
       }, () => {
-        if  (this.userProfile && this.educations.length > 0 )
+        if  (this.userProfile && this.educations.length > 0 ) {
         this.router.navigate(['apply/' + data.id + '/' + data.title]);
-        else 
+        } else {
         this.router.navigate(['userProfile/']);
+        }
       });
-      
+
     } else {
       this.router.navigate(['login']);
     }

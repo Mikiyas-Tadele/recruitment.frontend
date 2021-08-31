@@ -1,0 +1,42 @@
+<div class="spacehlder" style="margin-top: 3%;"></div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-toast [style]="{marginTop: '100px'}"></p-toast>
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="position" emptyMessage="No Vacancy Available!">
+        <p-header>
+            <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary" (click)="submit()">Submit Application</button>
+        </p-header>
+        <div class="row">
+    <ng-template let-vacancy pTemplate="listItem">
+       
+            <div class="col-lg-6">
+           
+                <div class="card card-default mb-3">
+                    <div class="card-header">
+                        <h4 *ngIf="!vacancy.closed" class="text-success"><i class="fa fa-bell fa-fw text-success"></i> {{vacancy.position}}</h4>
+                        <h4 *ngIf="vacancy.closed" class="text-danger"><i class="fa fa-bell fa-fw text-danger" ></i> {{vacancy.position}} </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">{{vacancy.qualifications}}</h4>
+                                <p><small class="text-muted"><i class="fa fa-clock-o"></i>2 days left</small>
+                                </p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>{{vacancy.qualification}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Select</button>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        
+    </ng-template>
+</div>
+</p-dataView>

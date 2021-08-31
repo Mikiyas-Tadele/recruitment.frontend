@@ -17,7 +17,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // const baseUrl = 'http://localhost:8080/api';
 
- const baseUrl = 'https://jobs.dbe.com.et/recruitment/api';
+const baseUrl = 'http://172.18.10.145:8080/api';
+
+//  const baseUrl = 'https://jobs.dbe.com.et/recruitment/api';
 
 @NgModule({
     imports: [

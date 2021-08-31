@@ -19,7 +19,7 @@ import { MessageModule } from 'primeng/message';
 import { EditorModule } from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AppliedJobComponent } from './applied-job/applied-job.component';
 import {DropdownModule} from 'primeng/dropdown';
@@ -27,10 +27,14 @@ import {DataViewModule} from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import { HelpComponent } from './help/help.component';
 import {CalendarModule} from 'primeng/calendar';
+import { InternalVacancyComponent } from './internal-vacancy/internal-vacancy.component';
+import { InternalVacancyFormComponent } from './internal-vacancy/internal-vacancy-form/internal-vacancy-form.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
-    UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent, HelpComponent],
+    UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent,
+    HelpComponent, InternalVacancyComponent, InternalVacancyFormComponent],
   imports: [
     CommonModule,
     ApplicantsRoutingModule,
@@ -50,8 +54,9 @@ import {CalendarModule} from 'primeng/calendar';
     DropdownModule,
     DataViewModule,
     TableModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ApplicantsModule { }
