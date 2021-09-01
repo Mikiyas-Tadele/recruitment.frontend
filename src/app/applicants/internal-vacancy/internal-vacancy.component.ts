@@ -15,6 +15,7 @@ export class InternalVacancyComponent implements OnInit {
   applies: any = [];
   uploadedFiles: any = [];
   isSelect = false;
+  uploadedFilesForVacancy: Map<number, any> = new Map();
 
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
@@ -35,10 +36,11 @@ apply(data: InternalVacancyModel) {
     if (this.applies.length < 3) {
       if (this.applies.length > 0) {
         this.applies = this.applies.filter(d => {
-          return data.id !== d;
+          return data.id !== d.id;
       });
       }
-      this.applies.push(data.id);
+      this.applies.push(data);
+      this.uploadedFilesForVacancy.set(data.id, []);
     } else {
       this.messageService.add({
         severity: 'error',
@@ -51,9 +53,11 @@ apply(data: InternalVacancyModel) {
 cancel(data: InternalVacancyModel) {
   if (this.applies.length > 0) {
     this.applies = this.applies.filter(d => {
-        return data.id !== d;
+        return data.id !== d.id;
     });
+    this.uploadedFilesForVacancy.delete(data.id);
     console.log(this.applies);
+    console.log(this.uploadedFilesForVacancy);
   }
 }
 
@@ -62,13 +66,20 @@ goToView(data: InternalVacancyModel) {
 }
 
 submit() {
-  console.log(this.applies.length);
   if (this.applies.length > 0 && this.applies.length < 3) {
     this.confirmMessage.confirm({
-      message: 'You can apply for three positions but you only applied for ' + this.applies.length +
+      message: 'You can apply for three positions but you have only applied for ' + this.applies.length +
       ' position  Are you sure you want to proceed?',
       accept: () => {
-         this.internalVacancyService.applyForInternalPosition(this.applies).subscribe(res => {
+         this.internalVacancyService.applyForInternalPosition(this.applies.map(d => {
+           return d.id;
+         })).subscribe(res => {
+           this.uploadedFilesForVacancy.forEach((file: any, vacancyId: number) => {
+            const formData: FormData = new FormData();
+            formData.append('file', file, file.name);
+               this.internalVacancyService.storeInternalApplication(formData, vacancyId).subscribe(f => {
+               });
+           });
           this.messageService.add({
             severity: 'success',
             summary: 'Saved',
@@ -98,10 +109,15 @@ submit() {
   });
   }
 }
-upload(event: any, data: InternalVacancyModel) {
+upload(event: any, form: any, data: InternalVacancyModel) {
   this.uploadedFiles.push(event.files[0]);
-  this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+  if (this.uploadedFilesForVacancy.has(data.id)) {
+         this.uploadedFilesForVacancy.set(data.id, event.files[0]);
+         this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+  } else {
+    this.messageService.add({severity: 'error', summary: 'Upload File', detail: 'Please select the position before uploading'});
+  }
+  form.clear();
 
 }
-
 }

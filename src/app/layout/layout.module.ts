@@ -33,6 +33,8 @@ import { AuthHeaderInterceptor } from '../shared/guard/auth-header.interceptor';
 import { InternalVacanciesComponent } from './post-vacancy/internal-vacancies/internal-vacancies.component';
 import { InternalVacancyFormComponent } from './post-vacancy/internal-vacancies/internal-vacancy-form/internal-vacancy-form.component';
 import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/internal-applicants/internal-applicants.component';
+import { InternalApplicantsByPositionComponent } from './internal-applicants-by-position/internal-applicants-by-position.component';
+import { InternalPositionByApplicantComponent } from './internal-position-by-applicant/internal-position-by-applicant.component';
 
 
 @NgModule({
@@ -65,7 +67,7 @@ import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/i
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
-         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent],
+         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent, InternalApplicantsByPositionComponent, InternalPositionByApplicantComponent],
     providers: [MessageService,
         [AuthGuard,
             {

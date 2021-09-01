@@ -1,45 +1,100 @@
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Inject, Injectable } from '@angular/core';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
+import { saveFile } from 'src/app/models/services/file.saver.helper';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class InternalVacancyService {
+    private readonly ADD_VACANCY = '/vacancy/internal-vacancy';
+    private readonly GET_VANCANCIES = '/vacancy/internal-vacancies';
+    private readonly GET_VACANCY = '/vacancy/internal-vacancy';
+    private readonly INTERNAL_APPLY = '/application/internalApplication';
+    private readonly INTERNAL_APPLICATION = '/application/internalApplications';
+    private readonly STORE = '/application/internal-application-store?vacancyId=';
+    private readonly INTERNAL_APPLICANT_BY_POSITION = '/application/internalApplicantsByPosition';
+    private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
 
-  readonly ADD_VACANCY = '/vacancy/internal-vacancy';
-  readonly GET_VANCANCIES = '/vacancy/internal-vacancies';
-  readonly GET_VACANCY = '/vacancy/internal-vacancy';
-  readonly INTERNAL_APPLY = '/application/internalApplication';
-  readonly INTERNAL_APPLICATION = '/application/internalApplications';
+    constructor(
+        private repoService: RepositoryService,
+        @Inject('BASE_API_URL') private baseUrl: string
+    ) {}
 
+    addOrUpdateVacancy(data: InternalVacancyModel) {
+        const options = { body: data };
+        return this.repoService.sendRequest(
+            'POST',
+            this.baseUrl + this.ADD_VACANCY,
+            options
+        );
+    }
 
-  constructor(private repoService: RepositoryService, @Inject('BASE_API_URL') private baseUrl: string) { }
+    getAllInternalVacancies() {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.GET_VANCANCIES
+        );
+    }
 
-  addOrUpdateVacancy(data: InternalVacancyModel) {
-    const options = {body: data};
-    return this.repoService.sendRequest('POST', this.baseUrl + this.ADD_VACANCY, options);
-  }
+    getAllInternalVacanciesByPlacement(placement: string) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.GET_VANCANCIES + '/' + placement
+        );
+    }
 
-  getAllInternalVacancies() {
-    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_VANCANCIES);
-  }
+    getInternalVacancy(id: number) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.GET_VACANCY + '/' + id
+        );
+    }
 
-  getAllInternalVacanciesByPlacement(placement: string) {
-    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_VANCANCIES + '/' + placement);
-  }
+    applyForInternalPosition(ids: any) {
+        const options = { body: ids };
+        return this.repoService.sendRequest(
+            'POST',
+            this.baseUrl + this.INTERNAL_APPLY,
+            options
+        );
+    }
 
-  getInternalVacancy(id: number) {
-    return this.repoService.sendRequest('GET', this.baseUrl + this.GET_VACANCY + '/' + id);
-  }
+    getInternalApplicationsByVacancy(id: number) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.INTERNAL_APPLICATION + '/' + id
+        );
+    }
 
-  applyForInternalPosition(ids: any) {
-    const options = {body: ids};
-    return this.repoService.sendRequest('POST', this.baseUrl + this.INTERNAL_APPLY, options);
-  }
+    storeInternalApplication(file: any, vacancyId: number) {
+        return this.repoService.httpClient.post(
+            this.baseUrl + this.STORE + vacancyId,
+            file
+        );
+    }
+    downloadFile(employeeId: number, vacancyId: number, userName: string) {
+      return this.repoService.httpClient.get(this.baseUrl + '/application/download-Internal-applicant-File?employeeId='
+       + employeeId + '&vacancyId=' + vacancyId , {responseType: 'blob'})
+        .subscribe((res: any) => {
+          console.log(res);
+          return saveFile(res, userName);
+        });
+    }
 
-  getInternalApplicationsByVacancy(id: number) {
-    return this.repoService.sendRequest('GET', this.baseUrl + this.INTERNAL_APPLICATION + '/' + id);
-  }
+    getInternalApplicantsByPosition() {
+      return this.repoService.sendRequest(
+        'GET',
+        this.baseUrl + this.INTERNAL_APPLICANT_BY_POSITION
+    );
+    }
+
+    getInternalPositionByApplicant() {
+      return this.repoService.sendRequest(
+        'GET',
+        this.baseUrl + this.INTERNAL_POSITION_BY_APPLICANT
+    );
+    }
+
 }

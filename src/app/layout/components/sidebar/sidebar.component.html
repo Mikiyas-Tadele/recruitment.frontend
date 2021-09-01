@@ -8,9 +8,13 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Post Vacancy'}}</span>
         </a>
-        <a routerLink="/admin/internalVacancies/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/admin/internalApplicantByPosition/" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
-            <span>{{ 'Internal  Vacancy'}}</span>
+            <span>{{ 'Report One'}}</span>
+        </a>
+        <a routerLink="/admin/internalPositionByApplicant/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Report Two'}}</span>
         </a>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;

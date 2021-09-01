@@ -1,4 +1,10 @@
-<div class="spacehlder" style="margin-top: 3%;"></div>
+<div class="spacehlder" style="margin-top: 10%;"></div>
+<div *ngIf="applies.length>0">
+    <span> Positions Selected</span>
+  <div *ngFor="let item of applies">
+     <span>{{item.position}}</span>
+  </div>
+</div>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 <p-toast [style]="{marginTop: '100px'}"></p-toast>
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="position" emptyMessage="No Vacancy Available!">
@@ -29,9 +35,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p-fileUpload  mode="basic" name="demo[]"  accept="image/*" maxFileSize="1000000" (uploadHandler)="upload($event,vacancy)" customUpload="true" [auto]="true" chooseLabel="Browse"></p-fileUpload>&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Select</button>&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)">Cancel</button>
+                        <p-fileUpload  #form mode="basic"  accept="image/*" maxFileSize="1000000" 
+                        (uploadHandler)="upload($event,form,vacancy)" customUpload="true"
+                         [auto]="true" chooseLabel="Browse"></p-fileUpload>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">Select</button>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)" style="margin-bottom:1.8em;">Cancel</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { InternalApplicantByPosition } from '../models/internal.applicant.by.position';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
+import { InternalApplicantsByPositionComponent } from './internal-applicants-by-position/internal-applicants-by-position.component';
+import { InternalPositionByApplicantComponent } from './internal-position-by-applicant/internal-position-by-applicant.component';
 import { LayoutComponent } from './layout.component';
 import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/internal-applicants/internal-applicants.component';
 import { InternalVacanciesComponent } from './post-vacancy/internal-vacancies/internal-vacancies.component';
@@ -20,6 +23,8 @@ const routes: Routes = [
             {path: 'internalVacancies', component: InternalVacanciesComponent},
             {path: 'internalVacancy/:id', component: InternalVacancyFormComponent},
             {path: 'appliedInternalPersonel/:id', component: InternalApplicantsComponent },
+            {path: 'internalApplicantByPosition', component: InternalApplicantsByPositionComponent},
+            {path: 'internalPositionByApplicant', component: InternalPositionByApplicantComponent},
             { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }
