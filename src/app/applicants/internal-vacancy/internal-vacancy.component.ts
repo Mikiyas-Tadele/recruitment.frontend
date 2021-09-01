@@ -13,6 +13,8 @@ export class InternalVacancyComponent implements OnInit {
 
   vacancies: any = [];
   applies: any = [];
+  uploadedFiles: any = [];
+  isSelect = false;
 
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
@@ -37,7 +39,6 @@ apply(data: InternalVacancyModel) {
       });
       }
       this.applies.push(data.id);
-      console.log(this.applies);
     } else {
       this.messageService.add({
         severity: 'error',
@@ -96,6 +97,11 @@ submit() {
       detail: 'You have to apply for at least one position before submitting the form!',
   });
   }
+}
+upload(event: any, data: InternalVacancyModel) {
+  this.uploadedFiles.push(event.files[0]);
+  this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+
 }
 
 }

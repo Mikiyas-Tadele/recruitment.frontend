@@ -13,13 +13,12 @@
            
                 <div class="card card-default mb-3">
                     <div class="card-header">
-                        <h4 *ngIf="!vacancy.closed" class="text-success"><i class="fa fa-bell fa-fw text-success"></i> {{vacancy.position}}</h4>
-                        <h4 *ngIf="vacancy.closed" class="text-danger"><i class="fa fa-bell fa-fw text-danger" ></i> {{vacancy.position}} </h4>
+                        <h4 class="text-success"><i class="fa fa-bell fa-fw text-success"></i> {{vacancy.position}}</h4>
                     </div>
                     <div class="card-body">
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{vacancy.qualifications}}</h4>
+                                <h5 class="timeline-title">{{vacancy.qualifications}}</h5>
                                 <p><small class="text-muted"><i class="fa fa-clock-o"></i>2 days left</small>
                                 </p>
                             </div>
@@ -30,7 +29,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;&nbsp;
+                        <p-fileUpload  mode="basic" name="demo[]"  accept="image/*" maxFileSize="1000000" (uploadHandler)="upload($event,vacancy)" customUpload="true" [auto]="true" chooseLabel="Browse"></p-fileUpload>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Select</button>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)">Cancel</button>
                     </div>
