@@ -39,4 +39,12 @@ export class TokenStorage {
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }
+
+  public setStaff(staff: string) {
+    window.sessionStorage.setItem('staff', staff);
+  }
+
+  public getStaff() {
+    return window.sessionStorage.getItem('staff');
+  }
 }

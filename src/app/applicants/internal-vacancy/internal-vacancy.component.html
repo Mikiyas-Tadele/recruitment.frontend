@@ -1,16 +1,19 @@
-<div class="spacehlder" style="margin-top: 10%;"></div>
+<div class="spacehlder" style="margin-top: 5%;"></div>
+<div *ngIf="employeeinfo" class="row" style="margin-left:2px;">
+   <h5>{{employeeinfo.name}},</h5>&nbsp;&nbsp;<h5>{{employeeinfo.position.replace('.', ' of ')}}</h5>
+</div>
 <div *ngIf="applies.length>0">
     <span> Positions Selected</span>
   <div *ngFor="let item of applies">
-     <span>{{item.position}}</span>
+     <h6>{{item.position}}</h6>
   </div>
 </div>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 <p-toast [style]="{marginTop: '100px'}"></p-toast>
-<p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="position" emptyMessage="No Vacancy Available!">
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="6" #dv filterBy="position" loading="true" paginatorPosition="both" emptyMessage="No Vacancy Available!">
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">&nbsp;&nbsp;
-            <button type="button" class="btn btn-primary" (click)="submit()">Submit Application</button>
+            <button type="button" class="btn btn-primary btn-round" (click)="submit()" style="float: right;">Submit Application</button><br>
         </p-header>
         <div class="row">
     <ng-template let-vacancy pTemplate="listItem">
@@ -35,10 +38,10 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p-fileUpload  #form mode="basic"  accept="image/*" maxFileSize="1000000" 
+                        <p-fileUpload  #form mode="basic"  accept=".doc, .docx, .pdf"  maxFileSize="20000" 
                         (uploadHandler)="upload($event,form,vacancy)" customUpload="true"
-                         [auto]="true" chooseLabel="Browse"></p-fileUpload>&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">Select</button>&nbsp;&nbsp;&nbsp;
+                         [auto]="true" chooseLabel="Attach File" (onSelect)="validateFileSize($event, form.maxFileSize)"></p-fileUpload>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">Apply</button>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)" style="margin-bottom:1.8em;">Cancel</button>
                     </div>
                 </div>

@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-    <a class="navbar-brand" [routerLink]="['/admin/dashboard']">
+    <a *ngIf="isHR; else other" class="navbar-brand" [routerLink]="['/admin/dashboard']">
      <img src="assets/images/dbelogo.gif" alt="DBE Logo" />
     </a>
+    <ng-template #other>
+        <img src="assets/images/dbelogo.gif" alt="DBE Logo" />
+    </ng-template>
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>

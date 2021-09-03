@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { TokenStorage } from 'src/app/shared/guard/token.storage';
 
 @Component({
     selector: 'app-sidebar',
@@ -11,10 +12,12 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
+    isHR = false;
+    isPlacement = false;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(public router: Router) {
+    constructor(public router: Router, private token: TokenStorage) {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -31,6 +34,20 @@ export class SidebarComponent implements OnInit {
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
+
+        console.log( this.token.getAuthorities());
+
+        const role = this.token.getAuthorities();
+        console.log(role);
+        // tslint:disable-next-line:triple-equals
+        if (role == 'ROLE_ADMIN') {
+             this.isHR = true;
+             this.isPlacement = false;
+        // tslint:disable-next-line:triple-equals
+        } else if (role == 'ROLE_PLACEMENT') {
+            this.isHR = false;
+            this.isPlacement = true;
+        }
     }
 
 

@@ -11,6 +11,7 @@ import { TokenStorage } from 'src/app/shared/guard/token.storage';
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     userName = '';
+    isHR = false;
 
     constructor(private translate: TranslateService, public router: Router, private tokenStorage: TokenStorage) {
 
@@ -28,6 +29,11 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.pushRightClass = 'push-right';
         this.userName = this.tokenStorage.getUserName();
+        const role = this.tokenStorage.getAuthorities();
+        if (role === 'ROLE_ADMIN') {
+            this.isHR = true;
+       // tslint:disable-next-line:triple-equals
+       }
     }
 
     isToggled(): boolean {

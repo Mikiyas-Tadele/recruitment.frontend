@@ -1,18 +1,18 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
-        <a routerLink="/admin/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf="isHR && !isPlacement"  routerLink="/admin/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Dashboard'}}</span>
         </a>
-        <a routerLink="/admin/post-vacancy/0" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf="isHR && !isPlacement"  routerLink="/admin/post-vacancy/0" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Post Vacancy'}}</span>
         </a>
-        <a routerLink="/admin/internalApplicantByPosition/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf="!isHR && isPlacement" routerLink="/admin/internalApplicantByPosition/" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Report One'}}</span>
         </a>
-        <a routerLink="/admin/internalPositionByApplicant/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf="!isHR && isPlacement" routerLink="/admin/internalPositionByApplicant/" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Report Two'}}</span>
         </a>

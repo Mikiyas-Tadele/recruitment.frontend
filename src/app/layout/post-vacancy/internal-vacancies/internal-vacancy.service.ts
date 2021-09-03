@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
 import { saveFile } from 'src/app/models/services/file.saver.helper';
 import { RepositoryService } from 'src/app/models/services/repository.service';
+import { UserModel } from 'src/app/signup/models/user.model';
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +17,7 @@ export class InternalVacancyService {
     private readonly STORE = '/application/internal-application-store?vacancyId=';
     private readonly INTERNAL_APPLICANT_BY_POSITION = '/application/internalApplicantsByPosition';
     private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
+    private readonly EMPLOYEE_INFO = '/application/employeeInfo';
 
     constructor(
         private repoService: RepositoryService,
@@ -95,6 +97,13 @@ export class InternalVacancyService {
         'GET',
         this.baseUrl + this.INTERNAL_POSITION_BY_APPLICANT
     );
+    }
+
+    getEmployeeInfo(username: string) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.EMPLOYEE_INFO + '/' + username
+        );
     }
 
 }

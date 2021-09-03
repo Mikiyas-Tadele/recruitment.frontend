@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     errorMessage: string;
     session: any;
     private readonly ADMIN = 'ROLE_ADMIN';
+    private readonly PLACEMENT = 'ROLE_PLACEMENT';
     private readonly APPLICANT = 'ROLE_APPLICANT';
 
     constructor(
@@ -45,13 +46,17 @@ get f() {
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
         this.loginService.login(value.username, value.password).subscribe(
             (data) => {
-              console.log(data['staff']);
+              console.log(data);
+              console.log(this.token.getAuthorities());
                 this.token.saveToken(data['accessToken']);
                 this.token.setUserName(value.username);
                 this.token.setAuthorities(data['authorities'][0].authority);
+                this.token.setStaff(data['staff']);
                 // tslint:disable-next-line:triple-equals
                 if (this.token.getAuthorities() === this.ADMIN) {
                   this.router.navigate(['admin/dashboard']);
+                } else if (this.token.getAuthorities() === this.PLACEMENT) {
+                  this.router.navigate(['admin/internalApplicantByPosition']);
                 } else if (data['staff']) {
                   this.router.navigate(['/Ivacancies']);
                 } else {

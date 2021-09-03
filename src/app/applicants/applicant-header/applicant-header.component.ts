@@ -16,6 +16,7 @@ export class ApplicantHeaderComponent implements OnInit {
   displayUserInfo = false;
   isNotLoggedIn = true;
   isMenuCollapsed = true;
+  isStaff = false;
 
     constructor(private translate: TranslateService, public router: Router,
         private loginService: LoginService, private tokenStorage: TokenStorage) {
@@ -36,6 +37,8 @@ export class ApplicantHeaderComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.isStaff = this.tokenStorage.getStaff() === 'true' ? true : false;
+        console.log(this.tokenStorage.getStaff());
     }
 
     isToggled(): boolean {
