@@ -18,7 +18,7 @@
       <tr>
           <td>{{appliedPersonel.position}}</td>
           <td>{{appliedPersonel.employeeId}}</td>
-          <td>{{appliedPersonel.employeeName}}</td>
+          <td>{{appliedPersonel.employeeName}}&nbsp;&nbsp;<button pButton icon="pi pi-download" class="ui-button-success" (click)="download(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
         </tr>
   </ng-template>
   <ng-template pTemplate="footer">

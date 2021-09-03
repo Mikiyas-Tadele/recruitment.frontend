@@ -1,6 +1,7 @@
 export class InternalPositionByApplicant {
     id: number;
-    employeeId: string;
+    employeeId: number;
     employeeName: string;
     position: string;
+    vacancyId: number;
 }

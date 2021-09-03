@@ -10,7 +10,7 @@
 </div>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 <p-toast [style]="{marginTop: '100px'}"></p-toast>
-<p-dataView [value]="vacancies" [paginator]="true" [rows]="6" #dv filterBy="position" loading="true" paginatorPosition="both" emptyMessage="No Vacancy Available!">
+<p-dataView [value]="vacancies" [paginator]="true" [rows]="6" #dv filterBy="position"  paginatorPosition="both" emptyMessage="No Vacancy Available!">
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">&nbsp;&nbsp;
             <button type="button" class="btn btn-primary btn-round" (click)="submit()" style="float: right;">Submit Application</button><br>

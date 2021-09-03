@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { InternalApplicantByPosition } from 'src/app/models/internal.applicant.by.position';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
 import { ExcelExportService } from 'src/app/shared/services/excel-export-service';
 import { InternalVacancyService } from '../post-vacancy/internal-vacancies/internal-vacancy.service';
@@ -47,6 +48,15 @@ getDateFormatted(startDate: Date) {
   }  else {
     return '';
   }
+}
+download1(data: InternalApplicantByPosition) {
+  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId1, data.employeeName + ' letter1');
+}
+download2(data: InternalApplicantByPosition) {
+  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId2, data.employeeName + ' letter2');
+}
+download3(data: InternalApplicantByPosition) {
+  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId3, data.employeeName + ' letter3');
 }
 
 onSort() {

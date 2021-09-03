@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { timeout } from 'rxjs/operators';
 import { InternalVacancyService } from 'src/app/layout/post-vacancy/internal-vacancies/internal-vacancy.service';
 import { Employee } from 'src/app/models/employee';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
@@ -94,8 +95,10 @@ submit() {
             summary: 'Saved',
             detail: 'You have successfuly applied for the position you selected',
         });
-         this.tokenStorage.signOut();
-         this.router.navigate(['/login']);
+        setTimeout(() => {
+          this.tokenStorage.signOut();
+          this.router.navigate(['/login']);
+        }, 2000);
          });
       }
   });

@@ -20,9 +20,9 @@
       <tr>
           <td>{{appliedPersonel.employeeId}}</td>
           <td>{{appliedPersonel.employeeName}}</td>
-          <td>{{appliedPersonel.positionOne}}</td>
-          <td>{{appliedPersonel.positionTwo}}</td>
-          <td>{{appliedPersonel.positionThree}}</td>
+          <td>{{appliedPersonel.positionOne}}&nbsp;&nbsp;<button pButton icon="pi pi-download" class="ui-button-success" (click)="download1(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
+          <td>{{appliedPersonel.positionTwo}}&nbsp;<button pButton icon="pi pi-download" class="ui-button-success" (click)="download2(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
+          <td>{{appliedPersonel.positionThree}}&nbsp;<button pButton icon="pi pi-download" class="ui-button-success" (click)="download3(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
         </tr>
   </ng-template>
   <ng-template pTemplate="footer">
