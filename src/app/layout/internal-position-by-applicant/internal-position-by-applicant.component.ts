@@ -49,7 +49,11 @@ getDateFormatted(startDate: Date) {
   }
 }
 download(data: InternalPositionByApplicant) {
-  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId, data.employeeName + ' letter1');
+  this.internalVacancyService.getFileNameToDownload(data.vacancyId, data.employeeId)
+    .map(response => response.json()).subscribe(name => {
+      this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId, name);
+    });
+
 }
 
 onSort() {

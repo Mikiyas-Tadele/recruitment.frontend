@@ -18,6 +18,7 @@ export class InternalVacancyService {
     private readonly INTERNAL_APPLICANT_BY_POSITION = '/application/internalApplicantsByPosition';
     private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
     private readonly EMPLOYEE_INFO = '/application/employeeInfo';
+    private readonly FILE_TO_DOWNLOAD = '/application/fileNameToDownload';
 
     constructor(
         private repoService: RepositoryService,
@@ -80,7 +81,6 @@ export class InternalVacancyService {
       return this.repoService.httpClient.get(this.baseUrl + '/application/download-Internal-applicant-File?employeeId='
        + employeeId + '&vacancyId=' + vacancyId , {responseType: 'blob'})
         .subscribe((res: any) => {
-          console.log(res);
           return saveFile(res, userName);
         });
     }
@@ -103,6 +103,13 @@ export class InternalVacancyService {
         return this.repoService.sendRequest(
             'GET',
             this.baseUrl + this.EMPLOYEE_INFO + '/' + username
+        );
+    }
+
+    getFileNameToDownload(vacancyId: number, employeeId: number) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.FILE_TO_DOWNLOAD + '/' + vacancyId + '/' + employeeId
         );
     }
 
