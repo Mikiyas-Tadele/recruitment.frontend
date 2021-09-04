@@ -19,6 +19,7 @@ export class InternalVacancyService {
     private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
     private readonly EMPLOYEE_INFO = '/application/employeeInfo';
     private readonly FILE_TO_DOWNLOAD = '/application/fileNameToDownload';
+    private readonly MANAGERIAL_POSITIONS = '/vacancy/all-positions';
 
     constructor(
         private repoService: RepositoryService,
@@ -110,6 +111,13 @@ export class InternalVacancyService {
         return this.repoService.sendRequest(
             'GET',
             this.baseUrl + this.FILE_TO_DOWNLOAD + '/' + vacancyId + '/' + employeeId
+        );
+    }
+
+    getAllPositions() {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.MANAGERIAL_POSITIONS
         );
     }
 

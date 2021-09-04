@@ -50,7 +50,8 @@ getDateFormatted(startDate: Date) {
 }
 download(data: InternalPositionByApplicant) {
   this.internalVacancyService.getFileNameToDownload(data.vacancyId, data.employeeId)
-    .map(response => response.json()).subscribe(name => {
+     .subscribe(name => {
+      console.log(name);
       this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId, name);
     });
 

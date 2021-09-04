@@ -7,4 +7,5 @@ export class InternalVacancyModel {
     placementOfWork: string;
     postDate: Date;
     endDate: Date;
+    parent: number;
 }

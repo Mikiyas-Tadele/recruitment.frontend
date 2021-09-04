@@ -4,6 +4,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { timeout } from 'rxjs/operators';
 import { InternalVacancyService } from 'src/app/layout/post-vacancy/internal-vacancies/internal-vacancy.service';
 import { Employee } from 'src/app/models/employee';
+import { InternalManagerialPosition } from 'src/app/models/internal.managerial.positions';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
 import { TokenStorage } from 'src/app/shared/guard/token.storage';
 
@@ -19,23 +20,35 @@ export class InternalVacancyComponent implements OnInit {
   uploadedFiles: any = [];
   isSelect = false;
   uploadedFilesForVacancy: Map<number, any> = new Map();
-  employeeinfo: Employee = new Employee();
+  employeeinfo: Employee;
+  vps: any = [];
+  directorates: any = [];
+  ddirectorates: any = [];
+  managers: any = [];
+  positions: any = [];
+  vacanciesUnfiltered: any = [];
+  districts: any = [];
+  selectedVp: any;
+  selectedDirectorate: any;
+  selectedDDirectorate: any;
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
      private messageService: MessageService,
      private confirmMessage: ConfirmationService,
-     private tokenStorage: TokenStorage) { }
+     private tokenStorage: TokenStorage) {}
 
   ngOnInit() {
    this.getVacancies();
    this.internalVacancyService.getEmployeeInfo(this.tokenStorage.getUserName()).subscribe(res => {
      this.employeeinfo = res as Employee;
    });
+   this.fillPositions();
   }
 
   private getVacancies() {
    this.internalVacancyService.getAllInternalVacancies().subscribe(res => {
      this.vacancies = res as InternalVacancyModel[];
+     this.vacanciesUnfiltered = this.vacancies;
    });
  }
 
@@ -48,6 +61,7 @@ apply(data: InternalVacancyModel) {
       }
       if (this.uploadedFilesForVacancy.has(data.id)) {
       this.applies.push(data);
+      this.messageService.add({severity: 'success', summary: 'Application', detail: 'The position is added to yours application list!'});
       } else {
         this.messageService.add({severity: 'error', summary: 'Upload File', detail: 'Please Attach the file first before applying'});
       }
@@ -92,7 +106,7 @@ submit() {
            });
           this.messageService.add({
             severity: 'success',
-            summary: 'Saved',
+            summary: 'Application',
             detail: 'You have successfuly applied for the position you selected',
         });
         setTimeout(() => {
@@ -105,7 +119,7 @@ submit() {
   } else {
     this.messageService.add({
       severity: 'error',
-      summary: 'Saved',
+      summary: 'Error',
       detail: 'You have to apply for Three Positions before submitting the form!',
   });
   }
@@ -124,13 +138,94 @@ upload(event: any, form: any, data: InternalVacancyModel) {
   });
  }
  validateFileSize($event: any, maxFileSize: number): void {
+  const fileTypes: any = [
+    {type: 'application/msword', name: 'doc'},
+    {type: 'application/pdf', name: 'pdf'},
+    {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', name: 'docx'}
+ ];
+ const fileType = $event.files[0].type;
+ console.log(fileType);
   if ($event.files[0].size > maxFileSize) {
     this.messageService.add({
       severity: 'error',
-      summary: 'Saved',
+      summary: 'Error',
       detail: 'The file size you selected is too large, please select a file that is within 20KB',
   });
+}
+ }
+
+fillPositions() {
+  this.internalVacancyService.getAllPositions().subscribe(res => {
+     this.positions = res as InternalManagerialPosition[];
+     for (let index = 0; index < this.positions.length; index++) {
+       const element = this.positions[index];
+       if (element.parent == null) {
+        const q = {label: element.positionName   , value: element.id};
+        this.vps.push(q);
+       }
+     }
+  });
+}
+
+fillDirector(event: any) {
+  this.directorates = [];
+  this.ddirectorates = [];
+  this.managers = [];
+  for (let index = 0; index < this.positions.length; index++) {
+    const element = this.positions[index];
+    if (element.parent === event.value) {
+      const q = {label: element.positionName   , value: element.id};
+      this.directorates.push(q);
+    }
   }
+  this.filter(event.value);
+}
+
+fillDDirector(event: any) {
+  console.log(event);
+  this.ddirectorates = [];
+  for (let index = 0; index < this.positions.length; index++) {
+    const element = this.positions[index];
+    if (element.parent === event.value) {
+      const q = {label: element.positionName   , value: element.id};
+      this.ddirectorates.push(q);
+    }
+  }
+  this.filter(event.value);
+}
+fillManager(event: any) {
+  console.log(event);
+  this.managers = [];
+  for (let index = 0; index < this.positions.length; index++) {
+    const element = this.positions[index];
+    if (element.parent === event.value) {
+      const q = {label: element.positionName   , value: element.id};
+      this.managers.push(q);
+    }
+  }
+  this.filter(event.value);
+}
+
+fileName(vacancy: InternalVacancyModel) {
+ return this.uploadedFilesForVacancy.has(vacancy.id) ? 'File Uploaded: ' + this.uploadedFilesForVacancy.get(vacancy.id).name : '';
+}
+
+filter(parentId: number) {
+  this.vacancies = this.vacanciesUnfiltered.filter(data => {
+     return data.parent === parentId;
+  });
+}
+
+resetFilter() {
+  this.vacancies = this.vacanciesUnfiltered;
+  this.selectedVp = null;
+  this.selectedDDirectorate = null;
+  this.selectedDirectorate = null;
+}
+isApplied(vacancy: InternalVacancyModel) {
+   if (this.applies.includes(vacancy)) {
+      return true;
+   }
 }
 
  }

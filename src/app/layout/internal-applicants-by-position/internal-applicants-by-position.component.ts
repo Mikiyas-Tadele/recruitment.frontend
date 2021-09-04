@@ -50,13 +50,25 @@ getDateFormatted(startDate: Date) {
   }
 }
 download1(data: InternalApplicantByPosition) {
-  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId1, data.employeeName + ' letter1');
+    this.internalVacancyService.getFileNameToDownload(data.vacancyId1, data.employeeId)
+       .subscribe(name => {
+        console.log(name);
+        this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId1, name);
+      });
 }
 download2(data: InternalApplicantByPosition) {
-  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId2, data.employeeName + ' letter2');
+  this.internalVacancyService.getFileNameToDownload(data.vacancyId2, data.employeeId)
+  .subscribe(name => {
+   console.log(name);
+   this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId2, name);
+ });
 }
 download3(data: InternalApplicantByPosition) {
-  this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId3, data.employeeName + ' letter3');
+  this.internalVacancyService.getFileNameToDownload(data.vacancyId3, data.employeeId)
+  .subscribe(name => {
+   console.log(name);
+   this.internalVacancyService.downloadFile(data.employeeId, data.vacancyId3, name);
+ });
 }
 
 onSort() {

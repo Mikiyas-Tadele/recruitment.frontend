@@ -31,6 +31,7 @@ import { InternalVacancyComponent } from './internal-vacancy/internal-vacancy.co
 import { InternalVacancyFormComponent } from './internal-vacancy/internal-vacancy-form/internal-vacancy-form.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
+
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
     UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent,
