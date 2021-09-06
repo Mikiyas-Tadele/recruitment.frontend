@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
     pushRightClass: string;
     isHR = false;
     isPlacement = false;
+    isPlacement2 = false;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
@@ -43,10 +44,17 @@ export class SidebarComponent implements OnInit {
         if (role == 'ROLE_ADMIN') {
              this.isHR = true;
              this.isPlacement = false;
+             this.isPlacement2 = false;
         // tslint:disable-next-line:triple-equals
         } else if (role == 'ROLE_PLACEMENT') {
             this.isHR = false;
             this.isPlacement = true;
+            this.isPlacement2 = false;
+        // tslint:disable-next-line:triple-equals
+        } else if (role == 'ROLE_PLACEMENT2') {
+            this.isHR = false;
+            this.isPlacement = false;
+            this.isPlacement2 = true;
         }
     }
 

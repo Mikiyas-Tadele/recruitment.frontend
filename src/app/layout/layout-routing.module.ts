@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InternalApplicantByPosition } from '../models/internal.applicant.by.position';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
+import { InternalApplicantsByNonManagerialPositionComponent } from './internal-applicants-by-non-managerial-position/internal-applicants-by-non-managerial-position.component';
 import { InternalApplicantsByPositionComponent } from './internal-applicants-by-position/internal-applicants-by-position.component';
+import { InternalNonManagerialPositionByApplicantComponent } from './internal-non-managerial-position-by-applicant/internal-non-managerial-position-by-applicant.component';
 import { InternalPositionByApplicantComponent } from './internal-position-by-applicant/internal-position-by-applicant.component';
 import { LayoutComponent } from './layout.component';
 import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/internal-applicants/internal-applicants.component';
@@ -25,6 +27,8 @@ const routes: Routes = [
             {path: 'appliedInternalPersonel/:id', component: InternalApplicantsComponent },
             {path: 'internalApplicantByPosition', component: InternalApplicantsByPositionComponent},
             {path: 'internalPositionByApplicant', component: InternalPositionByApplicantComponent},
+            {path: 'internalApplicantByNonManagerialPosition', component: InternalApplicantsByNonManagerialPositionComponent},
+            {path: 'internalNonManagerialPositionByApplicant', component: InternalNonManagerialPositionByApplicantComponent},
             { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }

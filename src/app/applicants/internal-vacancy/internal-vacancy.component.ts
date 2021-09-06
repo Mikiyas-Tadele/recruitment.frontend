@@ -31,6 +31,9 @@ export class InternalVacancyComponent implements OnInit {
   selectedVp: any;
   selectedDirectorate: any;
   selectedDDirectorate: any;
+  selectedPosition = 'manager';
+  wunits: any = [];
+  wunit: any;
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
      private messageService: MessageService,
@@ -42,13 +45,16 @@ export class InternalVacancyComponent implements OnInit {
    this.internalVacancyService.getEmployeeInfo(this.tokenStorage.getUserName()).subscribe(res => {
      this.employeeinfo = res as Employee;
    });
-   this.fillPositions();
   }
 
   private getVacancies() {
    this.internalVacancyService.getAllInternalVacancies().subscribe(res => {
      this.vacancies = res as InternalVacancyModel[];
+     this.positions = res as InternalVacancyModel[];
+     this.vacancies = this.vacancies.filter(d => d.parent != null);
      this.vacanciesUnfiltered = this.vacancies;
+     this.fillPositions();
+     this.fillWorkunits();
    });
  }
 
@@ -59,11 +65,14 @@ apply(data: InternalVacancyModel) {
           return data.id !== d.id;
       });
       }
+      if (data.managerial === 1) {
       if (this.uploadedFilesForVacancy.has(data.id)) {
       this.applies.push(data);
       this.messageService.add({severity: 'success', summary: 'Application', detail: 'The position is added to yours application list!'});
       } else {
         this.messageService.add({severity: 'error', summary: 'Upload File', detail: 'Please Attach the file first before applying'});
+      }} else {
+        this.applies.push(data);
       }
     } else {
       this.messageService.add({
@@ -90,8 +99,8 @@ goToView(data: InternalVacancyModel) {
 }
 
 submit() {
-  console.log(this.uploadedFilesForVacancy.entries());
-  if (this.uploadedFilesForVacancy.size === 3) {
+  console.log(this.applies);
+  if (this.applies.length === 3) {
     this.confirmMessage.confirm({
       message: 'You have Selected and uploaded a letter for three positions. Are you sure you want to submit the application?',
       accept: () => {
@@ -120,15 +129,23 @@ submit() {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'You have to apply for Three Positions before submitting the form!',
+      detail: 'You have to apply for Three Positions before submitting the application!',
   });
   }
 }
 upload(event: any, form: any, data: InternalVacancyModel) {
+         if (this.uploadedFilesForVacancy.size < 3) {
          this.uploadedFilesForVacancy.set(data.id, event.files[0]);
          this.messageService.add({severity: 'success', summary: 'Upload File',
         detail: event.files[0].name + ' File Successfully Uploaded'});
-  form.clear();
+         } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Saved',
+            detail: 'You can only apply for three positions!',
+        });
+         }
+        form.clear();
 
 }
  isFileNotUploaded() {
@@ -155,16 +172,14 @@ upload(event: any, form: any, data: InternalVacancyModel) {
  }
 
 fillPositions() {
-  this.internalVacancyService.getAllPositions().subscribe(res => {
-     this.positions = res as InternalManagerialPosition[];
+  console.log(this.positions);
      for (let index = 0; index < this.positions.length; index++) {
        const element = this.positions[index];
        if (element.parent == null) {
-        const q = {label: element.positionName   , value: element.id};
+        const q = {label: element.position   , value: element.id};
         this.vps.push(q);
        }
      }
-  });
 }
 
 fillDirector(event: any) {
@@ -174,7 +189,7 @@ fillDirector(event: any) {
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
     if (element.parent === event.value) {
-      const q = {label: element.positionName   , value: element.id};
+      const q = {label: element.position   , value: element.id};
       this.directorates.push(q);
     }
   }
@@ -187,7 +202,7 @@ fillDDirector(event: any) {
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
     if (element.parent === event.value) {
-      const q = {label: element.positionName   , value: element.id};
+      const q = {label: element.position   , value: element.id};
       this.ddirectorates.push(q);
     }
   }
@@ -199,11 +214,31 @@ fillManager(event: any) {
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
     if (element.parent === event.value) {
-      const q = {label: element.positionName   , value: element.id};
+      const q = {label: element.position   , value: element.id};
       this.managers.push(q);
     }
   }
   this.filter(event.value);
+}
+
+fillNonMangerialPositions() {
+  console.log('radio button ' + this.selectedPosition);
+  if (this.selectedPosition === 'non-manager') {
+     this.vacancies = this.vacanciesUnfiltered.filter(d => d.managerial === 0);
+  } else {
+    this.vacancies = this.vacanciesUnfiltered.filter(d => d.managerial === 1);
+  }
+}
+
+fillWorkunits() {
+  this.wunits = [];
+  for (let index = 0; index < this.positions.length; index++) {
+    const element = this.positions[index];
+    if (element.position.startsWith('Manager,')) {
+      const q = {label: element.position.replace('Manager,', '').trim()   , value: element.id};
+      this.wunits.push(q);
+    }
+  }
 }
 
 fileName(vacancy: InternalVacancyModel) {
@@ -215,12 +250,18 @@ filter(parentId: number) {
      return data.parent === parentId;
   });
 }
+filterWU(event: any) {
+  this.vacancies = this.vacanciesUnfiltered.filter(data => {
+    return data.parent === event.value;
+ });
+}
 
 resetFilter() {
   this.vacancies = this.vacanciesUnfiltered;
   this.selectedVp = null;
   this.selectedDDirectorate = null;
   this.selectedDirectorate = null;
+  this.wunit = null;
 }
 isApplied(vacancy: InternalVacancyModel) {
    if (this.applies.includes(vacancy)) {

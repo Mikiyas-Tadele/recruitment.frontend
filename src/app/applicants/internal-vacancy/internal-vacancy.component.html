@@ -11,18 +11,32 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 <p-toast [style]="{marginTop: '100px'}"></p-toast>
 <div class="spacehlder"></div>
-<p-panel header="Search Panel" [toggleable]="true">
+<p-panel [toggleable]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-2">
+                Search Panel
+            </div>
+          <div class="col-sm-3">
+            <p-radioButton name="position" value="manager" [(ngModel)]="selectedPosition" label="Managerial Positions" (click)="fillNonMangerialPositions()"></p-radioButton>
+          </div>
+          <div class="col-sm3">
+            <p-radioButton name="position" value="non-manager" [(ngModel)]="selectedPosition" label="Non-Managerial Positions" (click)="fillNonMangerialPositions()"></p-radioButton>
+          </div>
+        </div>
+    </p-header>
+    <div *ngIf="selectedPosition==='manager'">
     <div class="row">
         <div class="col-sm-6">
-            <p-dropdown [options]="vps" [showClear]="true" [(ngModel)]="selectedVp" [filter]="true" placeholder="Select Cluster" (onChange)="fillDirector($event)"></p-dropdown>
+            <p-dropdown [options]="vps"  [(ngModel)]="selectedVp" [filter]="true" placeholder="Select Cluster" (onChange)="fillDirector($event)"></p-dropdown>
         </div>
         <div class="col-sm-6">
-            <p-dropdown [options]="directorates" [showClear]="true"  [(ngModel)]="selectedDirectorate" [filter]="true" placeholder="Select Directorate" (onChange)="fillDDirector($event)"></p-dropdown>
+            <p-dropdown [options]="directorates"   [(ngModel)]="selectedDirectorate" [filter]="true" placeholder="Select Directorate" (onChange)="fillDDirector($event)"></p-dropdown>
         </div>
     </div><br> 
        <div class="row">
         <div class="col-sm-6">
-            <p-dropdown [options]="ddirectorates"  [showClear]="true" [(ngModel)]="selectedDDirectorate" [filter]="true" 
+            <p-dropdown [options]="ddirectorates"   [(ngModel)]="selectedDDirectorate" [filter]="true" 
             placeholder="Select Deputy Directorate" (onChange)="fillManager($event)"></p-dropdown>
         </div>
         <div class="col-sm-6">
@@ -30,7 +44,18 @@
             <!-- <p-dropdown [options]="managers" [(ngModel)]="selectedManager" [filter]="true" placeholder="Select Manager"></p-dropdown> -->
         </div>
         </div><br>
-
+    </div>
+    <div *ngIf="selectedPosition==='non-manager'">
+        <div class="row">
+        <div class="col-sm-6">
+            <p-dropdown [options]="wunits"  [(ngModel)]="wunit" [filter]="true" placeholder="Select Work Units" (onChange)="filterWU($event)"></p-dropdown>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-success btn-round" (click)="resetFilter()">Reset Filter</button><br>
+            <!-- <p-dropdown [options]="managers" [(ngModel)]="selectedManager" [filter]="true" placeholder="Select Manager"></p-dropdown> -->
+        </div>
+        </div>
+    </div>
 </p-panel>
 <br>
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="6" #dv filterBy="position"  
@@ -46,7 +71,7 @@
            
                 <div class="card card-default mb-3">
                     <div class="card-header">
-                        <h4 class="text-success"><i class="fa fa-bell fa-fw text-success"></i> {{vacancy.position}}</h4>
+                        <h4 class="text-success"><i class="fa fa-info-circle fa-fw text-success"></i> {{vacancy.position}}</h4>
                     </div>
                     <div class="card-body">
                         <div class="timeline-panel">
@@ -62,7 +87,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p-fileUpload  #form mode="basic"  accept=".doc, .docx, .pdf"  maxFileSize="20000" 
+                        <p-fileUpload  *ngIf="vacancy.managerial" #form mode="basic"  accept=".doc, .docx, .pdf"  maxFileSize="20000" 
                         (uploadHandler)="upload($event,form,vacancy)" customUpload="true"
                          [auto]="true" chooseLabel="Attach File" (onSelect)="validateFileSize($event, form.maxFileSize)"></p-fileUpload>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">{{isApplied(vacancy)?'Applied':'Apply'}}</button>&nbsp;&nbsp;&nbsp;

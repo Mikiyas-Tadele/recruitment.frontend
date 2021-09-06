@@ -8,4 +8,5 @@ export class InternalVacancyModel {
     postDate: Date;
     endDate: Date;
     parent: number;
+    managerial: number;
 }

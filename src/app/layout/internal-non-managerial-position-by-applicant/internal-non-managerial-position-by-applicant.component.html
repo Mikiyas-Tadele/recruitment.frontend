@@ -1,0 +1,28 @@
+<div style="margin-top: 5%;">
+  <p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true" sortField="fullName" sortMode="single" (onSort)="onSort()">
+    <ng-template pTemplate="caption">
+      <div class="ui-helper-clearfix" style="text-align: left">
+        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+    </div>
+      <h5>Development Bank of Ethiopia<br>
+       </h5>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Position</th>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
+        <tr>
+            <td>{{appliedPersonel.position}}</td>
+            <td>{{appliedPersonel.employeeId}}</td>
+            <td>{{appliedPersonel.employeeName}}</td>
+          </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+    </ng-template>
+  </p-table>
+  </div>
+  

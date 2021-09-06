@@ -17,6 +17,8 @@ export class InternalVacancyService {
     private readonly STORE = '/application/internal-application-store?vacancyId=';
     private readonly INTERNAL_APPLICANT_BY_POSITION = '/application/internalApplicantsByPosition';
     private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
+    private readonly INTERNAL_APPLICANT_BY_NON_MANAGERIAL_POSITION = '/application/internalApplicantsByNonManagerPosition';
+    private readonly INTERNAL_NON_MANAGERIAL_POSITION_BY_APPLICANT = '/application/internalNonManagerPositionByApplicant';
     private readonly EMPLOYEE_INFO = '/application/employeeInfo';
     private readonly FILE_TO_DOWNLOAD = '/application/fileNameToDownload';
     private readonly MANAGERIAL_POSITIONS = '/vacancy/all-positions';
@@ -93,12 +95,26 @@ export class InternalVacancyService {
     );
     }
 
-    getInternalPositionByApplicant() {
+    getInternalNonManagerialPositionByApplicant() {
       return this.repoService.sendRequest(
         'GET',
-        this.baseUrl + this.INTERNAL_POSITION_BY_APPLICANT
+        this.baseUrl + this.INTERNAL_NON_MANAGERIAL_POSITION_BY_APPLICANT
     );
     }
+
+    getInternalApplicantsByNonManagerialPosition() {
+        return this.repoService.sendRequest(
+          'GET',
+          this.baseUrl + this.INTERNAL_APPLICANT_BY_NON_MANAGERIAL_POSITION
+      );
+      }
+
+      getInternalPositionByApplicant() {
+        return this.repoService.sendRequest(
+          'GET',
+          this.baseUrl + this.INTERNAL_POSITION_BY_APPLICANT
+      );
+      }
 
     getEmployeeInfo(username: string) {
         return this.repoService.sendRequest(

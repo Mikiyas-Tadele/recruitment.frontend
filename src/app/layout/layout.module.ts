@@ -35,6 +35,8 @@ import { InternalVacancyFormComponent } from './post-vacancy/internal-vacancies/
 import { InternalApplicantsComponent } from './post-vacancy/internal-vacancies/internal-applicants/internal-applicants.component';
 import { InternalApplicantsByPositionComponent } from './internal-applicants-by-position/internal-applicants-by-position.component';
 import { InternalPositionByApplicantComponent } from './internal-position-by-applicant/internal-position-by-applicant.component';
+import { InternalApplicantsByNonManagerialPositionComponent } from './internal-applicants-by-non-managerial-position/internal-applicants-by-non-managerial-position.component';
+import { InternalNonManagerialPositionByApplicantComponent } from './internal-non-managerial-position-by-applicant/internal-non-managerial-position-by-applicant.component';
 
 
 @NgModule({
@@ -67,7 +69,7 @@ import { InternalPositionByApplicantComponent } from './internal-position-by-app
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
-         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent, InternalApplicantsByPositionComponent, InternalPositionByApplicantComponent],
+         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent, InternalApplicantsByPositionComponent, InternalPositionByApplicantComponent, InternalApplicantsByNonManagerialPositionComponent, InternalNonManagerialPositionByApplicantComponent],
     providers: [MessageService,
         [AuthGuard,
             {

@@ -7,4 +7,7 @@ export class InternalApplicantByPosition {
     vacancyId1: number;
     vacancyId2: number;
     vacancyId3: number;
+    managerial: number;
+    manageria2: number;
+    manageria3: number;
 }

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     session: any;
     private readonly ADMIN = 'ROLE_ADMIN';
     private readonly PLACEMENT = 'ROLE_PLACEMENT';
+    private readonly PLACEMENT2 = 'ROLE_PLACEMENT2';
     private readonly APPLICANT = 'ROLE_APPLICANT';
 
     constructor(
@@ -56,6 +57,8 @@ get f() {
                 if (this.token.getAuthorities() === this.ADMIN) {
                   this.router.navigate(['admin/dashboard']);
                 } else if (this.token.getAuthorities() === this.PLACEMENT) {
+                  this.router.navigate(['admin/internalApplicantByPosition']);
+                } else if (this.token.getAuthorities() === this.PLACEMENT2) {
                   this.router.navigate(['admin/internalApplicantByPosition']);
                 } else if (data['staff']) {
                   this.router.navigate(['/Ivacancies']);

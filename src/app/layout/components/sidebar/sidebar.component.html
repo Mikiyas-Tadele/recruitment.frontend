@@ -16,6 +16,14 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Report Two'}}</span>
         </a>
+        <a *ngIf="!isHR && isPlacement2" routerLink="/admin/internalApplicantByNonManagerialPosition/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Report One'}}</span>
+        </a>
+        <a *ngIf="!isHR && isPlacement2" routerLink="/admin/internalNonManagerialPositionByApplicant/" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>{{ 'Report Two'}}</span>
+        </a>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
         <span>{{ 'Collapse Sidebar'}}</span>
