@@ -59,7 +59,7 @@ get f() {
                 } else if (this.token.getAuthorities() === this.PLACEMENT) {
                   this.router.navigate(['admin/internalApplicantByPosition']);
                 } else if (this.token.getAuthorities() === this.PLACEMENT2) {
-                  this.router.navigate(['admin/internalApplicantByPosition']);
+                  this.router.navigate(['admin/internalApplicantByNonManagerialPosition']);
                 } else if (data['staff']) {
                   this.router.navigate(['/Ivacancies']);
                 } else {

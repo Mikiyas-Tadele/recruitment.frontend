@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p-fileUpload  *ngIf="vacancy.managerial" #form mode="basic"  accept=".doc, .docx, .pdf"  maxFileSize="20000" 
+                        <p-fileUpload  *ngIf="vacancy.managerial" #form mode="basic"  accept="image/*,.pdf"  maxFileSize="50000000" 
                         (uploadHandler)="upload($event,form,vacancy)" customUpload="true"
                          [auto]="true" chooseLabel="Attach File" (onSelect)="validateFileSize($event, form.maxFileSize)"></p-fileUpload>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">{{isApplied(vacancy)?'Applied':'Apply'}}</button>&nbsp;&nbsp;&nbsp;

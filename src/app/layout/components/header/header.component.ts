@@ -58,4 +58,7 @@ export class HeaderComponent implements OnInit {
     changeLang(language: string) {
         this.translate.use(language);
     }
+    displayProfile() {
+        this.router.navigate(['/admin/userProfile/' + this.userName]);
+    }
 }

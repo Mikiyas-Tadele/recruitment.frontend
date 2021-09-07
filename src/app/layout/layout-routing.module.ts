@@ -12,6 +12,7 @@ import { InternalVacanciesComponent } from './post-vacancy/internal-vacancies/in
 import { InternalVacancyFormComponent } from './post-vacancy/internal-vacancies/internal-vacancy-form/internal-vacancy-form.component';
 import { PostVacancyComponent } from './post-vacancy/post-vacancy.component';
 import { VacancyDetailComponent } from './post-vacancy/vacancy-detail/vacancy-detail.component';
+import { UserAccountProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,7 @@ const routes: Routes = [
             {path: 'internalPositionByApplicant', component: InternalPositionByApplicantComponent},
             {path: 'internalApplicantByNonManagerialPosition', component: InternalApplicantsByNonManagerialPositionComponent},
             {path: 'internalNonManagerialPositionByApplicant', component: InternalNonManagerialPositionByApplicantComponent},
+            {path: 'userProfile/:username', component: UserAccountProfileComponent },
             { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
         ]
     }

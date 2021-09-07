@@ -1,0 +1,36 @@
+<div style="margin-top: 5%;">
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<form role="form" [formGroup]="userForm" (ngSubmit)="saveUser(userForm)">
+  <div class="card">
+    <div class="card-header">
+      User Account Information
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="col form-group">
+          <label for="fname">Full Name</label>
+          <input class="form-control" id="fname" formControlName="fullName" />
+        </div>
+        <div class="col form-group">
+          <label for="uname">Username</label>
+          <input id="uname" formControlName="username" class="form-control" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password" />
+        </div>
+        <div class="col form-group">
+          <label for="password">Confirm Password</label>
+          <input type="password" class="form-control" id="password" formControlName="conPassword" />
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-success">Save Changes</button>&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="back()">Back</button>
+    </div>
+  </div>
+</form>
+</div>

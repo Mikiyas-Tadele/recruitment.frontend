@@ -14,6 +14,7 @@ export class InternalNonManagerialPositionByApplicantComponent implements OnInit
 
   appliedPersonels: any = [];
   vacancyName: string;
+  appliedPersonelsCols: any = [];
   constructor(private route: ActivatedRoute,
     private internalVacancyService: InternalVacancyService, private excelService: ExcelExportService) { }
 
@@ -21,6 +22,13 @@ export class InternalNonManagerialPositionByApplicantComponent implements OnInit
     this.internalVacancyService.getInternalNonManagerialPositionByApplicant().subscribe(res => {
       this.appliedPersonels = res;
     });
+    this.appliedPersonelsCols = [
+      {field: 'employeeId', header: 'Employee ID'},
+      {field: 'employeeName', header: 'Employee Name'},
+      {field: 'positionOne', header: 'Position One'},
+      {field: 'positionTwo', header: 'Position Two'},
+      {field: 'positionThree', header: 'Position Three'}
+    ];
   }
 
   exportExcel() {

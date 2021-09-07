@@ -37,6 +37,7 @@ import { InternalApplicantsByPositionComponent } from './internal-applicants-by-
 import { InternalPositionByApplicantComponent } from './internal-position-by-applicant/internal-position-by-applicant.component';
 import { InternalApplicantsByNonManagerialPositionComponent } from './internal-applicants-by-non-managerial-position/internal-applicants-by-non-managerial-position.component';
 import { InternalNonManagerialPositionByApplicantComponent } from './internal-non-managerial-position-by-applicant/internal-non-managerial-position-by-applicant.component';
+import { UserAccountProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -69,7 +70,12 @@ import { InternalNonManagerialPositionByApplicantComponent } from './internal-no
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
-         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent, InternalVacanciesComponent, InternalVacancyFormComponent, InternalApplicantsComponent, InternalApplicantsByPositionComponent, InternalPositionByApplicantComponent, InternalApplicantsByNonManagerialPositionComponent, InternalNonManagerialPositionByApplicantComponent],
+         PostVacancyComponent, VacancyDetailComponent, AppliedPersonelComponent,
+         InternalVacanciesComponent, InternalVacancyFormComponent,
+         InternalApplicantsComponent, InternalApplicantsByPositionComponent,
+          InternalPositionByApplicantComponent,
+          InternalApplicantsByNonManagerialPositionComponent,
+          InternalNonManagerialPositionByApplicantComponent, UserAccountProfileComponent],
     providers: [MessageService,
         [AuthGuard,
             {

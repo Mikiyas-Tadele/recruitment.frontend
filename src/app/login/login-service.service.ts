@@ -51,6 +51,14 @@ export class LoginService {
     return this.http.get(this.baseUrl + '/auth/verify/' + token);
   }
 
+  getUserProfile(userName: string) {
+    return this.http.get(this.baseUrl + '/auth/userGivenUsername/' + userName);
+  }
+
+  changeProfileInfo(data: UserModel) {
+    return this.http.post(this.baseUrl + '/auth/create-user', data);
+  }
+
 
 
 }
