@@ -23,7 +23,6 @@ export class UserAccountProfileComponent implements OnInit {
   ngOnInit() {
     this.resetUserForm();
     const username = this.route.snapshot.params['username'];
-    console.log(username);
     this.userService.getUserProfile(username)
     .subscribe(res => {
       this.user = res as UserModel;
@@ -53,9 +52,9 @@ export class UserAccountProfileComponent implements OnInit {
     this.userForm = new FormGroup({
       id: new FormControl(''),
       fullName: new FormControl(''),
-      username: new FormControl(''),
+      email: new FormControl(''),
       password: new FormControl(''),
-      conPassword: new FormControl('')
+      confirmPassword: new FormControl('')
     });
   }
 
@@ -63,9 +62,9 @@ export class UserAccountProfileComponent implements OnInit {
     this.userForm.setValue({
       id: user.id,
       fullName: user.fullName,
-      username: user.email,
+      email: user.email,
       password: user.password,
-      conPassword: null
+      confirmPassword: null
     });
   }
 

@@ -102,7 +102,7 @@ submit() {
   console.log(this.applies);
   if (this.applies.length === 3) {
     this.confirmMessage.confirm({
-      message: 'You have Selected and uploaded a letter for three positions. Are you sure you want to submit the application?',
+      message: 'You have Selected and/or uploaded a letter for three positions. Are you sure you want to submit the application?',
       accept: () => {
          this.internalVacancyService.applyForInternalPosition(this.applies.map(d => {
            return d.id;
@@ -116,7 +116,7 @@ submit() {
           this.messageService.add({
             severity: 'success',
             summary: 'Application',
-            detail: 'You have successfuly applied for the position you selected',
+            detail: 'A confirmation email is sent to your DBE mail, indicating that you have successfuly applied',
         });
         setTimeout(() => {
           this.tokenStorage.signOut();
