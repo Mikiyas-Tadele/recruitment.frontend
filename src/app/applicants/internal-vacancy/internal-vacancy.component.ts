@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { OverlayPanel } from 'primeng/overlaypanel';
 import { timeout } from 'rxjs/operators';
 import { InternalVacancyService } from 'src/app/layout/post-vacancy/internal-vacancies/internal-vacancy.service';
 import { Employee } from 'src/app/models/employee';
@@ -32,8 +33,12 @@ export class InternalVacancyComponent implements OnInit {
   selectedDirectorate: any;
   selectedDDirectorate: any;
   selectedPosition = 'manager';
+  selectedDistrict: any;
   wunits: any = [];
   wunit: any;
+  fieldOfStudy: any;
+  educationLevel: any;
+
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
      private messageService: MessageService,
@@ -52,7 +57,7 @@ export class InternalVacancyComponent implements OnInit {
      this.vacancies = res as InternalVacancyModel[];
      this.positions = res as InternalVacancyModel[];
      this.vacancies = this.vacancies.filter(d => d.parent != null);
-     this.vacanciesUnfiltered = this.vacancies;
+     this.vacanciesUnfiltered = Object.assign([], this.vacancies);
      this.fillPositions();
      this.fillWorkunits();
    });
@@ -113,6 +118,7 @@ submit() {
                this.internalVacancyService.storeInternalApplication(formData, vacancyId).subscribe(f => {
                });
            });
+           this.internalVacancyService.closeInternalApplication().subscribe(c => {});
           this.messageService.add({
             severity: 'success',
             summary: 'Application',
@@ -189,8 +195,14 @@ fillDirector(event: any) {
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
     if (element.parent === event.value) {
+      const p = element.position as string;
+      if (p.match(/Director/)) {
       const q = {label: element.position   , value: element.id};
       this.directorates.push(q);
+     } else {
+      const q = {label: element.position   , value: element.id};
+      this.districts.push(q);
+     }
     }
   }
   this.filter(event.value);
@@ -222,7 +234,6 @@ fillManager(event: any) {
 }
 
 fillNonMangerialPositions() {
-  console.log('radio button ' + this.selectedPosition);
   if (this.selectedPosition === 'non-manager') {
      this.vacancies = this.vacanciesUnfiltered.filter(d => d.managerial === 0);
   } else {
@@ -234,8 +245,8 @@ fillWorkunits() {
   this.wunits = [];
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
-    if (element.position.startsWith('Manager,')) {
-      const q = {label: element.position.replace('Manager,', '').trim()   , value: element.id};
+    if (element.position.startsWith('Director,')) {
+      const q = {label: element.position, value: element.id};
       this.wunits.push(q);
     }
   }
@@ -267,6 +278,15 @@ isApplied(vacancy: InternalVacancyModel) {
    if (this.applies.includes(vacancy)) {
       return true;
    }
+}
+displayDetail(event: any, doc: InternalVacancyModel, overlaypanel: OverlayPanel) {
+    this.fieldOfStudy = doc.fieldOfStudy;
+    this.educationLevel = doc.educationLevel;
+    overlaypanel.toggle(event);
+}
+
+fillDivisionsAndBranches(event: any) {
+  this.filter(event.value);
 }
 
  }

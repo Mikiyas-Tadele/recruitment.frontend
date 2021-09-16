@@ -9,4 +9,8 @@ export class InternalVacancyModel {
     endDate: Date;
     parent: number;
     managerial: number;
+    fieldOfStudy: string;
+    educationLevel: string;
+    location: string;
+    cluster: string;
 }

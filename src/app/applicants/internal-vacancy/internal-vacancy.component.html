@@ -40,10 +40,16 @@
             placeholder="Select Deputy Directorate" (onChange)="fillManager($event)"></p-dropdown>
         </div>
         <div class="col-sm-6">
-            <button type="button" class="btn btn-success btn-round" (click)="resetFilter()">Reset Filter</button><br>
-            <!-- <p-dropdown [options]="managers" [(ngModel)]="selectedManager" [filter]="true" placeholder="Select Manager"></p-dropdown> -->
+            <p-dropdown [options]="districts"   [(ngModel)]="selectedDistrict" [filter]="true" 
+            placeholder="Select  Districts" (onChange)="fillDivisionsAndBranches($event)"></p-dropdown>
         </div>
         </div><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-success btn-round" (click)="resetFilter()">Reset Filter</button><br>
+                <!-- <p-dropdown [options]="managers" [(ngModel)]="selectedManager" [filter]="true" placeholder="Select Manager"></p-dropdown> -->
+            </div>
+        </div>
     </div>
     <div *ngIf="selectedPosition==='non-manager'">
         <div class="row">
@@ -76,13 +82,19 @@
                     <div class="card-body">
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h5 class="timeline-title">{{vacancy.qualifications}}</h5>
-                                <p><small class="text-muted"><i class="fa fa-clock-o"></i>2 days left</small>
+                                <h5 class="timeline-title">Job Grade: {{vacancy.jobGrade}}</h5>
+                                <p *ngIf="vacancy.managerial"><small class="text-muted">Place: {{vacancy.location}}</small>
+                                </p>
+                                <p *ngIf="!vacancy.managerial"><small class="text-muted">Number of Vacant Posts:{{vacancy.noRequired}}</small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <p>
-                                </p>
+                                <p *ngIf="vacancy.managerial">
+                                Cluster: {{vacancy.cluster}} &nbsp;&nbsp;<button class="btn btn-success btn-small" (click)="displayDetail($event,vacancy,op3)">More Info</button>
+                              </p>
+                              <p *ngIf="!vacancy.managerial">
+                                Place of work: {{vacancy.placementOfWork}} &nbsp;&nbsp;<button class="btn btn-success btn-small" (click)="displayDetail($event,vacancy,op3)">More Info</button>
+                              </p>
                             </div>
                         </div>
                     </div>
@@ -99,3 +111,9 @@
     </ng-template>
 </div>
 </p-dataView>
+<p-overlayPanel  appendTo="body" #op3>
+    <h5>Filed of study</h5>
+    <p>{{fieldOfStudy}}</p>
+    <h5>Educational Level & General Experience</h5>
+    <p>{{educationLevel}}</p>
+</p-overlayPanel>

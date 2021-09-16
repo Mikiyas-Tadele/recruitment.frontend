@@ -31,6 +31,7 @@ import { InternalVacancyComponent } from './internal-vacancy/internal-vacancy.co
 import { InternalVacancyFormComponent } from './internal-vacancy/internal-vacancy-form/internal-vacancy-form.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     TableModule,
     CalendarModule,
     ConfirmDialogModule,
-    RadioButtonModule
+    RadioButtonModule,
+    OverlayPanelModule
   ],
   providers: [MessageService, ConfirmationService]
 })

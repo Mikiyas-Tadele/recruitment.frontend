@@ -10,11 +10,11 @@
   </button>
     <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
         <ul class="navbar-nav ml-auto">
-            <li *ngIf="!isStaff" class="nav-item d-none d-xl-block">
+            <!-- <li *ngIf="!isStaff" class="nav-item d-none d-xl-block">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/help']">
                   {{ 'Help'}}
               </a>
-            </li> &nbsp;&nbsp;
+            </li> &nbsp;&nbsp; -->
             <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/login']">
                   {{ 'Log In'}}
@@ -25,11 +25,11 @@
                   {{ 'Register'}}
               </a>
             </li> &nbsp;&nbsp;
-            <li class="nav-item" *ngIf="isNotLoggedIn">
+            <!-- <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/login']">
                   {{ 'Internal Vacancy'}}
               </a>
-            </li> &nbsp;&nbsp;
+            </li> &nbsp;&nbsp; -->
             <li class="nav-item" *ngIf="!isStaff && displayUserInfo">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/appliedJobs']">
                   {{ 'Applied Jobs'}}
