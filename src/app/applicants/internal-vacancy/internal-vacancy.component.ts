@@ -7,6 +7,7 @@ import { InternalVacancyService } from 'src/app/layout/post-vacancy/internal-vac
 import { Employee } from 'src/app/models/employee';
 import { InternalManagerialPosition } from 'src/app/models/internal.managerial.positions';
 import { InternalVacancyModel } from 'src/app/models/internal.vacancy.model';
+import { MultipartFileModel } from 'src/app/models/multipart.file.model';
 import { TokenStorage } from 'src/app/shared/guard/token.storage';
 
 @Component({
@@ -38,6 +39,7 @@ export class InternalVacancyComponent implements OnInit {
   wunit: any;
   fieldOfStudy: any;
   educationLevel: any;
+  attachementLabel = 'Attach File';
 
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
@@ -104,7 +106,6 @@ goToView(data: InternalVacancyModel) {
 }
 
 submit() {
-  console.log(this.applies);
   if (this.applies.length === 3) {
     this.confirmMessage.confirm({
       message: 'You have Selected and/or uploaded a letter for three positions. Are you sure you want to submit the application?',
@@ -115,20 +116,28 @@ submit() {
            this.uploadedFilesForVacancy.forEach((file: any, vacancyId: number) => {
             const formData: FormData = new FormData();
             formData.append('file', file, file.name);
-               this.internalVacancyService.storeInternalApplication(formData, vacancyId).subscribe(f => {
-               });
+            this.internalVacancyService.storeInternalApplication(formData, vacancyId).subscribe(f => {
+            });
            });
-           this.internalVacancyService.closeInternalApplication().subscribe(c => {});
           this.messageService.add({
             severity: 'success',
             summary: 'Application',
             detail: 'A confirmation email is sent to your DBE mail, indicating that you have successfuly applied',
         });
-        setTimeout(() => {
-          this.tokenStorage.signOut();
-          this.router.navigate(['/login']);
-        }, 2000);
-         });
+         }, (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Application',
+            detail: 'There is an error in your application please refresh and try again',
+        });
+         }, () => {
+            this.internalVacancyService.closeInternalApplication().subscribe(c => {
+              this.router.navigate(['/login']);
+              this.tokenStorage.signOut();
+            });
+         }
+
+         );
       }
   });
   } else {
@@ -144,6 +153,7 @@ upload(event: any, form: any, data: InternalVacancyModel) {
          this.uploadedFilesForVacancy.set(data.id, event.files[0]);
          this.messageService.add({severity: 'success', summary: 'Upload File',
         detail: event.files[0].name + ' File Successfully Uploaded'});
+        this.attachementLabel = 'Attached';
          } else {
           this.messageService.add({
             severity: 'error',
@@ -156,7 +166,6 @@ upload(event: any, form: any, data: InternalVacancyModel) {
 }
  isFileNotUploaded() {
   this.uploadedFilesForVacancy.forEach((file: any, vacancyId: number) => {
-    console.log(Array.isArray(file));
       return Array.isArray(file);
   });
  }
@@ -167,7 +176,6 @@ upload(event: any, form: any, data: InternalVacancyModel) {
     {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', name: 'docx'}
  ];
  const fileType = $event.files[0].type;
- console.log(fileType);
   if ($event.files[0].size > maxFileSize) {
     this.messageService.add({
       severity: 'error',
@@ -178,7 +186,6 @@ upload(event: any, form: any, data: InternalVacancyModel) {
  }
 
 fillPositions() {
-  console.log(this.positions);
      for (let index = 0; index < this.positions.length; index++) {
        const element = this.positions[index];
        if (element.parent == null) {
@@ -209,7 +216,6 @@ fillDirector(event: any) {
 }
 
 fillDDirector(event: any) {
-  console.log(event);
   this.ddirectorates = [];
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
@@ -221,7 +227,6 @@ fillDDirector(event: any) {
   this.filter(event.value);
 }
 fillManager(event: any) {
-  console.log(event);
   this.managers = [];
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
@@ -278,6 +283,13 @@ isApplied(vacancy: InternalVacancyModel) {
    if (this.applies.includes(vacancy)) {
       return true;
    }
+}
+isAttached(vacancy: InternalVacancyModel) {
+  if (this.uploadedFilesForVacancy.has(vacancy.id)) {
+    return 'Attached';
+  } else {
+   return 'Attach File';
+  }
 }
 displayDetail(event: any, doc: InternalVacancyModel, overlaypanel: OverlayPanel) {
     this.fieldOfStudy = doc.fieldOfStudy;

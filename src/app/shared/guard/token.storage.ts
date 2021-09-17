@@ -47,4 +47,12 @@ export class TokenStorage {
   public getStaff() {
     return window.sessionStorage.getItem('staff');
   }
+
+  public getApplied() {
+    return window.sessionStorage.getItem('applied');
+  }
+
+  public setApplied(applied: string) {
+   window.sessionStorage.setItem('applied', applied);
+  }
 }

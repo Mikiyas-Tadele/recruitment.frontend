@@ -51,6 +51,7 @@ get f() {
                 this.token.setUserName(value.username);
                 this.token.setAuthorities(data['authorities'][0].authority);
                 this.token.setStaff(data['staff']);
+                this.token.setApplied(data['applied']);
                 // tslint:disable-next-line:triple-equals
                 if (this.token.getAuthorities() === this.ADMIN) {
                   this.router.navigate(['admin/dashboard']);
@@ -58,8 +59,11 @@ get f() {
                   this.router.navigate(['admin/internalApplicantByPosition']);
                 } else if (this.token.getAuthorities() === this.PLACEMENT2) {
                   this.router.navigate(['admin/internalApplicantByNonManagerialPosition']);
-                } else if (data['staff']) {
+                } else if (data['staff'] && !data['applied']) {
                   this.router.navigate(['/Ivacancies']);
+                } else if (data['staff'] && data['applied']) {
+                  this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Sorry, You have already Applied!'});
+                  this.token.signOut();
                 } else {
                   this.router.navigate([this.returnUrl]);
                 }
