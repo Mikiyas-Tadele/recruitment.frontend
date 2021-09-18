@@ -88,6 +88,7 @@ apply(data: InternalVacancyModel) {
         detail: 'You can only apply for three positions!',
     });
     }
+    console.log(this.applies);
 }
 
 cancel(data: InternalVacancyModel) {
@@ -152,7 +153,7 @@ upload(event: any, form: any, data: InternalVacancyModel) {
          if (this.uploadedFilesForVacancy.size < 3) {
          this.uploadedFilesForVacancy.set(data.id, event.files[0]);
          this.messageService.add({severity: 'success', summary: 'Upload File',
-        detail: event.files[0].name + ' File Successfully Uploaded'});
+         detail: event.files[0].name + ' File Successfully Uploaded'});
         this.attachementLabel = 'Attached';
          } else {
           this.messageService.add({

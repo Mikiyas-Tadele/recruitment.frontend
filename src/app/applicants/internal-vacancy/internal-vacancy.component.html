@@ -37,7 +37,7 @@
        <div class="row">
         <div class="col-sm-6">
             <p-dropdown [options]="ddirectorates"   [(ngModel)]="selectedDDirectorate" [filter]="true" 
-            placeholder="Select Deputy Directorate" (onChange)="fillManager($event)"></p-dropdown>
+            placeholder="Select Division Head" (onChange)="fillManager($event)"></p-dropdown>
         </div>
         <div class="col-sm-6">
             <p-dropdown [options]="districts"   [(ngModel)]="selectedDistrict" [filter]="true" 
@@ -111,7 +111,7 @@
     </ng-template>
 </div>
 </p-dataView>
-<p-overlayPanel  appendTo="body" #op3>
+<p-overlayPanel  appendTo="body" #op3 [style]="{'width':'30%'}">
     <h5>Qualifications</h5>
     <p>{{fieldOfStudy}}</p>
     <h5>Experiences</h5>
