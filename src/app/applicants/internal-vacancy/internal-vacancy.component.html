@@ -1,6 +1,6 @@
 <div class="spacehlder" style="margin-top: 5%;"></div>
 <div *ngIf="employeeinfo" class="row" style="margin-left:2px;">
-   <h5 style="color:#CD9934"><i>{{employeeinfo.name}},&nbsp;&nbsp;{{employeeinfo.position.replace('.', ' of ')}}</i></h5>
+   <h5 style="color:#CD9934"><i>{{employeeinfo.name}}</i></h5>
 </div>
 <div *ngIf="applies.length>0">
     <div style="display: flex; justify-content: center"><h5> Positions Selected</h5></div>
@@ -112,8 +112,8 @@
 </div>
 </p-dataView>
 <p-overlayPanel  appendTo="body" #op3 [style]="{'width':'30%'}">
-    <h5>Qualifications</h5>
+    <h5>Qualification</h5>
     <p>{{fieldOfStudy}}</p>
-    <h5>Experiences</h5>
+    <h5>Experience</h5>
     <p>{{educationLevel}}</p>
 </p-overlayPanel>

@@ -58,7 +58,7 @@ export class InternalVacancyComponent implements OnInit {
    this.internalVacancyService.getAllInternalVacancies().subscribe(res => {
      this.vacancies = res as InternalVacancyModel[];
      this.positions = res as InternalVacancyModel[];
-     this.vacancies = this.vacancies.filter(d => d.parent != null);
+     this.vacancies = this.vacancies.filter(d => d.parent !== 0);
      this.vacanciesUnfiltered = Object.assign([], this.vacancies);
      this.fillPositions();
      this.fillWorkunits();
@@ -189,7 +189,7 @@ upload(event: any, form: any, data: InternalVacancyModel) {
 fillPositions() {
      for (let index = 0; index < this.positions.length; index++) {
        const element = this.positions[index];
-       if (element.parent == null) {
+       if (element.parent === 0) {
         const q = {label: element.position   , value: element.id};
         this.vps.push(q);
        }
@@ -220,7 +220,7 @@ fillDDirector(event: any) {
   this.ddirectorates = [];
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
-    if (element.parent === event.value) {
+    if (element.parent === event.value && this.hasChilds(element)) {
       const q = {label: element.position   , value: element.id};
       this.ddirectorates.push(q);
     }
@@ -251,11 +251,22 @@ fillWorkunits() {
   this.wunits = [];
   for (let index = 0; index < this.positions.length; index++) {
     const element = this.positions[index];
-    if (element.position.startsWith('Director,')) {
-      const q = {label: element.position, value: element.id};
+    const q = {label: element.placementOfWork, value: element.placementOfWork};
+    if (q.label != null && this.ifNotExist(this.wunits, q)) {
       this.wunits.push(q);
     }
   }
+}
+
+ifNotExist(lists: any, o: any) {
+   for (let index = 0; index < this.wunits.length; index++) {
+     const element = this.wunits[index];
+     if (o.label === element.label) {
+       return false;
+     }
+   }
+
+   return true;
 }
 
 fileName(vacancy: InternalVacancyModel) {
@@ -269,7 +280,7 @@ filter(parentId: number) {
 }
 filterWU(event: any) {
   this.vacancies = this.vacanciesUnfiltered.filter(data => {
-    return data.parent === event.value;
+    return data.placementOfWork === event.value;
  });
 }
 
@@ -279,6 +290,7 @@ resetFilter() {
   this.selectedDDirectorate = null;
   this.selectedDirectorate = null;
   this.wunit = null;
+  this.districts = null;
 }
 isApplied(vacancy: InternalVacancyModel) {
    if (this.applies.includes(vacancy)) {
@@ -301,5 +313,13 @@ displayDetail(event: any, doc: InternalVacancyModel, overlaypanel: OverlayPanel)
 fillDivisionsAndBranches(event: any) {
   this.filter(event.value);
 }
+ hasChilds(element: any) {
+   for (let index = 0; index < this.positions.length; index++) {
+       if (element.id === this.positions[index].parent) {
+         return true;
+       }
+   }
+   return false;
+ }
 
  }

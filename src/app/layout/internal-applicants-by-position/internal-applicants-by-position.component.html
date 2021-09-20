@@ -1,5 +1,6 @@
 <div style="margin-top: 5%;">
-<p-table [columns]="appliedPersonelsCols" [value]="appliedPersonels" #dt [responsive]="true" [autoLayout]="true"  sortMode="single" (onSort)="onSort()">
+<p-table [columns]="appliedPersonelsCols" [value]="appliedPersonels" #dt [responsive]="true" 
+[autoLayout]="true"  sortMode="single" (onSort)="onSort()" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     <div class="ui-helper-clearfix" style="text-align: left">
       <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
