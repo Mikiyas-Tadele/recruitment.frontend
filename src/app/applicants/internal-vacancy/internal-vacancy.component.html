@@ -68,7 +68,7 @@
   paginatorPosition="both" emptyMessage="No Vacancy Available!">
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger btn-round" (click)="submit()" style="float: right;">Submit Application</button><br>
+            <button type="button" class="btn btn-danger btn-round" (click)="submit()" style="float: right;" [disabled]='isSubmitted'>Submit Application</button><br>
         </p-header>
         <div class="row">
     <ng-template let-vacancy pTemplate="listItem">

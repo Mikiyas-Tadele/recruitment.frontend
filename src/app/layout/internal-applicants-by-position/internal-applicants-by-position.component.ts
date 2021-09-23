@@ -44,7 +44,7 @@ export class InternalApplicantsByPositionComponent implements OnInit {
        element.positionOne,
        element.positionTwo,
        element.positionThree,
-      element.appliedDate]);
+      this.getDateFormatted(element.appliedDate)]);
     }
     const title = 'Development Bank of Ethiopia';
        const fileName = 'Report ' + Date();
@@ -54,7 +54,7 @@ export class InternalApplicantsByPositionComponent implements OnInit {
 
 getDateFormatted(startDate: Date) {
   if (startDate != null ) {
-     return formatDate(startDate, 'yyyy-MM-dd', 'en');
+     return formatDate(startDate, 'short', 'en');
   }  else {
     return '';
   }

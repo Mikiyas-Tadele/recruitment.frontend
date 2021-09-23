@@ -40,6 +40,7 @@ export class InternalVacancyComponent implements OnInit {
   fieldOfStudy: any;
   educationLevel: any;
   attachementLabel = 'Attach File';
+  isSubmitted = false;
 
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
@@ -107,6 +108,7 @@ goToView(data: InternalVacancyModel) {
 }
 
 submit() {
+  this.isSubmitted = true;
   if (this.applies.length === 3) {
     this.confirmMessage.confirm({
       message: 'You have Selected and/or uploaded a letter for three positions. Are you sure you want to submit the application?',
@@ -131,6 +133,7 @@ submit() {
             summary: 'Application',
             detail: 'There is an error in your application please refresh and try again',
         });
+          this.isSubmitted = false;
          }, () => {
             this.internalVacancyService.closeInternalApplication().subscribe(c => {
               this.router.navigate(['/login']);
@@ -147,6 +150,7 @@ submit() {
       summary: 'Error',
       detail: 'You have to apply for Three Positions before submitting the application!',
   });
+  this.isSubmitted = false;
   }
 }
 upload(event: any, form: any, data: InternalVacancyModel) {

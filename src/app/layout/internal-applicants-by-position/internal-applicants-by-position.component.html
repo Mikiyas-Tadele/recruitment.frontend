@@ -19,6 +19,10 @@
           <th>Position One</th>
           <th>Position Two</th>
           <th>Position Three</th>
+          <th [pSortableColumn]="'appliedDate'">Applied Date
+            <p-sortIcon [field]="'appliedDate'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+
+          </th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
