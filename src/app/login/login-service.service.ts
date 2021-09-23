@@ -59,6 +59,13 @@ export class LoginService {
     return this.http.post(this.baseUrl + '/auth/create-user', data);
   }
 
+  resetPassword(id: any, key: any) {
+    return this.http.get(this.baseUrl + '/auth/reset/' + id + '/' + key);
+  }
+  sendReset(username: any) {
+    return this.http.get(this.baseUrl + '/auth/send-reset/' + username);
+  }
+
 
 
 }

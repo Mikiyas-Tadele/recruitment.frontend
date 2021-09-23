@@ -28,7 +28,8 @@ export class InternalApplicantsByPositionComponent implements OnInit {
       {field: 'employeeName', header: 'Employee Name'},
       {field: 'positionOne', header: 'Position One'},
       {field: 'positionTwo', header: 'Position Two'},
-      {field: 'positionThree', header: 'Position Three'}
+      {field: 'positionThree', header: 'Position Three'},
+      {fiedl: 'appliedDate', header: 'Applied Date'}
     ];
   }
 
@@ -42,7 +43,8 @@ export class InternalApplicantsByPositionComponent implements OnInit {
        element.employeeName,
        element.positionOne,
        element.positionTwo,
-       element.positionThree]);
+       element.positionThree,
+      element.appliedDate]);
     }
     const title = 'Development Bank of Ethiopia';
        const fileName = 'Report ' + Date();

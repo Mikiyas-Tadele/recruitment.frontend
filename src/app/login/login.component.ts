@@ -45,7 +45,7 @@ get f() {
   return this.authenticated.controls;
 }
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
-        this.loginService.login(value.username, value.password).subscribe(
+        this.loginService.login(value.username.toLowerCase(), value.password).subscribe(
             (data) => {
                 this.token.saveToken(data['accessToken']);
                 this.token.setUserName(value.username);
@@ -69,7 +69,7 @@ get f() {
                 }
               },
               error => {
-                this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});
+                this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Wrong username or password'});
               });
     }
 }

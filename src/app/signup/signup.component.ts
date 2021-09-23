@@ -33,17 +33,21 @@ export class SignupComponent implements OnInit {
     onRegister({value, valid}: { value: UserModel, valid: boolean }) {
          this.submitted = true;
         if (valid) {
+            value.email = value.email.toLowerCase();
             this.logiService.registerNewUser(value).subscribe(res => {
                 this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.'});
                  this.route.navigate(['/notification']);
                  this.submitted = false;
             }, error => {
                 this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});
+                this.submitted = false;
             });
         } else if (value.password !== value.confirmPassword) {
             this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Password must match'});
+            this.submitted = false;
         } else {
             this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Make sure all data entered are correct'});
+            this.submitted = false;
         }
 
     }

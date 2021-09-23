@@ -14,6 +14,14 @@ import { EditorModule } from 'primeng/editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationNotificationComponent } from './registration-notification/registration-notification.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { PasswordResetComponent } from './forget-password/password-reset/password-reset.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ResetPasswordComponent } from './forget-password/reset-password/reset-password.component';
 
 // const baseUrl = 'http://localhost:8080/api';
 
@@ -34,9 +42,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         EditorModule,
         NgbModule,
         BsDatepickerModule.forRoot(),
+        MessagesModule,
+    MessageModule,
+    ConfirmDialogModule,
+    ToastModule
 
     ],
-    declarations: [AppComponent, RegistrationNotificationComponent],
+    declarations: [AppComponent, RegistrationNotificationComponent,
+        ForgetPasswordComponent, PasswordResetComponent, ResetPasswordComponent],
     bootstrap: [AppComponent],
     providers: [AuthGuard,
         {
@@ -44,6 +57,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
             useClass: AuthHeaderInterceptor,
             multi: true
           },
-        { provide: 'BASE_API_URL', useValue: baseUrl }],
+        { provide: 'BASE_API_URL', useValue: baseUrl }, MessageService],
 })
 export class AppModule {}

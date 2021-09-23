@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn" [disabled] = "!signupForm.valid">{{ 'Register' | translate }}</button>&nbsp;
+                <button type="submit" class="btn rounded-btn" [disabled] = "!signupForm.valid" [disabled]="submitted">{{ 'Register' | translate }}</button>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/login']">{{ 'Log in' | translate }}</a>
             </form>
         </div>
