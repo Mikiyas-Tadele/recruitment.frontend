@@ -32,12 +32,15 @@ import { InternalVacancyFormComponent } from './internal-vacancy/internal-vacanc
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {BlockUIModule} from 'primeng/blockui';
+import { FileAttachementComponent } from './internal-vacancy/file-attachement/file-attachement.component';
 
 
 @NgModule({
   declarations: [ApplicantComponent, ApplicantHeaderComponent, ApplyVacancyComponent,
     UserprofileComponent, VacancyViewComponent, VacancyPostComponent, AppliedJobComponent,
-    HelpComponent, InternalVacancyComponent, InternalVacancyFormComponent],
+    HelpComponent, InternalVacancyComponent, InternalVacancyFormComponent, FileAttachementComponent],
   imports: [
     CommonModule,
     ApplicantsRoutingModule,
@@ -60,7 +63,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     CalendarModule,
     ConfirmDialogModule,
     RadioButtonModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ProgressSpinnerModule,
+    BlockUIModule
   ],
   providers: [MessageService, ConfirmationService]
 })

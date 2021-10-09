@@ -64,6 +64,7 @@
     </div>
 </p-panel>
 <br>
+<p-blockUI [blocked]="blockedDocument" [target]="dv"></p-blockUI>
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="6" #dv filterBy="position"  
   paginatorPosition="both" emptyMessage="No Vacancy Available!">
         <p-header>
@@ -101,7 +102,7 @@
                     <div class="card-footer">
                         <p-fileUpload  *ngIf="vacancy.managerial" #form mode="basic"  accept="image/*,.pdf"  maxFileSize="50000000" 
                         (uploadHandler)="upload($event,form,vacancy)" customUpload="true"
-                         [auto]="true" chooseLabel="{{isAttached(vacancy)}}" (onSelect)="validateFileSize($event, form.maxFileSize)"></p-fileUpload>&nbsp;&nbsp;&nbsp;
+                         [auto]="true" chooseLabel="Attach File" (onSelect)="validateFileSize($event, form.maxFileSize)"></p-fileUpload>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" style="margin-bottom: 1.8em;">{{isApplied(vacancy)?'Applied':'Apply'}}</button>&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-sm btn-primary" (click)="cancel(vacancy)" style="margin-bottom:1.8em;">Cancel</button>
                     </div>

@@ -61,7 +61,7 @@ export class ApplicantHeaderComponent implements OnInit {
     }
 
     gotoProfile() {
-        this.router.navigate(['/admin/userProfile/' + this.userEmail]);
+        this.router.navigate(['/userProfile']);
     }
 
     changeLang(language: string) {

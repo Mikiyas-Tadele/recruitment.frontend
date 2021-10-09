@@ -43,6 +43,18 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    applicantForWrittenExam(data: Vacancy) {
+      this.zone.run(() => {
+        this.router.navigateByUrl('admin/applicantForWrittenExam/' + data.id + '/' + data.title);
+      });
+    }
+
+    applicantForInterview(data: Vacancy) {
+      this.zone.run(() => {
+        this.router.navigateByUrl('admin/applicantForInterview/' + data.id + '/' + data.title);
+      });
+    }
+
     goToView(data: Vacancy) {
       this.router.navigate(['admin/post-vacancy/' + data.id]);
     }

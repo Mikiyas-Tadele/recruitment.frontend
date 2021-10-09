@@ -37,4 +37,23 @@ export class AppliedPersonelService {
     const options = {body: data};
     return this.repoService.sendRequest('POST', this.baseUrl + '/application/search-excel', options);
   }
+
+  addOrUpdateApplicantsForWrittenExam(applicantsForWrittenExam: any) {
+    const options = {body: applicantsForWrittenExam};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/applicants-for-written-exam', options);
+  }
+
+  addOrUpdateApplicantsForInterview(applicantsForInterview: any) {
+    const options = {body: applicantsForInterview};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/applicants-for-interview-exam', options);
+  }
+
+  getApplicantsForWrittenExam(vacancyId: any) {
+    return this.repoService.sendRequest('GET', this.baseUrl + '/application/all-applicants-for-wriiten-exam/' + vacancyId);
+  }
+
+  getApplicantsForInterview(vacancyId: any) {
+    return this.repoService.sendRequest('GET', this.baseUrl + '/application/all-applicants-for-wriiten-exam/' + vacancyId);
+  }
+
 }

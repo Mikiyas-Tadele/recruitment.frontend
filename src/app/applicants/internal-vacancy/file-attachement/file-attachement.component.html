@@ -1,0 +1,26 @@
+<div style="margin-top: 10%;">
+  </div>
+  <p-toast [style]="{marginTop: '100px'}"></p-toast>
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+  <p-blockUI [blocked]="blockedDocument" [target]="pnl"></p-blockUI>
+  <p-panel #pnl header="Attach The files for the below listed applied  positions ">
+    <div class="row justify-content-center"><p-progressSpinner *ngIf="stopSpinner"></p-progressSpinner></div>
+    <div class="row justify-content-center" *ngIf="blockedDocument">Please Wait ....</div>
+<div class="row" *ngFor="let item of applicantsInfo">
+  <div class="col">
+    <p-fileUpload    mode="basic"  accept="image/*,.pdf"  maxFileSize="50000000" 
+                        (uploadHandler)="upload($event,form,item)" customUpload="true"
+                        [auto]="true"  chooseLabel="File For {{item.position}}"></p-fileUpload>
+  </div>
+  <div class="col">
+    <button class="btn btn-danger btn-small" (click)="cancel(item)">Cancel</button><br>
+  </div>
+</div><br>
+<h4 *ngIf="uploadedFilesForVacancy.size!=0">Attached Files</h4>
+<div class="row" *ngFor="let fileA of uploadedFilesForVacancy | keyvalue">
+  <h6>{{fileA.value}}</h6>
+</div>
+<div class="row" *ngIf="!stopSpinner">
+  <button class="btn btn-warning" (click)="finishedAttaching()">Finished Attaching</button>
+</div>
+  </p-panel>

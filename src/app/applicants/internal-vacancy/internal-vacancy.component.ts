@@ -41,6 +41,7 @@ export class InternalVacancyComponent implements OnInit {
   educationLevel: any;
   attachementLabel = 'Attach File';
   isSubmitted = false;
+  blockedDocument = false;
 
   constructor(private internalVacancyService: InternalVacancyService,
      private router: Router,
@@ -93,14 +94,35 @@ apply(data: InternalVacancyModel) {
 }
 
 cancel(data: InternalVacancyModel) {
-  if (this.applies.length > 0) {
-    this.applies = this.applies.filter(d => {
-        return data.id !== d.id;
+  if (this.uploadedFilesForVacancy.has(data.id)) {
+    this.blockedDocument = true;
+    this.internalVacancyService.deleteFile(data.id).subscribe(res => {
+      if (this.applies.length > 0) {
+        this.applies = this.applies.filter(d => {
+            return data.id !== d.id;
+        });
+      }
+      this.uploadedFilesForVacancy.delete(data.id);
+      this.messageService.add({severity: 'success', summary: 'Application',
+      detail: 'File Attachement and/or Application cancled successfully!'});
+      this.blockedDocument = false;
+    }, err => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Saved',
+        detail: 'Make sure you have attached the file before canceling',
     });
-    this.uploadedFilesForVacancy.delete(data.id);
-    console.log(this.applies);
-    console.log(this.uploadedFilesForVacancy);
+    this.blockedDocument = false;
+    });
+  } else {
+    if (this.applies.length > 0) {
+      this.applies = this.applies.filter(d => {
+          return data.id !== d.id;
+      });
+    }
   }
+
+
 }
 
 goToView(data: InternalVacancyModel) {
@@ -109,19 +131,13 @@ goToView(data: InternalVacancyModel) {
 
 submit() {
   this.isSubmitted = true;
-  if (this.applies.length === 3) {
+  if (this.applies.length >= 1 && this.applies.length <= 3) {
     this.confirmMessage.confirm({
-      message: 'You have Selected and/or uploaded a letter for three positions. Are you sure you want to submit the application?',
+      message: 'You have Selected and/or uploaded a letter for  positions selected. Are you sure you want to submit the application?',
       accept: () => {
          this.internalVacancyService.applyForInternalPosition(this.applies.map(d => {
            return d.id;
          })).subscribe(res => {
-           this.uploadedFilesForVacancy.forEach((file: any, vacancyId: number) => {
-            const formData: FormData = new FormData();
-            formData.append('file', file, file.name);
-            this.internalVacancyService.storeInternalApplication(formData, vacancyId).subscribe(f => {
-            });
-           });
           this.messageService.add({
             severity: 'success',
             summary: 'Application',
@@ -142,31 +158,49 @@ submit() {
          }
 
          );
+      },
+      reject: () => {
+        this.isSubmitted = false;
       }
   });
   } else {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'You have to apply for Three Positions before submitting the application!',
+      detail: 'You have to apply for at least one Position before submitting the application!',
   });
   this.isSubmitted = false;
   }
 }
 upload(event: any, form: any, data: InternalVacancyModel) {
+  this.blockedDocument = true;
+     if (this.uploadedFilesForVacancy.has(data.id)) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Saved',
+        detail: 'You have already attached the file for this position, please cancel first to choose another file',
+    });
+    this.blockedDocument = false;
+     } else {
          if (this.uploadedFilesForVacancy.size < 3) {
          this.uploadedFilesForVacancy.set(data.id, event.files[0]);
-         this.messageService.add({severity: 'success', summary: 'Upload File',
-         detail: event.files[0].name + ' File Successfully Uploaded'});
-        this.attachementLabel = 'Attached';
+         const formData: FormData = new FormData();
+         formData.append('file', event.files[0], event.files[0].name);
+         this.internalVacancyService.storeInternalApplicationFileWithCorrection(formData, data.id).subscribe(f => {
+          this.messageService.add({severity: 'success', summary: 'Upload File',
+          detail: event.files[0].name + ' File Successfully Uploaded'});
+          this.blockedDocument = false;
+         });
          } else {
           this.messageService.add({
             severity: 'error',
             summary: 'Saved',
             detail: 'You can only apply for three positions!',
         });
+        this.blockedDocument = false;
          }
         form.clear();
+     }
 
 }
  isFileNotUploaded() {

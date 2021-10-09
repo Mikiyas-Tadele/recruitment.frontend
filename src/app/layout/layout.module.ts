@@ -8,7 +8,7 @@ import { NgbDatepickerModule, NgbDropdownModule, NgbModule} from '@ng-bootstrap/
 import { ToastModule } from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {EditorModule} from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -38,6 +38,9 @@ import { InternalPositionByApplicantComponent } from './internal-position-by-app
 import { InternalApplicantsByNonManagerialPositionComponent } from './internal-applicants-by-non-managerial-position/internal-applicants-by-non-managerial-position.component';
 import { InternalNonManagerialPositionByApplicantComponent } from './internal-non-managerial-position-by-applicant/internal-non-managerial-position-by-applicant.component';
 import { UserAccountProfileComponent } from './user-profile/user-profile.component';
+import { ApplicantForWrittenExamComponent } from './applicant-for-written-exam/applicant-for-written-exam.component';
+import { ApplicantsForInterviewComponent } from './applicants-for-interview/applicants-for-interview.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -66,7 +69,9 @@ import { UserAccountProfileComponent } from './user-profile/user-profile.compone
         DropdownModule,
         DataViewModule,
         NgbDatepickerModule,
-        CalendarModule
+        CalendarModule,
+        ConfirmDialogModule
+
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
@@ -75,8 +80,9 @@ import { UserAccountProfileComponent } from './user-profile/user-profile.compone
          InternalApplicantsComponent, InternalApplicantsByPositionComponent,
           InternalPositionByApplicantComponent,
           InternalApplicantsByNonManagerialPositionComponent,
-          InternalNonManagerialPositionByApplicantComponent, UserAccountProfileComponent],
-    providers: [MessageService,
+          InternalNonManagerialPositionByApplicantComponent, UserAccountProfileComponent,
+           ApplicantForWrittenExamComponent, ApplicantsForInterviewComponent],
+    providers: [MessageService, ConfirmationService,
         [AuthGuard,
             {
                 provide: HTTP_INTERCEPTORS,

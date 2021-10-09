@@ -15,14 +15,18 @@ export class InternalVacancyService {
     private readonly INTERNAL_APPLY = '/application/internalApplication';
     private readonly INTERNAL_APPLICATION = '/application/internalApplications';
     private readonly STORE = '/application/internal-application-store?vacancyId=';
+    private readonly STORE_CORRECTION = '/application/internal-application-store-with-correction?vacancyId=';
     private readonly INTERNAL_APPLICANT_BY_POSITION = '/application/internalApplicantsByPosition';
     private readonly INTERNAL_POSITION_BY_APPLICANT = '/application/internalPositionByApplicant';
     private readonly INTERNAL_APPLICANT_BY_NON_MANAGERIAL_POSITION = '/application/internalApplicantsByNonManagerPosition';
     private readonly INTERNAL_NON_MANAGERIAL_POSITION_BY_APPLICANT = '/application/internalNonManagerPositionByApplicant';
     private readonly EMPLOYEE_INFO = '/application/employeeInfo';
+    private readonly INTERNAL_APPLICATION_INFO = '/application/employeeApplicationInfo/';
     private readonly FILE_TO_DOWNLOAD = '/application/fileNameToDownload';
     private readonly MANAGERIAL_POSITIONS = '/vacancy/all-positions';
     private readonly CLOSING_APPLICATION = '/application/interanal-application-closing';
+    private readonly DELETE_SELECTED_FILE = '/application/deleteAttachedFile/';
+    private readonly CLOSE_FILE_ATTACHEMENT = '/application/closeFileAttachementSession';
 
     constructor(
         private repoService: RepositoryService,
@@ -140,6 +144,34 @@ export class InternalVacancyService {
 
     closeInternalApplication() {
        return this.repoService.sendRequest('GET', this.baseUrl + this.CLOSING_APPLICATION);
+    }
+
+    getInternalApplicationInfo(username: string) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.INTERNAL_APPLICATION_INFO + username
+        );
+    }
+
+    storeInternalApplicationFileWithCorrection(file: any, vacancyId: number) {
+        return this.repoService.httpClient.post(
+            this.baseUrl + this.STORE_CORRECTION + vacancyId,
+            file
+        );
+    }
+
+    deleteFile(vacancyId: any) {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.DELETE_SELECTED_FILE + vacancyId
+        );
+    }
+
+    closeFileAttachementSession() {
+        return this.repoService.sendRequest(
+            'GET',
+            this.baseUrl + this.CLOSE_FILE_ATTACHEMENT
+        );
     }
 
 }

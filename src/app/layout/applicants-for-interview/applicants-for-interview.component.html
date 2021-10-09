@@ -1,0 +1,30 @@
+<div style="margin-top: 5%;">
+  <p-table [value]="appliedPersonels" #dt [responsive]="true" [paginator]="true" [rows]="10" [autoLayout]="true" sortField="fullName" sortMode="single">
+    <ng-template pTemplate="caption">
+      <div class="ui-helper-clearfix" style="text-align: left">
+        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+    </div>
+      <h5>Development Bank of Ethiopia<br>
+        List Of Applicants Selected For Interview For the Position of {{vacancyTitle}}<br>
+       </h5>
+       <div style="text-align: right">        
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Search ...." (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Applicant Name</th>
+            <th>Exam Result</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
+        <tr>
+            <td>{{appliedPersonel.applicantName}}</td>
+            <td>{{appliedPersonel.examResult}}</td>
+          </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+    </ng-template>
+  </p-table>
+  </div>

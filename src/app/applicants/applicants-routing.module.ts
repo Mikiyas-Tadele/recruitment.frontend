@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ApplicantComponent } from './applicant/applicant.component';
 import { AppliedJobComponent } from './applied-job/applied-job.component';
 import { HelpComponent } from './help/help.component';
+import { FileAttachementComponent } from './internal-vacancy/file-attachement/file-attachement.component';
 import { InternalVacancyFormComponent } from './internal-vacancy/internal-vacancy-form/internal-vacancy-form.component';
 import { InternalVacancyComponent } from './internal-vacancy/internal-vacancy.component';
 import { ApplyVacancyComponent } from './vacancy-post/apply-vacancy/apply-vacancy.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'vacancies', component: VacancyPostComponent},
   {path: 'Ivacancies', component: InternalVacancyComponent},
   {path: 'IvacanciesView', component: InternalVacancyFormComponent},
+  {path: 'IApplicantFileAttachement', component: FileAttachementComponent},
   {path: 'help', component: HelpComponent},
   {path: 'vacancy-view/:id', component: VacancyViewComponent},
   {path: 'apply/:id/:name', component: ApplyVacancyComponent},

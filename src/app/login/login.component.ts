@@ -61,6 +61,8 @@ get f() {
                   this.router.navigate(['admin/internalApplicantByNonManagerialPosition']);
                 } else if (data['staff'] && !data['applied']) {
                   this.router.navigate(['/Ivacancies']);
+                } else if (data['staff'] && data['applied'] && data['fileError']) {
+                  this.router.navigate(['/IApplicantFileAttachement']);
                 } else if (data['staff'] && data['applied']) {
                   this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Sorry, You have already Applied!'});
                   this.token.signOut();

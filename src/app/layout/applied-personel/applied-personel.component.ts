@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
 import { LookupDetail } from 'src/app/models/lookup.model';
@@ -18,7 +19,8 @@ import { AppliedPersonelService } from './applied-personel.service';
 })
 export class AppliedPersonelComponent implements OnInit {
   constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
-    private vacancyService: VancancyService, private excelService: ExcelExportService) { }
+    private vacancyService: VancancyService, private excelService: ExcelExportService,
+    private confirmMessage: ConfirmationService, private messagingService: MessageService) { }
   appliedPersonels: any = [];
   appliedPersonelsExcel: any = [];
   filteredAppliedPersonels: any[];
@@ -33,6 +35,7 @@ export class AppliedPersonelComponent implements OnInit {
   rowGroupFullName: RowGroupModel;
   rowGroupEmail: RowGroupModel;
   rowGroupTotal: RowGroupModel;
+  selectedApplicants: any = [];
 
   onClick(event: Event, menu) {
     menu.toggle(event);
@@ -258,6 +261,20 @@ onSort() {
   this.updateFullNameRowGroupMetaData1();
         this.updateEmailRowGroupMetaData1();
         this.updateTotalRowGroupMetaData1();
+}
+
+moveToWE() {
+  if (this.selectedApplicants.length > 0) {
+  this.confirmMessage.confirm({
+    message: 'Are you sure you want to move the selected applicants for the written exam?',
+    accept: () => {
+    console.log(this.selectedApplicants);
+    }
+  });
+} else {
+   this.messagingService.add({severity: 'error', summary: 'Selection',
+   detail: 'You have to select at least one applicant!'});
+}
 }
 
 }
