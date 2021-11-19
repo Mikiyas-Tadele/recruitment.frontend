@@ -19,7 +19,7 @@
             *ngIf="(applicationFormControl.applicationLetter.touched || applicationFormControl.applicationLetter.drty) && applicationFormControl.applicationLetter.invalid">
             Application letter is required
         </span> -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]='applySubmitted'>Submit</button>
     </div>
 </div>
 </form>

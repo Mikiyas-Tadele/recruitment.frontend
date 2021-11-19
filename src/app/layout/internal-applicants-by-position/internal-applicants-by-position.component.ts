@@ -29,6 +29,9 @@ export class InternalApplicantsByPositionComponent implements OnInit {
       {field: 'positionOne', header: 'Position One'},
       {field: 'positionTwo', header: 'Position Two'},
       {field: 'positionThree', header: 'Position Three'},
+      {field: 'positionFour', header: 'Position Four'},
+      {field: 'positionFive', header: 'Position Five'},
+      {field: 'positionSix', header: 'Position Six'},
       {fiedl: 'appliedDate', header: 'Applied Date'}
     ];
   }
@@ -44,6 +47,9 @@ export class InternalApplicantsByPositionComponent implements OnInit {
        element.positionOne,
        element.positionTwo,
        element.positionThree,
+       element.positionFour,
+       element.positionFive,
+       element.positionSix,
       this.getDateFormatted(element.appliedDate)]);
     }
     const title = 'Development Bank of Ethiopia';

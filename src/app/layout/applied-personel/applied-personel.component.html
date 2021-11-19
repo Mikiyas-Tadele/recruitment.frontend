@@ -147,7 +147,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
       <tr>
-          <td><p-tableCheckbox *ngIf="appliedPersonel.userId!=null" [value]="appliedPersonel"></p-tableCheckbox></td>
+          <td><p-tableCheckbox *ngIf="appliedPersonel.userId!=null" [value]="appliedPersonel" [disabled]="appliedPersonel.selected" [index]="rowIndex"></p-tableCheckbox></td>
           <td *ngIf="rowGroupFullName[appliedPersonel.fullName].index === rowIndex" [attr.rowspan]="rowGroupFullName[appliedPersonel.fullName].size">{{appliedPersonel.fullName}}</td>
           <td *ngIf="rowGroupEmail[appliedPersonel.email].index === rowIndex" [attr.rowspan]="rowGroupEmail[appliedPersonel.email].size">{{appliedPersonel.email}}</td>
           <td>{{appliedPersonel.age}}</td>
@@ -155,8 +155,8 @@
           <td>{{appliedPersonel.disability}}</td>
           <td>{{appliedPersonel.mobilePhone1}}</td>
           <td>{{appliedPersonel.fixedLinePhone}}</td>
-          <td><button  *ngIf="appliedPersonel.userId!=null" pButton icon="pi pi-download" class="ui-button-success" (click)="downloadCV(appliedPersonel,1)" pTooltip="download cv" tooltipPosition="top"></button></td>
-          <td><button  *ngIf="appliedPersonel.userId!=null" pButton icon="pi pi-download" class="ui-button-success" (click)="downloadQualificationDocument(appliedPersonel,2)" pTooltip="download qualification document" tooltipPosition="top"></button></td>
+          <td><button  *ngIf="appliedPersonel.userId!=null" pButton icon="pi pi-download" class="ui-button-success" (click)="downloadCV(appliedPersonel)" pTooltip="download cv" tooltipPosition="top"></button></td>
+          <td><button  *ngIf="appliedPersonel.userId!=null" pButton icon="pi pi-download" class="ui-button-success" (click)="downloadQualificationDocument(appliedPersonel)" pTooltip="download qualification document" tooltipPosition="top"></button></td>
           <td><button  *ngIf="appliedPersonel.applicationLetter!=null" pButton  class="ui-button-secondary" (click)="displayAL(appliedPersonel)">Application Letter</button></td>
           <td>{{appliedPersonel.fieldOfEducation}}</td>
           <td>{{appliedPersonel.qualificationDesc}}</td>

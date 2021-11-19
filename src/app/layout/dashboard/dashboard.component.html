@@ -32,27 +32,19 @@
                                 </p>
                             </div>
                         </div>
+
+
+
                     </div>
                     <div class="card-footer">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">Edit</button>    
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-sm btn-primary" (click)="appliedPersonel(vacancy)">Applicants</button>
-                            </div>
-                        </div><br>
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-sm btn-primary" (click)="applicantForWrittenExam(vacancy)">Applicants For Written Exam</button>    
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-sm btn-primary" (click)="applicantForInterview(vacancy)">Applicants For Interview</button>
-                            </div>
+                                <a (click)="goToView(vacancy)" class="btn badge badge-primary"><span style="color: white; font-size: 12px;">Edit</span></a>&nbsp;
+                                <a (click)="appliedPersonel(vacancy)" class="btn badge badge-info"><span style="color: white; font-size: 12px;">Applicants</span></a>&nbsp;
+                                <a (click)="applicantForWrittenExam(vacancy)" class=" btn badge badge-info"><span style="color: white;font-size: 12px;">Applicants For Written Exam</span></a>&nbsp;<br>
+                                <a (click)="applicantForInterview(vacancy)" class=" btn badge badge-info"><span style="color: white;font-size: 12px;">Applicants For Interview</span></a>&nbsp;
+                                <a (click)="applicantsFinalSelected(vacancy)" class=" btn badge badge-info"><span style="color: white;font-size: 12px;">Final Stage Selected applicants</span></a>
                         </div>
                     </div>
                 </div>
-            </div>
         
     </ng-template>
 </div>

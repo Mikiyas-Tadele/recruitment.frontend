@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InternalApplicantByPosition } from '../models/internal.applicant.by.position';
 import { ApplicantForWrittenExamComponent } from './applicant-for-written-exam/applicant-for-written-exam.component';
+import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/applicants-at-final-stage.component';
 import { ApplicantsForInterviewComponent } from './applicants-for-interview/applicants-for-interview.component';
 import { AppliedPersonelComponent } from './applied-personel/applied-personel.component';
 import { InternalApplicantsByNonManagerialPositionComponent } from './internal-applicants-by-non-managerial-position/internal-applicants-by-non-managerial-position.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
             {path: 'appliedPersonel/:id', component: AppliedPersonelComponent},
             {path: 'applicantForWrittenExam/:id/:title', component: ApplicantForWrittenExamComponent},
             {path: 'applicantForInterview/:id/:title', component: ApplicantsForInterviewComponent},
+            {path: 'applicantAtFinalStage/:id/:title', component: ApplicantsAtFinalStageComponent},
             {path: 'internalVacancies', component: InternalVacanciesComponent},
             {path: 'internalVacancy/:id', component: InternalVacancyFormComponent},
             {path: 'appliedInternalPersonel/:id', component: InternalApplicantsComponent },

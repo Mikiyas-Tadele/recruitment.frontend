@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { Application } from 'src/app/models/application.model';
@@ -15,7 +15,7 @@ import { UserProfileService } from '../userprofile/user-profile.service';
 })
 export class ApplyVacancyComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router,
     private userProfileService: UserProfileService, private messageService: MessageService) { }
 
   applicationForm: FormGroup;
@@ -25,6 +25,7 @@ export class ApplyVacancyComponent implements OnInit {
   applicantProfile: any = [];
   private readonly QUALIFICATION_FILE = 1;
   private routeSub: Subscription;
+  applySubmitted = false;
   ngOnInit() {
     this.applicationForm = this.fb.group({
       applicationLetter: ['', Validators.required]
@@ -39,29 +40,39 @@ export class ApplyVacancyComponent implements OnInit {
     return this.applicationForm.controls;
   }
   onSubmit({value, valid}: { value: Application, valid: boolean }) {
+    this.applySubmitted = true;
     if (valid && this.uploadedFiles.length > 0) {
       value.vacancyId = this.vacancyId;
       this.userProfileService.apply(value).subscribe(res => {
         const savedModel = res as Application;
-        const formData: FormData = new FormData();
-        formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
-        this.userProfileService.storeFile(formData, savedModel.id).subscribe(fileRes => {
-          this.messageService.add({severity: 'success', summary: 'Saved', detail: 'You Have Successfully Applied'});
-      });
+        setTimeout(() => {
+          this.messageService.add({severity: 'success', summary: 'Error', detail: 'You have successfully applied!'});
+        }, 100);
+        this.applySubmitted = false;
+        this.router.navigate(['appliedJobs']);
       },
       err => {
-        this.messageService.add({severity: 'error', summary: 'Error', detail: err.error.message});
+        this.messageService.add({severity: 'error', summary: 'Error', detail: err.message});
+        this.applySubmitted = false;
       }
       );
     } else {
       this.messageService.add({severity: 'error', summary: 'Success', detail: 'Application Letter not entered and/or File not uploaded!'});
+      this.applySubmitted = false;
     }
 
   }
 
   onUpload(event) {
     this.uploadedFiles.push(event.files[0]);
-    this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+    const formData: FormData = new FormData();
+    formData.append('file', event.files[0], event.files[0].name);
+    this.userProfileService.storeFile(formData, this.vacancyId).subscribe(fileRes => {
+      this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+  }, err => {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: err.error.message});
+  }
+  );
   }
 
 }

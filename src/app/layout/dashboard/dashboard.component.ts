@@ -78,4 +78,9 @@ export class DashboardComponent implements OnInit {
     clearSearch() {
         this.getVacancies();
       }
+      applicantsFinalSelected(data: Vacancy) {
+        this.zone.run(() => {
+          this.router.navigateByUrl('admin/applicantAtFinalStage/' + data.id + '/' + data.title);
+        });
+      }
 }

@@ -1,16 +1,13 @@
 <div style="margin-top: 5%;">
   <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
 <p-toast [style]="{marginTop: '100px'}"></p-toast>
-  <p-table [value]="appliedPersonels" #dt [responsive]="true" [paginator]="true" [rows]="10" [autoLayout]="true" sortField="fullName" sortMode="single" [(selection)]="selectedApplicants">
+  <p-table [value]="appliedPersonels" #dt [responsive]="true" [paginator]="true" [rows]="10" [autoLayout]="true" sortField="fullName" sortMode="single">
     <ng-template pTemplate="caption">
       <div class="ui-helper-clearfix" style="text-align: left">
         <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
-        <button type="button" pButton icon="pi pi-save" iconPos="left" label="Save Result" (click)="save()" style="margin-right: 0.5em;" class="ui-button-success"></button>&nbsp;
-        <button type="button" pButton icon="pi pi-arrow-left" iconPos="left" label="Remove From List" (click)="removeFromList()" style="margin-right: 0.5em;" class="ui-button-success"></button>
-        <button type="button" pButton icon="pi pi-arrow-right" iconPos="right" label="Move to Final Stage" (click)="moveForFinalSelection()" style="margin-right: 0.5em;" class="ui-button-success"></button>
     </div>
       <h5>Development Bank of Ethiopia<br>
-        List Of Applicants Selected For Interview For the Position of {{vacancyTitle}}<br>
+        List Of Applicants Selected For Final Stage For the Position of {{vacancyTitle}}<br>
        </h5>
        <div style="text-align: right">        
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -19,19 +16,24 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3em" rowspan="2">Select</th>
             <th>Applicant Name</th>
-            <th>Exam Result</th>
+            <th>Written Exam Result</th>
+            <th> Interview Result</th>
+            <th>Gross Total</th>
+            <th>Total(100%)</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
         <tr>
-          <td><p-tableCheckbox *ngIf="appliedPersonel.id!=null" [value]="appliedPersonel" [index]="rowIndex"></p-tableCheckbox></td>
             <td>{{appliedPersonel.applicantName}}</td>
-            <td><input type="number" [(ngModel)]="appliedPersonel.examResult" style="width: 100%;"></td>
+            <td>{{appliedPersonel.writtenExamResult}}</td>
+            <td>{{appliedPersonel.interviewResult}}</td>
+            <td>{{appliedPersonel.totalResult}}</td>
+            <td>{{(appliedPersonel.totalResult)/2 | number : '1.2-2'}}</td>
           </tr>
     </ng-template>
     <ng-template pTemplate="footer">
     </ng-template>
   </p-table>
   </div>
+

@@ -23,11 +23,15 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ResetPasswordComponent } from './forget-password/reset-password/reset-password.component';
 
-// const baseUrl = 'http://localhost:8080/api';
+const baseUrl = 'http://localhost:8080/api';
 
-// const baseUrl = 'http://172.18.10.145:8080/api';
+//  const baseUrl = 'http://10.48.8.21:8080/recruitment/api';
 
- const baseUrl = 'https://jobs.dbe.com.et/recruitment/api';
+//  const baseUrl = 'http://jobs.dbe.com.et:9095/recruitment/api';
+// const baseUrl = 'http://192.168.4.11:9095/recruitment/api';
+
+
+
 
 @NgModule({
     imports: [

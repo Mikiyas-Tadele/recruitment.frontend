@@ -20,7 +20,6 @@ export class AppliedPersonelService {
     return this.repoService.httpClient.get(this.baseUrl + '/application/downloadFile?documentId='
      + documentId + '&applicationId=' + fileTypeId , {responseType: 'blob'})
       .subscribe((res: any) => {
-        console.log(res);
         return saveFile(res, userName);
       });
   }
@@ -43,9 +42,24 @@ export class AppliedPersonelService {
     return this.repoService.sendRequest('POST', this.baseUrl + '/application/applicants-for-written-exam', options);
   }
 
+  removeApplicantsForWrittenExam(applicantsForWrittenExam: any) {
+    const options = {body: applicantsForWrittenExam};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/remove-applicants-for-written-exam', options);
+  }
+
+  removeApplicantsForInterviewExam(applicantsForInterviewExam: any) {
+    const options = {body: applicantsForInterviewExam};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/remove-applicants-for-interview-exam', options);
+  }
+
   addOrUpdateApplicantsForInterview(applicantsForInterview: any) {
     const options = {body: applicantsForInterview};
     return this.repoService.sendRequest('POST', this.baseUrl + '/application/applicants-for-interview-exam', options);
+  }
+
+  moveToFinalStage(applicantsForInterview: any) {
+    const options = {body: applicantsForInterview};
+    return this.repoService.sendRequest('POST', this.baseUrl + '/application/move-applicants-to-final-stage', options);
   }
 
   getApplicantsForWrittenExam(vacancyId: any) {
@@ -53,7 +67,15 @@ export class AppliedPersonelService {
   }
 
   getApplicantsForInterview(vacancyId: any) {
-    return this.repoService.sendRequest('GET', this.baseUrl + '/application/all-applicants-for-wriiten-exam/' + vacancyId);
+    return this.repoService.sendRequest('GET', this.baseUrl + '/application/all-applicants-for-interview/' + vacancyId);
+  }
+
+  getFileNameToDownloadExternal(vacancyId: any, userId: any) {
+    return this.repoService.sendRequest('GET', this.baseUrl + '/application/fileNameToDownloadExternal/' + vacancyId + '/' + userId);
+  }
+
+  getApplicantsForFinalResult(vacancyId: any) {
+    return this.repoService.sendRequest('GET', this.baseUrl + '/application/applicants-final-result/' + vacancyId);
   }
 
 }

@@ -79,7 +79,7 @@ validateFileSize($event: any, maxFileSize: number): void {
  }
 
  finishedAttaching() {
-   if (this.uploadedFilesForVacancy.size === 3) {
+   if (this.uploadedFilesForVacancy.size > 0) {
   this.confirmMessage.confirm({
     message: 'Have you finished attaching the files?',
     accept: () => {
@@ -90,7 +90,7 @@ validateFileSize($event: any, maxFileSize: number): void {
   });
    } else {
     this.messageService.add({severity: 'error', summary: 'Upload File',
-    detail: 'You have to attach a file for all three positions'});
+    detail: 'You have to attach a file for at least one position'});
    }
  }
 

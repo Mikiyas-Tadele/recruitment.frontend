@@ -26,4 +26,5 @@ export class AppliedPersonelModel {
      applicationId: number;
      totalExperience: number;
      qualificationDesc: string;
+     selected: boolean;
 }

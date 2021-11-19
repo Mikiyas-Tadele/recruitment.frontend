@@ -41,6 +41,7 @@ import { UserAccountProfileComponent } from './user-profile/user-profile.compone
 import { ApplicantForWrittenExamComponent } from './applicant-for-written-exam/applicant-for-written-exam.component';
 import { ApplicantsForInterviewComponent } from './applicants-for-interview/applicants-for-interview.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/applicants-at-final-stage.component';
 
 
 @NgModule({
@@ -81,7 +82,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
           InternalPositionByApplicantComponent,
           InternalApplicantsByNonManagerialPositionComponent,
           InternalNonManagerialPositionByApplicantComponent, UserAccountProfileComponent,
-           ApplicantForWrittenExamComponent, ApplicantsForInterviewComponent],
+           ApplicantForWrittenExamComponent, ApplicantsForInterviewComponent, ApplicantsAtFinalStageComponent],
     providers: [MessageService, ConfirmationService,
         [AuthGuard,
             {

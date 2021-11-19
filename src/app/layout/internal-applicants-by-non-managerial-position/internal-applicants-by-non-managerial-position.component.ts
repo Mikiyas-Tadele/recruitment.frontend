@@ -27,7 +27,10 @@ export class InternalApplicantsByNonManagerialPositionComponent implements OnIni
       {field: 'employeeName', header: 'Employee Name'},
       {field: 'positionOne', header: 'Position One'},
       {field: 'positionTwo', header: 'Position Two'},
-      {field: 'positionThree', header: 'Position Three'}
+      {field: 'positionThree', header: 'Position Three'},
+      {field: 'positionFour', header: 'Position Four'},
+      {field: 'positionFive', header: 'Position Five'},
+      {field: 'positionSix', header: 'Position Six'},
     ];
   }
 
@@ -41,7 +44,11 @@ export class InternalApplicantsByNonManagerialPositionComponent implements OnIni
        element.employeeName,
        element.positionOne,
        element.positionTwo,
-       element.positionThree]);
+       element.positionThree,
+      element.positionFour,
+     element.positionFive,
+    element.positionSix,
+    this.getDateFormatted(element.appliedDate)]);
     }
     const title = 'Development Bank of Ethiopia';
        const fileName = 'Report ' + Date();

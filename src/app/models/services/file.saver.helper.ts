@@ -20,6 +20,7 @@ const MIME_TYPES = {
  */
 export const saveFile = (blobContent: Blob, fileName: string) => {
     const fileNameContents: string[] = fileName.split('.');
+    console.log(fileName);
     const blob = new Blob([blobContent], {type: MIME_TYPES[fileNameContents[fileNameContents.length - 1].trim()]});
     file.saveAs(blob, fileName);
 };

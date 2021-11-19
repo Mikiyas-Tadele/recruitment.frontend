@@ -19,6 +19,9 @@
           <th>Position One</th>
           <th>Position Two</th>
           <th>Position Three</th>
+          <th>Position Four</th>
+          <th>Position Five</th>
+          <th>Position Six</th>
           <th [pSortableColumn]="'appliedDate'">Applied Date
             <p-sortIcon [field]="'appliedDate'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
@@ -32,6 +35,9 @@
           <td>{{appliedPersonel.positionOne}}&nbsp;&nbsp;<button *ngIf="appliedPersonel.managerial==1" pButton icon="pi pi-download" class="ui-button-success" (click)="download1(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
           <td>{{appliedPersonel.positionTwo}}&nbsp;<button *ngIf="appliedPersonel.manageria2==1" pButton icon="pi pi-download" class="ui-button-success" (click)="download2(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
           <td>{{appliedPersonel.positionThree}}&nbsp;<button *ngIf="appliedPersonel.manageria3==1" pButton icon="pi pi-download" class="ui-button-success" (click)="download3(appliedPersonel)" pTooltip="download letter" tooltipPosition="top"></button></td>
+          <td>{{appliedPersonel.positionFour}}&nbsp;</td>
+          <td>{{appliedPersonel.positionFive}}&nbsp;</td>
+          <td>{{appliedPersonel.positionSix}}&nbsp;</td>
           <td>{{appliedPersonel.appliedDate | date:'medium' }}</td>
         </tr>
   </ng-template>

@@ -46,6 +46,7 @@ phoneno = '^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$';
 minDate: Date;
   maxDate: Date;
   @ViewChild('tabset', { static: true }) tabset: any;
+  finishSubmitted = false;
 
 private readonly qualificationLookupCode = 'QUALIFICATION';
 private readonly CV_FILE = 0;
@@ -100,15 +101,17 @@ private readonly CV_FILE = 0;
     });
     this.loadQualificationLookups();
     this.loadYears();
+    this.getUserProfile();
 
-      this.userService.getApplicant().subscribe(res => {
-         this.userProfile = res;
-         if (this.userProfile != null) {
-           this.isNewUser = false;
-           this.setForm(this.userProfile);
-         }
-      });
-
+  }
+  getUserProfile() {
+    this.userService.getApplicant().subscribe(res => {
+      this.userProfile = res;
+      if (this.userProfile != null) {
+        this.isNewUser = false;
+        this.setForm(this.userProfile);
+      }
+   });
   }
   get userFormControl() {
     return this.userForm.controls;
@@ -126,22 +129,17 @@ private readonly CV_FILE = 0;
     this.activeMainTab = tab;
   }
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
+    this.finishSubmitted = true;
     if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
 
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
       this.userService.saveApplicant(value).subscribe(res => {
-        const formData: FormData = new FormData();
-        formData.append('file', this.uploadedFiles[0], this.uploadedFiles[0].name);
-        this.userService.storeFile(formData, this.CV_FILE).subscribe(fileRes => {
-          this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
-          this.enableDisablity = false;
-      });
+        this.enableDisablity = false;
+        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
+        this.getUserProfile();
         });
-        this.userForm.reset();
-        this.educationForm.reset();
-        this.experienceForm.reset();
     } else if (valid && value.id != null) {
       console.log('Date ' + value.dateOfBirth);
       value.educationalBackgrounds = this.educations;
@@ -151,6 +149,7 @@ private readonly CV_FILE = 0;
        this.userService.saveApplicant(value).subscribe(res => {
         this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Updated Successfully!'});
         this.enableDisablity = false;
+        this.getUserProfile();
        });
     } else if (this.educations.length === 0 || this.uploadedFiles.length === 0) {
       this.messageService.add({severity: 'error', summary: 'Saved',
@@ -262,7 +261,11 @@ deleteExperience(experience: WorkExperience) {
   }
   onUpload(event) {
     this.uploadedFiles.push(event.files[0]);
-    this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+    const formData: FormData = new FormData();
+    formData.append('file', event.files[0], event.files[0].name);
+    this.userService.storeFile(formData, this.CV_FILE).subscribe(fileRes => {
+      this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+  });
   }
 
   getQualificationDesc(qual: number) {

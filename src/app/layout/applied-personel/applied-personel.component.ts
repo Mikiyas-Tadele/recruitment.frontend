@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ApplicantForWrittenExamModel } from 'src/app/models/applicant.selected.for.we';
 import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
 import { LookupDetail } from 'src/app/models/lookup.model';
@@ -36,6 +37,7 @@ export class AppliedPersonelComponent implements OnInit {
   rowGroupEmail: RowGroupModel;
   rowGroupTotal: RowGroupModel;
   selectedApplicants: any = [];
+  vacancyId = 0;
 
   onClick(event: Event, menu) {
     menu.toggle(event);
@@ -44,9 +46,9 @@ export class AppliedPersonelComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    const vacancyId = this.route.snapshot.params['id'];
+    this.vacancyId = this.route.snapshot.params['id'];
     const searchModel: AppliedPersonelFilter = new AppliedPersonelFilter();
-    searchModel.vacancyId = vacancyId;
+    searchModel.vacancyId = this.vacancyId;
     this.appliedPersonelService.advanceSearch(searchModel).subscribe(res => {
       this.counter = 0;
            this.appliedPersonels = res;
@@ -58,19 +60,22 @@ export class AppliedPersonelComponent implements OnInit {
          });
     });
 this.filteredAppliedPersonels = this.appliedPersonels;
-console.log('Filtered Applied Personel: ' + this.appliedPersonels);
-    this.vacancyService.getVacancy(vacancyId).subscribe(res => {
+    this.vacancyService.getVacancy(this.vacancyId).subscribe(res => {
         const v = res as Vacancy;
         this.vacancyName = v.title;
     });
   }
 
   downloadCV(data: AppliedPersonelModel) {
-     this.appliedPersonelService.downloadFile(data.userId, 0, data.fullName);
+     this.appliedPersonelService.getFileNameToDownloadExternal(0, data.userId).subscribe(name => {
+      this.appliedPersonelService.downloadFile(data.userId, 0, name);
+     });
   }
 
   downloadQualificationDocument(data: AppliedPersonelModel) {
-    this.appliedPersonelService.downloadFile(data.userId, data.applicationId, data.fullName);
+    this.appliedPersonelService.getFileNameToDownloadExternal(this.vacancyId, data.userId).subscribe(name => {
+      this.appliedPersonelService.downloadFile(data.userId, this.vacancyId, name);
+    });
   }
   displayAL(data: AppliedPersonelModel) {
    this.letter = data.applicationLetter;
@@ -268,13 +273,31 @@ moveToWE() {
   this.confirmMessage.confirm({
     message: 'Are you sure you want to move the selected applicants for the written exam?',
     accept: () => {
-    console.log(this.selectedApplicants);
+     const  writtenExamApplicantList = this.getWEApplicantList();
+    this.appliedPersonelService.addOrUpdateApplicantsForWrittenExam(writtenExamApplicantList).subscribe(res => {
+      this.messagingService.add({severity: 'success', summary: 'Selection',
+      detail: 'You have successfully selected applicants for written exam, to un-select please go to applicants list for exam page'});
+    });
     }
   });
 } else {
    this.messagingService.add({severity: 'error', summary: 'Selection',
    detail: 'You have to select at least one applicant!'});
 }
+}
+
+getWEApplicantList() {
+  const WEApplicantList: any = [];
+  for (let index = 0; index < this.selectedApplicants.length; index++) {
+    const element = this.selectedApplicants[index] as AppliedPersonelModel;
+    const applicant = new ApplicantForWrittenExamModel();
+    applicant.applicantId = element.applicantId;
+    applicant.examResult = 0.0;
+    applicant.vacancyId = this.vacancyId;
+    WEApplicantList.push(applicant);
+  }
+
+  return WEApplicantList;
 }
 
 }
