@@ -23,8 +23,9 @@ vacancyForm: FormGroup;
 vacancy: any;
 minDate: Date;
 maxDate: Date;
+saved = false;
   constructor(private vacancyService: VancancyService, private messageService: MessageService,
-     private router: Router, private route: ActivatedRoute, ) { 
+     private router: Router, private route: ActivatedRoute, ) {
       this.minDate = new Date();
       this.maxDate = new Date();
       this.minDate.setFullYear(this.minDate.getFullYear());
@@ -45,16 +46,19 @@ maxDate: Date;
   }
 save({value, valid}: { value: Vacancy, valid: boolean }) {
   if (valid) {
+    this.saved = true;
    this.vacancyService.saveVacancy(value).subscribe(res => {
-     this.vacancy = res;
+      this.vacancy = res as Vacancy;
     this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Data Saved Successfully'});
-    this.clear();
+    this.vacancyForm.reset({});
+    this.saved = false;
    }, err => {
     this.messageService.add({severity: 'error', summary: 'Saved', detail: err});
+    this.saved = false;
    });
   } else {
     this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Please fill the form data properly!'});
-    console.log(valid);
+    this.saved = false;
   }
 }
 
@@ -71,6 +75,7 @@ initForm() {
     salaryDescription: new FormControl(''),
     requiredNumber: new FormControl('', Validators.required),
     employmentCondition: new FormControl('', Validators.required),
+    cgpa: new FormControl('')
   });
 }
 
@@ -87,6 +92,7 @@ setForm(vacancy: Vacancy) {
     salaryDescription: vacancy.salaryDescription,
     requiredNumber: vacancy.requiredNumber,
     employmentCondition: vacancy.employmentCondition,
+    cgpa: vacancy.cgpa
   });
   console.log(this.vacancyForm);
 }

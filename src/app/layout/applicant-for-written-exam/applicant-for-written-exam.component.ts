@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ApplicantForInterviewModel } from 'src/app/models/applicant.selected.for.interview';
 import { ApplicantForWrittenExamModel } from 'src/app/models/applicant.selected.for.we';
+import { ExcelExportService } from 'src/app/shared/services/excel-export-service';
 import { AppliedPersonelService } from '../applied-personel/applied-personel.service';
 
 @Component({
@@ -18,13 +20,17 @@ export class ApplicantForWrittenExamComponent implements OnInit {
 
 
   constructor(private appliedService: AppliedPersonelService, private route: ActivatedRoute,
-     private router: Router,  private confirmMessage: ConfirmationService, private messagingService: MessageService) { }
+     private router: Router,  private confirmMessage: ConfirmationService, private excelService: ExcelExportService,
+     private messagingService: MessageService,
+     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.vacancyId = this.route.snapshot.params['id'];
     this.vacancyTitle = this.route.snapshot.params['title'];
+    this.spinner.show();
     this.appliedService.getApplicantsForWrittenExam(this.vacancyId).subscribe(res => {
        this.appliedPersonels = res as ApplicantForWrittenExamModel[];
+       this.spinner.hide();
     });
 
   }
@@ -38,6 +44,7 @@ export class ApplicantForWrittenExamComponent implements OnInit {
         this.appliedService.addOrUpdateApplicantsForInterview(interviewExamApplicantList).subscribe(res => {
           this.messagingService.add({severity: 'success', summary: 'Selection',
           detail: 'You have successfully selected applicants for interview, to un-select please go to applicants list for interview page'});
+          window.location.reload();
         });
         }
       });
@@ -66,6 +73,7 @@ export class ApplicantForWrittenExamComponent implements OnInit {
 
   save() {
     const weList = this.appliedPersonels.filter(data => {
+      (data as ApplicantForWrittenExamModel).addOrRemove = false;
         return (data as ApplicantForWrittenExamModel).examResult !== 0;
     });
     this.appliedService.addOrUpdateApplicantsForWrittenExam(weList).subscribe(res => {
@@ -87,5 +95,23 @@ export class ApplicantForWrittenExamComponent implements OnInit {
     }
     return IEApplicantList;
   }
+
+  exportExcel() {
+    const excelContents: any = [];
+   const headers = ['Applicant_SystemId', 'Applicant Name', 'Exam Code', 'Written Exam Result'];
+    for (let index = 0; index < this.appliedPersonels.length; index++) {
+      const element = this.appliedPersonels[index];
+       console.log(element);
+       excelContents.push([
+       element.applicantId,
+       element.applicantName,
+       element.examCode,
+       element.examResult]);
+    }
+    const title = 'Human Resource Management Directorate Applicants selected for writen exam  for the Position ' + this.vacancyTitle;
+       const fileName = this.vacancyTitle + Date();
+
+       this.excelService.exportAsExcelFileExcelJs(headers, excelContents, fileName, title );
+}
 
 }

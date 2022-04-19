@@ -1,7 +1,8 @@
 <div class="spacehlder"></div>
 
 <div [@routerTransition]>
-   
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+    <p-toast [style]="{marginTop: '100px'}"></p-toast>
 
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title" emptyMessage="No Vacancy Available!">
     
@@ -21,14 +22,15 @@
                     <div class="card-body">
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{vacancy.workExperience}} Work Experience</h4>
+                                <h4 class="timeline-title">{{vacancy.qualification}}</h4>
+                                <h6>{{vacancy.location}}</h6>
                                 <p><small class="text-muted"><i class="fa fa-clock-o"></i>{{vacancy.minutesElapsedSinceCreation}}</small>
                                 </p>
                                 <span class="text-success" *ngIf="!vacancy.closed" >Active</span>
                                 <span class="text-danger" *ngIf="vacancy.closed">Closed</span>
                             </div>
                             <div class="timeline-body">
-                                <p>{{vacancy.qualification}}
+                                <p>{{vacancy.workExperience}}
                                 </p>
                             </div>
                         </div>
@@ -38,6 +40,7 @@
                     </div>
                     <div class="card-footer">
                                 <a (click)="goToView(vacancy)" class="btn badge badge-primary"><span style="color: white; font-size: 12px;">Edit</span></a>&nbsp;
+                                <a (click)="cancelVacancy(vacancy)" class="btn badge badge-danger" *ngIf="!vacancy.closed"><span style="color: white; font-size: 12px;">Delete</span></a>&nbsp;
                                 <a (click)="appliedPersonel(vacancy)" class="btn badge badge-info"><span style="color: white; font-size: 12px;">Applicants</span></a>&nbsp;
                                 <a (click)="applicantForWrittenExam(vacancy)" class=" btn badge badge-info"><span style="color: white;font-size: 12px;">Applicants For Written Exam</span></a>&nbsp;<br>
                                 <a (click)="applicantForInterview(vacancy)" class=" btn badge badge-info"><span style="color: white;font-size: 12px;">Applicants For Interview</span></a>&nbsp;
@@ -50,3 +53,4 @@
 </div>
 </p-dataView>
 </div>
+<ngx-spinner></ngx-spinner>

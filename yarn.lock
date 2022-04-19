@@ -169,7 +169,7 @@
     "universal-analytics" "^0.4.20"
     "uuid" "^3.3.2"
 
-"@angular/common@^6.1.0", "@angular/common@^7.2.0 || ^8.0.0", "@angular/common@^8.0.0 || ^9.0.0-0", "@angular/common@>=5.0.0", "@angular/common@>=6.0.0", "@angular/common@>=7.0.0", "@angular/common@8.2.3":
+"@angular/common@^6.1.0", "@angular/common@^7.2.0 || ^8.0.0", "@angular/common@^8.0.0", "@angular/common@^8.0.0 || ^9.0.0-0", "@angular/common@>=5.0.0", "@angular/common@>=6.0.0", "@angular/common@>=7.0.0", "@angular/common@8.2.3":
   "integrity" "sha512-Y8ttd66bAApnJgxjndVnBP0aMsID8AzttR2TKp1KpdDKy4n6td22+1DeHZJqPMOBwoTDEdjHZqFQ7XRNYe3IVw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-8.2.3.tgz"
   "version" "8.2.3"
@@ -200,7 +200,7 @@
   dependencies:
     "tslib" "^1.9.0"
 
-"@angular/core@^6.1.0", "@angular/core@^7.2.0 || ^8.0.0", "@angular/core@^8.0.0 || ^9.0.0-0", "@angular/core@>=2.3.1 <9.0.0 || >8.0.0-beta <9.0.0", "@angular/core@>=5.0.0", "@angular/core@>=6.0.0", "@angular/core@>=7.0.0", "@angular/core@8.2.3":
+"@angular/core@^6.1.0", "@angular/core@^7.2.0 || ^8.0.0", "@angular/core@^8.0.0", "@angular/core@^8.0.0 || ^9.0.0-0", "@angular/core@>=2.3.1 <9.0.0 || >8.0.0-beta <9.0.0", "@angular/core@>=5.0.0", "@angular/core@>=6.0.0", "@angular/core@>=7.0.0", "@angular/core@8.2.3":
   "integrity" "sha512-wNlq6r0RI8q0BCr3I16NHfteliJLVjZN3MsLfzYi4u08LcGTemGL9YwcVjCOPEH4xREo3xX0ebvmuLwObu75lQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-8.2.3.tgz"
   "version" "8.2.3"
@@ -5878,6 +5878,13 @@
   "integrity" "sha512-KxHES+Dn6pbetytO9ng2GAdclmo4UcwzFmQyVPWh2xRPbAlv5/ezL2xnDVBFMqCoJQaZagvdQ+ZZFbqGWqAvCQ=="
   "resolved" "https://registry.npmjs.org/ngx-pagination/-/ngx-pagination-5.1.1.tgz"
   "version" "5.1.1"
+
+"ngx-spinner@^8.1.0":
+  "integrity" "sha512-VtIcKsxe+cNj9zCelNesSJZ/xarjxKL86GQG9h4JM++/Hf7HUJtPDBWXZ6lBk0CpgWdJ4++XX3aeOntI92ApEw=="
+  "resolved" "https://registry.npmjs.org/ngx-spinner/-/ngx-spinner-8.1.0.tgz"
+  "version" "8.1.0"
+  dependencies:
+    "tslib" "^1.9.0"
 
 "nice-try@^1.0.4":
   "integrity" "sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ=="

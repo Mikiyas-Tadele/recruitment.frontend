@@ -15,4 +15,5 @@ export class Vacancy {
     requiredNumber: number;
     salary: number;
     salaryDescription: string;
+    cgpa: string;
 }

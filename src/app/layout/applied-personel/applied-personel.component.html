@@ -94,11 +94,12 @@
 </p-panel>
 </div>
 <br />
-<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true"  sortMode="single" (onSort)="onSort()" [(selection)]="selectedApplicants">
+<p-table [value]="appliedPersonels" [responsive]="true" [autoLayout]="true"  
+sortMode="single" (onSort)="onSort()" [(selection)]="selectedApplicants" (sortFunction)="customSort($event)" [customSort]="true">
   <ng-template pTemplate="caption">
     <div class="ui-helper-clearfix" style="text-align: left">
       <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="Export to EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
-      <button type="button" pButton icon="pi pi-arrow-right" iconPos="left" label="Move to Next Stage" (click)="moveToWE()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+      <button type="button" pButton icon="pi pi-arrow-right" iconPos="left" label="Move to Next Stage" (click)="displayEC=!displayEC" style="margin-right: 0.5em;" class="ui-button-success"></button>
   </div>
     <h5>Development Bank of Ethiopia<br>
       Human Resource Management Directorate<br>
@@ -107,6 +108,7 @@
   </ng-template>
   <ng-template pTemplate="header">
       <tr>
+        <th style="width: 3em" rowspan="2">SR No</th>
           <th style="width: 3em" rowspan="2">Select</th>
           <th rowspan="2"  [pSortableColumn]="'fullName'">Name
             <p-sortIcon [field]="'fullName'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
@@ -125,6 +127,7 @@
           <th rowspan="2">Application Letter</th>
           <th colspan="5">Educational Background</th>
           <th colspan="5">Work Experience</th>
+          <th colspan="3">Certification</th>
       </tr>
       <tr>
           <th>Field of Education</th>
@@ -143,13 +146,17 @@
           <th [pSortableColumn]="'totalExperience'">Total Experience In Years
             <p-sortIcon [field]="'totalExperience'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
           </th>
+          <th>Title</th>
+          <th>Institution</th>
+          <th>Award Date</th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
       <tr>
+        <td>{{appliedPersonel.id}}</td>
           <td><p-tableCheckbox *ngIf="appliedPersonel.userId!=null" [value]="appliedPersonel" [disabled]="appliedPersonel.selected" [index]="rowIndex"></p-tableCheckbox></td>
-          <td *ngIf="rowGroupFullName[appliedPersonel.fullName].index === rowIndex" [attr.rowspan]="rowGroupFullName[appliedPersonel.fullName].size">{{appliedPersonel.fullName}}</td>
-          <td *ngIf="rowGroupEmail[appliedPersonel.email].index === rowIndex" [attr.rowspan]="rowGroupEmail[appliedPersonel.email].size">{{appliedPersonel.email}}</td>
+          <td>{{appliedPersonel.fullName}}</td>
+          <td>{{appliedPersonel.email}}</td>
           <td>{{appliedPersonel.age}}</td>
           <td>{{appliedPersonel.gender}}</td>
           <td>{{appliedPersonel.disability}}</td>
@@ -167,7 +174,10 @@
           <td>{{appliedPersonel.position}}</td>
           <td>{{appliedPersonel.salary}}</td>
           <td>{{appliedPersonel.startDate | date :'dd/MM/yyyy'}} - {{appliedPersonel.endDate | date :'dd/MM/yyyy'}}</td>
-          <td *ngIf="rowGroupTotal[appliedPersonel.totalExperience].index === rowIndex" [attr.rowspan]="rowGroupTotal[appliedPersonel.totalExperience].size">{{appliedPersonel.totalExperience}}</td>
+          <td>{{appliedPersonel.totalExperience}}</td>
+          <td>{{appliedPersonel.certTitle}}</td>
+          <td>{{appliedPersonel.certInstutiion}}</td>
+          <td>{{appliedPersonel.certDate}}</td>
       </tr>
   </ng-template>
   <ng-template pTemplate="footer">
@@ -180,3 +190,20 @@
         <p-footer>
         </p-footer>
 </p-dialog>
+
+<p-dialog header="Exam Code Prefix" [(visible)]="displayEC" [modal]="true" [responsive]="true" [style]="{width: '20%', minWidth: '200px'}" [minY]="40" 
+        [maximizable]="true" [baseZIndex]="10000">
+        <div class="row">
+          <div class="col">
+            <input type="text" [(ngModel)]="examCodePrefix"/>
+          </div>
+        </div><br>
+        <div class="row">
+           <div class="col">
+            <button class="btn btn-primary btn-small" (click)="go()">Go</button>
+           </div>
+        </div>
+        <p-footer>
+        </p-footer>
+</p-dialog>
+<ngx-spinner></ngx-spinner>

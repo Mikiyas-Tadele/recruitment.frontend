@@ -8,11 +8,13 @@ import { Vacancy } from 'src/app/models/vacancy.model';
 })
 export class VancancyService {
 
-  readonly ADD_VACANCY = '/vacancy/vacancy';
-  readonly GET_VANCANCIES = '/vacancy/vacancies';
-  readonly GET_VACANCY = '/vacancy/vacancy';
-  readonly ADD_VACANCY_DETAIL = '/vacancy/vacancyDetail';
-  readonly GET_VACANCY_DETAILS = '/vacancy/vacancyDetails';
+  private readonly ADD_VACANCY = '/vacancy/vacancy';
+  private readonly GET_VANCANCIES = '/vacancy/vacancies';
+  private readonly GET_VACANCY = '/vacancy/vacancy';
+  private readonly ADD_VACANCY_DETAIL = '/vacancy/vacancyDetail';
+  private readonly GET_VACANCY_DETAILS = '/vacancy/vacancyDetails';
+  private readonly DELETE_VACANCY_DETAIL = '/vacancy/delete-vacancyDetails/';
+
 
   constructor(private repoService: RepositoryService, @Inject('BASE_API_URL') private baseUrl: string) { }
 
@@ -36,6 +38,15 @@ export class VancancyService {
 
   getVacancyDetails(vacancyId: number) {
     return this.repoService.sendRequest('GET', this.baseUrl + this.GET_VACANCY_DETAILS + '/' + vacancyId);
+  }
+
+  deleteVacancy(data: Vacancy) {
+    const options = {body: data};
+    return this.repoService.sendRequest('DELETE', this.baseUrl + this.ADD_VACANCY, options);
+  }
+
+  deleteVacancyDetail(id: any) {
+    return this.repoService.sendRequest('GET', this.baseUrl + this.DELETE_VACANCY_DETAIL + id);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { VacancyDetail } from 'src/app/models/vacancy.detail.model';
 import { VancancyService } from './vancancy.service';
 
@@ -18,7 +18,8 @@ export class VacancyDetailComponent implements OnInit {
 
     constructor(private vacancyService: VancancyService,
        private router: Router, private route: ActivatedRoute,
-       private messageService: MessageService) { }
+       private messageService: MessageService,
+       private confirmMessage: ConfirmationService) { }
 
     ngOnInit() {
       this.initForm();
@@ -52,12 +53,28 @@ export class VacancyDetailComponent implements OnInit {
        console.log(value);
        this.vacancyService.saveVacancyDetail(value).subscribe(res => {
         this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Data Saved Successfully'});
+        this.vacancyService.getVacancyDetails(this.vacancyId).subscribe( resIn  => {
+          this.vacancyDetails = resIn;
+       });
       }, err => {
        this.messageService.add({severity: 'error', summary: 'Saved', detail: err});
       });
     }
      edit(data: VacancyDetail) {
       this.setForm(data);
+    }
+
+    deleteDetail(data: VacancyDetail) {
+      this.confirmMessage.confirm({
+        message: 'Are you sure you want to remove the vacancy post?',
+        accept: () => {
+      this.vacancyService.deleteVacancyDetail(data.id).subscribe(res => {
+        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Data Deleted Successfully'});
+        this.vacancyService.getVacancyDetails(this.vacancyId).subscribe( resIn  => {
+          this.vacancyDetails = resIn;
+       });
+      });
+    }});
     }
 
     clear() {

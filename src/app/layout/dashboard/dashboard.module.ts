@@ -8,6 +8,12 @@ import { StatModule } from '../../shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { DataViewModule } from 'primeng/dataview';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     imports: [
@@ -19,10 +25,16 @@ import { DataViewModule } from 'primeng/dataview';
         FormsModule,
         ReactiveFormsModule,
         DropdownModule,
-        DataViewModule
+        DataViewModule,
+        MessagesModule,
+        MessageModule,
+        ConfirmDialogModule,
+        ToastModule,
+        NgxSpinnerModule
     ],
     declarations: [
         DashboardComponent
-    ]
+    ],
+    providers: [MessageService, ConfirmationService]
 })
 export class DashboardModule {}

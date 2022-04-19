@@ -3,10 +3,11 @@
     <form [formGroup]="applicationForm" (ngSubmit)="onSubmit(applicationForm)" class="form">
     <div class="form-row">
         <div class="col">
-            <label><em>Upload Yours relevant Degree/Master/Phd/Diploma/Cerificate not greater than 3MB.<br> By clicking choose button then clicking the upload button</em></label><br>
+            <label><Strong><em>Upload yours scanned relevant qualification document(i.e MSc, MA, BA,BSc,Deploma) not greater than 2MB.<br> By clicking choose button then clicking the upload button</em></Strong>&nbsp;<span style="color: red;">*</span></label><br>
             <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)"
-            accept=".pdf" maxFileSize="3000000" customUpload="true">
+            accept=".pdf" maxFileSize="3000000" customUpload="true" [showUploadButton]="showUpload" [disabled]="!showUpload">
         </p-fileUpload>
+        <Strong *ngIf="showValue" style="color: red;">File Uploading.......</Strong>
         </div>
       </div>
         <div class="form-row">
@@ -15,12 +16,9 @@
                 <label for="applicationLetter"><em>Please write application letter to apply for {{vacancyname}} position not grater than 1000 words</em> </label>
                 <p-editor formControlName="applicationLetter" [style]="{'height':'320px'}"  name="applicationLetter" formControlName="applicationLetter"></p-editor>
             </fieldset>
-            <!-- <span class="text-danger"
-            *ngIf="(applicationFormControl.applicationLetter.touched || applicationFormControl.applicationLetter.drty) && applicationFormControl.applicationLetter.invalid">
-            Application letter is required
-        </span> -->
             <button type="submit" class="btn btn-primary" [disabled]='applySubmitted'>Submit</button>
     </div>
 </div>
 </form>
 </div>
+<ngx-spinner></ngx-spinner>

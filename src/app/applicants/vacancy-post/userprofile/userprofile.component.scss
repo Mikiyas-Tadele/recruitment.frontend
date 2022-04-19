@@ -1,3 +1,7 @@
 .ui-calendar.ui-calendar-w-btn{
     z-index: 1031 !important;
 }
+.scroll {
+    max-height: 100px;
+    overflow-y: auto;
+}

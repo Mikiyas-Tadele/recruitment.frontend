@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApplicantsRoutingModule } from './applicants-routing.module';
@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
@@ -35,6 +36,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {BlockUIModule} from 'primeng/blockui';
 import { FileAttachementComponent } from './internal-vacancy/file-attachement/file-attachement.component';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 
 @NgModule({
@@ -65,8 +67,11 @@ import { FileAttachementComponent } from './internal-vacancy/file-attachement/fi
     RadioButtonModule,
     OverlayPanelModule,
     ProgressSpinnerModule,
-    BlockUIModule
+    BlockUIModule,
+    NgxSpinnerModule,
+    ProgressBarModule
   ],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ApplicantsModule { }

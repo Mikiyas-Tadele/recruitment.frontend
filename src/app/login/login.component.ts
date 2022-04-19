@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     authenticatedResult: boolean;
     errorMessage: string;
     session: any;
+    loginIsClicked = false;
     private readonly ADMIN = 'ROLE_ADMIN';
     private readonly PLACEMENT = 'ROLE_PLACEMENT';
     private readonly PLACEMENT2 = 'ROLE_PLACEMENT2';
@@ -45,6 +46,8 @@ get f() {
   return this.authenticated.controls;
 }
     onLoggedin({value, valid}: { value: Authenticated, valid: boolean }) {
+      if (valid) {
+        this.loginIsClicked = true;
         this.loginService.login(value.username.toLowerCase(), value.password).subscribe(
             (data) => {
                 this.token.saveToken(data['accessToken']);
@@ -69,10 +72,13 @@ get f() {
                 } else {
                   this.router.navigate([this.returnUrl]);
                 }
+                this.loginIsClicked = false;
               },
               error => {
                 this.messageService.add({severity: 'error', summary: 'Error Message', detail: 'Wrong username or password'});
+                this.loginIsClicked = false;
               });
+            }
     }
 }
 

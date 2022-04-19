@@ -1,8 +1,9 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
 import { ApplicantForWrittenExamModel } from 'src/app/models/applicant.selected.for.we';
 import { AppliedPersonelFilter } from 'src/app/models/applied-personel-filter.model';
 import { AppliedPersonelModel } from 'src/app/models/appliedPersonel.model';
@@ -21,7 +22,9 @@ import { AppliedPersonelService } from './applied-personel.service';
 export class AppliedPersonelComponent implements OnInit {
   constructor(private appliedPersonelService: AppliedPersonelService, private route: ActivatedRoute,
     private vacancyService: VancancyService, private excelService: ExcelExportService,
-    private confirmMessage: ConfirmationService, private messagingService: MessageService) { }
+    private confirmMessage: ConfirmationService, private messagingService: MessageService,
+    private router: Router,
+    private spinner: NgxSpinnerService) { }
   appliedPersonels: any = [];
   appliedPersonelsExcel: any = [];
   filteredAppliedPersonels: any[];
@@ -38,6 +41,8 @@ export class AppliedPersonelComponent implements OnInit {
   rowGroupTotal: RowGroupModel;
   selectedApplicants: any = [];
   vacancyId = 0;
+  displayEC = false;
+  examCodePrefix: string;
 
   onClick(event: Event, menu) {
     menu.toggle(event);
@@ -49,6 +54,7 @@ export class AppliedPersonelComponent implements OnInit {
     this.vacancyId = this.route.snapshot.params['id'];
     const searchModel: AppliedPersonelFilter = new AppliedPersonelFilter();
     searchModel.vacancyId = this.vacancyId;
+    this.spinner.show();
     this.appliedPersonelService.advanceSearch(searchModel).subscribe(res => {
       this.counter = 0;
            this.appliedPersonels = res;
@@ -58,6 +64,7 @@ export class AppliedPersonelComponent implements OnInit {
            this.appliedPersonelService.advanceSearchForExcel(searchModel).subscribe(resI => {
             this.appliedPersonelsExcel = resI;
          });
+         this.spinner.hide();
     });
 this.filteredAppliedPersonels = this.appliedPersonels;
     this.vacancyService.getVacancy(this.vacancyId).subscribe(res => {
@@ -118,7 +125,7 @@ exportExcel() {
        const headers = ['Name', 'Email', 'Age', 'Gender', 'Disability', 'Mobile', 'Fixed',
         'Field of Education',
         'Qualification', 'University', 'Year of Graduation', 'CGPA', 'Organization',
-        'Position', 'Salary', 'Duration', 'Total Experience (Years)'];
+        'Position', 'Salary', 'Duration', 'Total Experience (Years)', 'Certification Title', 'Certification Institution', 'Award Date'];
         for (let index = 0; index < this.appliedPersonelsExcel.length; index++) {
           const element = this.appliedPersonelsExcel[index];
            console.log(element);
@@ -138,7 +145,10 @@ exportExcel() {
            element.position,
            element.salary,
            this.getDateFormatted(element.startDate, element.endDate),
-           element.totalExperience]);
+           element.totalExperience,
+          element.certTitle,
+          element.certInstutiion,
+        element.certDate]);
         }
         const title = 'Human Resource Management Directorate Applicants profile Summary for the Position ' + this.vacancyName;
            const fileName = this.vacancyName + Date();
@@ -277,6 +287,7 @@ moveToWE() {
     this.appliedPersonelService.addOrUpdateApplicantsForWrittenExam(writtenExamApplicantList).subscribe(res => {
       this.messagingService.add({severity: 'success', summary: 'Selection',
       detail: 'You have successfully selected applicants for written exam, to un-select please go to applicants list for exam page'});
+      window.location.reload();
     });
     }
   });
@@ -294,10 +305,45 @@ getWEApplicantList() {
     applicant.applicantId = element.applicantId;
     applicant.examResult = 0.0;
     applicant.vacancyId = this.vacancyId;
+    applicant.examCodePrefix = this.examCodePrefix;
+    applicant.addOrRemove = true;
     WEApplicantList.push(applicant);
   }
 
   return WEApplicantList;
+}
+go() {
+  this.displayEC = false;
+  this.moveToWE();
+}
+customSort(event: SortEvent) {
+  const uniqueList = event.data.filter(a => {
+     return a.fullName != null;
+  }).sort((data1, data2) => {
+    const value1 = data1[event.field];
+    const value2 = data2[event.field];
+    const result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+    return (event.order * result);
+  });
+
+  const listWithNull = event.data.filter(a => {
+    return a.fullName == null;
+ });
+ this.appliedPersonels = [];
+  for (let index = 0; index < uniqueList.length; index++) {
+    const element = uniqueList[index];
+    this.appliedPersonels.push(element);
+    const groupedvalues = listWithNull.filter(a => {
+      return a.applicantId === element.applicantId;
+   });
+   if (groupedvalues.length > 0) {
+    for (let index = 0; index < groupedvalues.length; index++) {
+      const element = groupedvalues[index];
+       this.appliedPersonels.push(element);
+
+    }
+  }
+  }
 }
 
 }

@@ -17,6 +17,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Applicant Name</th>
+            <th>Exam Code</th>
             <th>Written Exam Result</th>
             <th> Interview Result</th>
             <th>Gross Total</th>
@@ -26,6 +27,7 @@
     <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
         <tr>
             <td>{{appliedPersonel.applicantName}}</td>
+            <td>{{appliedPersonel.examCode}}</td>
             <td>{{appliedPersonel.writtenExamResult}}</td>
             <td>{{appliedPersonel.interviewResult}}</td>
             <td>{{appliedPersonel.totalResult}}</td>
@@ -36,4 +38,5 @@
     </ng-template>
   </p-table>
   </div>
+  <ngx-spinner></ngx-spinner>
 

@@ -5,5 +5,6 @@ export class ApplicantForInterviewModel {
     vacancyId: number;
     vacancyTitle: string;
     examResult: number;
-    isSelected: boolean;
+    selected: boolean;
+    examCode: string;
 }

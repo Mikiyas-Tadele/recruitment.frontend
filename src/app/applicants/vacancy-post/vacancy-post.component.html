@@ -6,7 +6,6 @@
 <p-dataView [value]="vacancies" [paginator]="true" [rows]="10" #dv filterBy="title" emptyMessage="No Vacancy Available!">
         <p-header>
             <input type="search" pInputText placeholder="Search by title" (keyup)="dv.filter($event.target.value, 'contains')">&nbsp;&nbsp;&nbsp;
-            <span><strong>External Vacancy Testing Environment</strong></span>
         </p-header>
     <div class="row">
     <ng-template let-vacancy pTemplate="listItem">
@@ -21,21 +20,23 @@
                     <div class="card-body">
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{vacancy.workExperience}} Year Experience</h4>
+                                <h4 class="timeline-title">{{vacancy.qualification}}</h4>
+                                <h6>{{vacancy.location}}</h6>
                                 <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{vacancy.minutesElapsedSinceCreation}}</small>
                                 </p>
                                 <span class="text-success" *ngIf="!vacancy.closed" >Active</span>
                                 <span class="text-danger" *ngIf="vacancy.closed">Closed</span>
                             </div>
                             <div class="timeline-body">
-                                <p>{{vacancy.qualification}}
+                                <p>
+                                    {{vacancy.workExperience}}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">More</button>&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)">Apply</button>
+                        <button class="btn btn-sm btn-success" (click)="goToView(vacancy)">View Job Details</button>&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" (click)="apply(vacancy)" [disabled]="applyClicked">Apply</button>
                     </div>
                 </div>
             </div>
@@ -43,3 +44,4 @@
     </ng-template>
 </div>
 </p-dataView>
+<!-- <ngx-spinner></ngx-spinner> -->

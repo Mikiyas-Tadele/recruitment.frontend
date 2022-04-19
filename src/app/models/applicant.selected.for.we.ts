@@ -6,4 +6,8 @@ export class ApplicantForWrittenExamModel {
     vacancyTitle: string;
     examResult: number;
     isSelected: boolean;
+    examCodePrefix: string;
+    addOrRemove: boolean;
+    examCode: string;
+
 }

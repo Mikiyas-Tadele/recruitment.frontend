@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn" [disabled] ="!authenticated.valid">{{ 'Log in'}}</button>&nbsp;&nbsp;
+                <button type="submit" class="btn rounded-btn" [disabled] ="loginIsClicked">{{ 'Log in'}}</button>&nbsp;&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/']">{{ 'Cancel'}}</a>
                 &nbsp;<br><br>
                 <a  [routerLink]="['/signup']">New To DBE's online job application? Create an account</a>

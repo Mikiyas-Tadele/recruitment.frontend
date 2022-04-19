@@ -12,9 +12,12 @@
               <label for="qualification">Qualification</label>
               <input type="text" formControlName="qualification" class="form-control"  name="qualification">
           </fieldset>
-
+          <fieldset class="form-group">
+            <label for="cgpa">CGPA</label>
+            <input type="text" formControlName="cgpa" class="form-control"  name="cgpa">
+        </fieldset>
           <div class="form-group">
-              <label for="workExprience">Work Exprience</label>
+              <label for="workExprience">Work Experience</label>
               <input type="text" formControlName="workExperience" class="form-control"   name="workExperience">
           </div>
 
@@ -23,34 +26,34 @@
               <input type="text"  formControlName="location"  class="form-control"  name="location">
           </fieldset>
           <fieldset class="form-group">
-            <label for="requiredNumber">Required Number of Vacant Post</label>
-            <input type="text"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber">
+            <label for="requiredNumber">Number of Vacant Post</label>
+            <input type="text"  formControlName="requiredNumber"  class="form-control"  name="requiredNumber">
         </fieldset>
         <fieldset class="form-group">
             <label for="salary">Salary</label>
-            <input type="text"  formControlName="salary"  class="form-control"  placeholder="Enter salary" name="salary">
+            <input type="text"  formControlName="salary"  class="form-control"   name="salary">
         </fieldset>
         <fieldset class="form-group">
             <label for="salaryDescription">Salary Description</label>
-            <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription">
+            <input type="text"  formControlName="salaryDescription"  class="form-control"   name="salaryDescription">
         </fieldset>
         <fieldset class="form-group">
-            <label for="employementCondition">Employeement Condition</label>
-            <input type="text"  formControlName="employmentCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition">
+            <label for="employementCondition">Employement Condition</label>
+            <input type="text"  formControlName="employmentCondition"  class="form-control"   name="employementCondition">
         </fieldset>
         <fieldset class="form-group">
           <label for="postedDate">Posted Date</label>
-          <input type="text" formControlName="postedDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+          <input type="text" formControlName="postedDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                class="form-control"
-                               bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                               bsDatepicker/> 
           <!-- <input type="date" formControlName="postedDate"  class="form-control"  name="postedDate"> -->
       </fieldset>
 
       <fieldset class="form-group">
-          <label for="deadlineDate">Deadline Date</label>
-          <input type="text" formControlName="deadlineDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+          <label for="deadlineDate">Deadline</label>
+          <input type="text" formControlName="deadlineDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                class="form-control"
-                               bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
+                               bsDatepicker/> 
           <!-- <input type="date" formControlName="deadlineDate"  class="form-control"  name="deadlineDate"> -->
       </fieldset>
   </div>
@@ -77,3 +80,4 @@
   <button type="button" class="btn btn-primary" (click)="back()">Back</button>
 </div>
 </div>
+<ngx-spinner></ngx-spinner>

@@ -36,7 +36,9 @@ export class SignupComponent implements OnInit {
             value.email = value.email.toLowerCase();
             this.logiService.registerNewUser(value).subscribe(res => {
                 this.messageService.add({severity: 'success', summary: 'Registered', detail: 'You have successfully registered.'});
-                 this.route.navigate(['/notification']);
+                setTimeout(() => {
+                    this.route.navigate(['/login']);
+                }, 1500);
                  this.submitted = false;
             }, error => {
                 this.messageService.add({severity: 'error', summary: 'Error Message', detail: error.error.message});

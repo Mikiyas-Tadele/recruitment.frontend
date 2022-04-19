@@ -23,12 +23,10 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
     if (this.token.getToken() != null) {
           authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)});
         }
-
-return next.handle(authReq).pipe(tap(
+return next.handle(authReq).pipe(tap(() => {},
         (err: any) => {
-          if (err instanceof HttpResponse) {
+          if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
-              console.log('I am here');
               this.router.navigate(['/login']);
             }
           }

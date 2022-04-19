@@ -2,20 +2,19 @@
         <p-toast [style]="{marginTop: '100px'}"></p-toast>
        <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="form">
             <ngb-tabset [destroyOnHide]="false">
-  
-                <ngb-tab title="Basic Info" id="tab1">
+                <ngb-tab  id="tab1">
+                    <ng-template ngbTabTitle>Basic Info</ng-template>
                   <ng-template ngbTabContent>
                       <div class="row">
                           <div class="col-md-6">
-
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
-                            <label for="gender">Gender</label>
+                            <label for="gender">Gender&nbsp;<span style="color: red;">* <small>(i.e. required)</small></span> </label>
                             <select class="form-control" name="gender" formControlName="gender" >
                               <option  value="">Please select your gender</option>
                               <option  value="Male">Male</option>
                               <option value="Female">Female</option>
-                            </select>                         
+                            </select>                      
                             <span class="text-danger"
                             *ngIf="(userFormControl.gender.touched || userFormControl.gender.drty) && userFormControl.gender.invalid">
                             Gender is required
@@ -25,7 +24,7 @@
 
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
-                            <label for="dateOfBirth">Date of Birth</label>
+                            <label for="dateOfBirth">Date of Birth&nbsp;<span style="color: red;">*</span></label>
                             <!-- <input type="date" name="dateOfBirth"  formControlName="dateOfBirth" class="form-control"  placeholder="dd-mm-yyyy" required /> -->
                             <!-- <div class="input-group">
                                 <input class="form-control" placeholder="mm/dd/yyyy"
@@ -47,7 +46,7 @@
 
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
-                            <label for="disability">Disability</label>
+                            <label for="disability">Disability&nbsp;<span style="color: red;">*</span></label>
                             <select name="disability" formControlName="disability" 
                              class="form-control"  (change)="checkDisablity($event.target.value)">
                                 <option  value="">Please select</option>
@@ -69,8 +68,8 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
-                                <label for="mphone">Primary Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="mPhone1"  name="mphone1" minlength="10" maxlength="12" required/>
+                                <label for="mphone">Primary Phone Number&nbsp;<span style="color: red;">*(example in the format 0911223344)</span></label>
+                                <input type="tel" class="form-control" formControlName="mPhone1"  name="mphone1"  required/>
                                 <span class="text-danger" *ngIf="(userFormControl.mPhone1.touched || userFormControl.mPhone1.drty) && userFormControl.invalid">
                                 mobile phone is required
                             </span>
@@ -79,13 +78,13 @@
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="mphone2">Secondary Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" minlength="10" maxlength="12"/>
+                                <input type="tel" class="form-control" formControlName="mPhone2"  name="mphone2" />
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="userForm">
                                 <label for="fphone">Fixed-Line Phone Number</label>
-                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone" minlength="10" maxlength="12" />
+                                <input type="tel" class="form-control" formControlName="fPhone"  name="fphone"  />
                             </div>
                         </fieldset>
                         </div>
@@ -100,7 +99,7 @@
                              <div class="col-md-6">
                         <fieldset class="form-group">
                                 <div [formGroup]="educationForm">
-                                <label for="fieldOfEducation">Field of Education</label>
+                                <label for="fieldOfEducation">Field of Education&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" formControlName="fieldOfEducation" name="field" />
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.fieldOfEducation.touched || educationFormControl.fieldOfEducation.drty) && educationFormControl.fieldOfEducation.invalid">
@@ -110,7 +109,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                            <label for="fieldOfEducation">Specialization</label>
+                            <label for="fieldOfEducation">Specialization&nbsp;<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" formControlName="specialization" name="field" />
                             <span class="text-danger"
                             *ngIf="(educationFormControl.specialization.touched || educationFormControl.specialization.drty) && educationFormControl.specialization.invalid">
@@ -120,7 +119,7 @@
                     </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="qualification">Qualification</label><br>
+                                <label for="qualification">Qualification&nbsp;<span style="color: red;">*</span></label><br>
                                 <p-dropdown formControlName="qualification"  class="dropdownInput" [filter]="true" [options]="qualifications" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.qualification.touched || educationFormControl.qualification.drty) && educationFormControl.qualification.invalid">
@@ -130,7 +129,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="university">University/College</label>
+                                <label for="university">University/College&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" formControlName="university"  name="university" />
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.university.touched || educationFormControl.university.drty) && educationFormControl.university.invalid">
@@ -140,7 +139,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="cgpa">CGPA</label>
+                                <label for="cgpa">CGPA&nbsp;<span style="color: red;">*</span></label>
                                 <input type="number" name="cgpa" class="form-control" formControlName="cgpa"  />
                                 <div *ngIf="(educationFormControl.cgpa.touched || educationFormControl.cgpa.drty) && educationFormControl.cgpa.invalid">
                                     <span class="text-danger" *ngIf="educationFormControl.cgpa.errors?.required">
@@ -154,7 +153,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="educationForm">
-                                <label for="yearOfGraduation">Year of Graduation In G.C</label><br>
+                                <label for="yearOfGraduation">Year of Graduation In G.C&nbsp;<span style="color: red;">*</span></label><br>
                                 <p-dropdown formControlName="yearOfGraduation" [filter]="true" class="dropdownInput" [options]="years" name="qualification" [style]="{'width':'100%'}" ></p-dropdown>
                                 <span class="text-danger"
                                 *ngIf="(educationFormControl.yearOfGraduation.touched || educationFormControl.yearOfGraduation.drty) && educationFormControl.yearOfGraduation.invalid">
@@ -214,7 +213,7 @@
                                 <div class="col-md-6">
                                     <fieldset class="form-group">
                                         <div [formGroup]="experienceForm">
-                                            <label for="organization">Organization Name</label>
+                                            <label for="organization">Organization Name&nbsp;<span style="color: red;">*</span></label>
                                             <input type="text" class="form-control" formControlName="organization" name="organization" />
                                             <span class="text-danger"
                                             *ngIf="(experienceFormControl.organization.touched || experienceFormControl.organization.drty) && (experienceFormControl.organization.invalid)">
@@ -224,7 +223,7 @@
                                     </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
-                                <label for="position">Position</label>
+                                <label for="position">Position&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" formControlName="position"  name="position" />
                                 <span class="text-danger"
                             *ngIf="(experienceFormControl.position.touched || experienceFormControl.position.drty) && experienceFormControl.position.invalid">
@@ -234,18 +233,10 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
-                                <label for="startDate">Start Date</label>
+                                <label for="startDate">Start Date&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" formControlName="startDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                 class="form-control"
-                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
-                                <!-- <input type="date" name="startDate"  formControlName="startDate" class="form-control" placeholder="dd-mm-yyyy" required/> -->
-                                <!-- <div class="input-group">
-                                    <input class="form-control" placeholder="dd/mm/yyyy"
-                                           name="startDate"  formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                    </div>
-                                  </div> -->
+                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate" /> 
                                 <span class="text-danger"
                             *ngIf="(experienceFormControl.startDate.touched || experienceFormControl.startDate.drty) && experienceFormControl.startDate.invalid">
                             Start date is required
@@ -254,18 +245,10 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
-                                <label for="endDate">End Date </label>
+                                <label for="endDate">End Date&nbsp;<span style="color: red;">*</span> </label>
                                 <input type="text" formControlName="endDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                 class="form-control"
-                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
-                                <!-- <input type="date" name="endDate"  formControlName="endDate" class="form-control" required/> -->
-                                <!-- <div class="input-group">
-                                    <input class="form-control" placeholder="dd/mm/yyyy"
-                                           name="endDate"  formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker" [minDate]="{year: 1960, month: 1, day: 1}">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                    </div>
-                                  </div> -->
+                                bsDatepicker [minDate]="minDate" [maxDate]="maxDate" /> 
                             <span class="text-danger"
                             *ngIf="(experienceFormControl.endDate.touched || experienceFormControl.endDate.drty) && experienceFormControl.endDate.invalid">
                             End date is required
@@ -274,7 +257,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="experienceForm">
-                                <label for="salary">Salary </label>
+                                <label for="salary">Salary &nbsp;<span style="color: red;">*</span></label>
                                 <input type="number" class="form-control" formControlName="salary"  name="salary" />
                              </div>
                         </fieldset>
@@ -329,7 +312,7 @@
                              <div class="col-md-6">
                         <fieldset class="form-group">
                                 <div [formGroup]="certificationForm">
-                                <label for="title">Certification Title</label>
+                                <label for="title">Certification Title&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" formControlName="title" name="title" />
                                 <span class="text-danger"
                                 *ngIf="(certificationFormControl.title.touched || certificationFormControl.title.drty) && certificationFormControl.title.invalid">
@@ -339,7 +322,7 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <div [formGroup]="certificationForm">
-                            <label for="institution">Institution</label>
+                            <label for="institution">Institution&nbsp;<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" formControlName="institution" name="institution" />
                             <span class="text-danger"
                             *ngIf="(certificationFormControl.institution.touched || certificationFormControl.institution.drty) && certificationFormControl.institution.invalid">
@@ -350,7 +333,7 @@
                         
                         <fieldset class="form-group">
                             <div [formGroup]="certificationForm">
-                                <label for="awardedDate">Awarded Date</label>
+                                <label for="awardedDate">Awarded Date&nbsp;<span style="color: red;">*</span></label>
                                 <input type="text" formControlName="awardDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                 class="form-control"
                                 bsDatepicker [minDate]="minDate" [maxDate]="maxDate"  /> 
@@ -412,17 +395,21 @@
                         <br/>
                         <div class="row">
                             <div class="col-md-6">
-                                <label><em>Upload Yours CV not greater than 2MB.<br> By clicking choose button then clicking the upload button</em></label><br>
-                                <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)"
-                                accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" >
+                                <label><Strong><em>Upload Yours CV not greater than 2MB.<br> By clicking choose button then clicking the upload button</em></Strong>&nbsp;<span style="color: red;">*</span></label><br>
+                                <p-fileUpload name="demo[]"  (uploadHandler)="onUpload($event)" 
+                                accept=".doc, .docx, .pdf" maxFileSize="10000000" customUpload="true" [showUploadButton]="showUpload" [disabled]="!showUpload">
                             </p-fileUpload>
                             <br><br>
+                            <Strong *ngIf="showValue" style="color: red;">File Uploading.......</Strong>
                             </div>
                             </div>
+
                             </ng-template>
                   </ngb-tab>
         </ngb-tabset><br><br>
             <button type="button" class="btn btn-success" (click)="back()">Back To Home</button>&nbsp;&nbsp;
-            <button type="submit" class="btn btn-primary">Finish</button>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary" [disabled]="finishSubmitted">Finish Profile</button>&nbsp;&nbsp;
         </form>
         </div>
+        <ngx-spinner></ngx-spinner>
+        

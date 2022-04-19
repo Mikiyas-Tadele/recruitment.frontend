@@ -1,7 +1,8 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { RepositoryService } from 'src/app/models/services/repository.service';
 import { VacancieslFilter } from 'src/app/models/vacanciesl-filter.model';
 import { Vacancy } from 'src/app/models/vacancy.model';
@@ -19,7 +20,10 @@ export class DashboardComponent implements OnInit {
     vacancyFilterForm: FormGroup;
     vacanvyTitles: SelectItem[] = [];
 
-    constructor(private vacancyService: VancancyService, private router: Router, private zone: NgZone) { }
+    constructor(private vacancyService: VancancyService, private router: Router,
+      private zone: NgZone, private confirmMessage: ConfirmationService,
+      private messagingService: MessageService,
+      private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
        this.initForm();
@@ -27,8 +31,10 @@ export class DashboardComponent implements OnInit {
     }
     private getVacancies() {
         this.vacanvyTitles = [];
+        this.spinner.show();
        this.vacancyService.getVcancies().subscribe(res => {
          this.vacancies = res as Vacancy[];
+         this.spinner.hide();
          for (let i = 0; i < this.vacancies.length; i++) {
            const element = this.vacancies[i];
            const l = { label: element.title, value: element.id };
@@ -57,6 +63,25 @@ export class DashboardComponent implements OnInit {
 
     goToView(data: Vacancy) {
       this.router.navigate(['admin/post-vacancy/' + data.id]);
+    }
+    cancelVacancy(data: Vacancy) {
+      this.confirmMessage.confirm({
+        message: 'Are you sure you want to remove the vacancy post?',
+        accept: () => {
+          this.spinner.show();
+        this.vacancyService.deleteVacancy(data).subscribe(res => {
+          this.messagingService.add({severity: 'success', summary: 'Selection',
+          detail: 'You have successfully removed the vacancy from the list'});
+          this.spinner.hide();
+          window.location.reload();
+        }, err => {
+          this.messagingService.add({severity: 'error', summary: 'Saved', detail: err.error.message});
+          this.spinner.hide();
+         }  );
+        }, reject: () => {
+          this.spinner.hide();
+        }
+      });
     }
 
     search({value, valid}: { value: VacancieslFilter, valid: boolean }) {

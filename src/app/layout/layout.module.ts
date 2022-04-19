@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
@@ -42,6 +42,7 @@ import { ApplicantForWrittenExamComponent } from './applicant-for-written-exam/a
 import { ApplicantsForInterviewComponent } from './applicants-for-interview/applicants-for-interview.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/applicants-at-final-stage.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -55,7 +56,6 @@ import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/app
         FormsModule,
         ReactiveFormsModule,
         TableModule,
-        ToastModule,
         MessagesModule,
         MessageModule,
         EditorModule,
@@ -71,8 +71,8 @@ import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/app
         DataViewModule,
         NgbDatepickerModule,
         CalendarModule,
-        ConfirmDialogModule
-
+        ConfirmDialogModule,
+        NgxSpinnerModule
 
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent,
@@ -89,6 +89,7 @@ import { ApplicantsAtFinalStageComponent } from './applicants-at-final-stage/app
                 provide: HTTP_INTERCEPTORS,
                 useClass: AuthHeaderInterceptor,
                 multi: true
-              }, ]]
+              }, ]],
+              schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LayoutModule {}

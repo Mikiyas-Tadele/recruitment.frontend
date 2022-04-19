@@ -15,6 +15,7 @@ import { RepositoryService } from 'src/app/models/services/repository.service';
 import { Userprofile } from 'src/app/models/userprofile.model';
 import { WorkExperience } from 'src/app/models/work-experience.model';
 import { UserProfileService } from './user-profile.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-userprofile',
@@ -45,14 +46,20 @@ years: any = [];
 phoneno = '^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$';
 minDate: Date;
   maxDate: Date;
+  endMinDate: Date;
   @ViewChild('tabset', { static: true }) tabset: any;
   finishSubmitted = false;
+  showUpload = true;
+  startDateEntered = true;
 
 private readonly qualificationLookupCode = 'QUALIFICATION';
+private readonly Grauduation_Year = 'GRY';
 private readonly CV_FILE = 0;
+  showValue = false;
   constructor(private userService: UserProfileService,
      private fb: FormBuilder, private router: Router,
-     private messageService: MessageService ) {
+     private messageService: MessageService,
+     private spinner: NgxSpinnerService) {
 
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -67,7 +74,7 @@ private readonly CV_FILE = 0;
       dateOfBirth: ['', Validators.required],
       disability: ['', Validators.required],
       disabilityDescription: [''],
-      mPhone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(13)]],
+      mPhone1: ['', [Validators.required]],
       mPhone2: [''],
       fPhone: [''],
     });
@@ -105,11 +112,13 @@ private readonly CV_FILE = 0;
 
   }
   getUserProfile() {
+    this.spinner.show();
     this.userService.getApplicant().subscribe(res => {
       this.userProfile = res;
       if (this.userProfile != null) {
         this.isNewUser = false;
         this.setForm(this.userProfile);
+        this.spinner.hide();
       }
    });
   }
@@ -131,17 +140,18 @@ private readonly CV_FILE = 0;
   onSubmit({value, valid}: { value: Userprofile, valid: boolean }) {
     this.finishSubmitted = true;
     if (valid && this.educations.length > 0 && this.uploadedFiles.length > 0) {
-
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
       this.userService.saveApplicant(value).subscribe(res => {
         this.enableDisablity = false;
-        this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Saved Successfully!'});
+        setTimeout(() => {
+          // tslint:disable-next-line:max-line-length
+          this.messageService.add({severity: 'success', summary: 'Saved', detail: 'User Profile Saved Successfully! Please go to the list of vacancies to apply for a position'});
+        }, 1000);
         this.getUserProfile();
         });
     } else if (valid && value.id != null) {
-      console.log('Date ' + value.dateOfBirth);
       value.educationalBackgrounds = this.educations;
       value.workExperiences = this.experiences;
       value.certifications = this.certifications;
@@ -149,14 +159,17 @@ private readonly CV_FILE = 0;
        this.userService.saveApplicant(value).subscribe(res => {
         this.messageService.add({severity: 'success', summary: 'Saved', detail: 'Date Updated Successfully!'});
         this.enableDisablity = false;
+        this.finishSubmitted = false;
         this.getUserProfile();
        });
     } else if (this.educations.length === 0 || this.uploadedFiles.length === 0) {
       this.messageService.add({severity: 'error', summary: 'Saved',
       detail: 'You have not added either education background or uploaded a CV'});
+      this.finishSubmitted = false;
     } else {
       console.log(valid);
       this.messageService.add({severity: 'error', summary: 'Saved', detail: 'Check for wrong data in the form'});
+      this.finishSubmitted = false;
     }
   }
   addEducation({value, valid}: { value: Education, valid: boolean }) {
@@ -169,9 +182,13 @@ private readonly CV_FILE = 0;
   }
   addExperiences({value, valid}: { value: WorkExperience, valid: boolean }) {
     if (valid) {
+      if (value.startDate <= value.endDate) {
     this.experiences.push(value);
     this.experienceForm.reset();
     this.experience = new WorkExperience();
+      } else {
+        this.messageService.add({severity: 'error', summary: 'Saved', detail: 'start date should be less than end date'});
+      }
     }
   }
   addCertification({value, valid}: { value: Certification, valid: boolean }) {
@@ -260,11 +277,18 @@ deleteExperience(experience: WorkExperience) {
     this.router.navigate(['vacancies']);
   }
   onUpload(event) {
+    this.showUpload = false;
     this.uploadedFiles.push(event.files[0]);
     const formData: FormData = new FormData();
     formData.append('file', event.files[0], event.files[0].name);
+    this.showValue = true;
     this.userService.storeFile(formData, this.CV_FILE).subscribe(fileRes => {
       this.messageService.add({severity: 'success', summary: 'Upload File', detail: 'File Successfully Uploaded'});
+      this.showUpload = true;
+      this.showValue = false;
+  }, err => {
+        this.showUpload = true;
+        this.showValue = false;
   });
   }
 
@@ -293,10 +317,11 @@ deleteExperience(experience: WorkExperience) {
   }
 
   loadYears() {
-    const startYear = 1940;
+    const startYear = 2019;
+    const endYear = 2022;
     this.years.push({label: null, value: null});
-    for (let index = 1; index < 150; index++) {
-      const year = startYear + index;
+    for (let index = startYear; index <= endYear; index++) {
+      const year = index;
       const q = {label: year   , value: year};
       this.years.push(q);
     }
@@ -308,5 +333,14 @@ deleteExperience(experience: WorkExperience) {
 
   nextTab(event) {
     console.log(event);
+  }
+
+  onValueChange(value: Date): void {
+    this.endMinDate = new Date(value.valueOf());
+    this.endMinDate.setDate(this.endMinDate.getDate() + 1);
+    this.startDateEntered = !this.startDateEntered;
+  }
+  showProgress() {
+    this.showValue = true;
   }
 }

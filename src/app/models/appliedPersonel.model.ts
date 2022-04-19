@@ -27,4 +27,7 @@ export class AppliedPersonelModel {
      totalExperience: number;
      qualificationDesc: string;
      selected: boolean;
+     certDate: Date;
+     certInstutiion: string;
+     certTitle: string;
 }

@@ -15,9 +15,12 @@
                 <label for="qualification">Qualification</label>
                 <input type="text" formControlName="qualification" class="form-control"  placeholder="Enter Qualification" name="qualification" required />
             </fieldset>
-
+            <fieldset class="form-group">
+                <label for="cgpa">CGPA</label>
+                <input type="text" formControlName="cgpa" class="form-control"  placeholder="Enter CGPA" name="cgpa" />
+            </fieldset>
             <div class="form-group">
-                <label for="workExprience">Work Exprience</label>
+                <label for="workExprience">Work Experience </label>
                 <input type="text" formControlName="workExperience" class="form-control"  placeholder="Enter Work Exprience" name="workExperience" required />
             </div>
 
@@ -26,7 +29,7 @@
                 <input type="text"  formControlName="location"  class="form-control"  placeholder="Enter Location" name="location" required>
             </fieldset>
             <fieldset class="form-group">
-                <label for="requiredNumber">Required Number of Vacant Post</label>
+                <label for="requiredNumber">Number of Vacant Post</label>
                 <input type="number"  formControlName="requiredNumber"  class="form-control"  placeholder="Enter required number of vacant post" name="requiredNumber" required>
             </fieldset>
             <fieldset class="form-group">
@@ -38,7 +41,7 @@
                 <input type="text"  formControlName="salaryDescription"  class="form-control"  placeholder="Enter salary description" name="salaryDescription">
             </fieldset>
             <fieldset class="form-group">
-                <label for="employementCondition">Employeement Condition</label>
+                <label for="employementCondition">Employement Condition</label>
                 <input type="text"  formControlName="employmentCondition"  class="form-control"  placeholder="Enter Employeement Condition" name="employementCondition" required>
             </fieldset>
             <fieldset class="form-group">
@@ -50,7 +53,7 @@
             </fieldset>
   
             <fieldset class="form-group">
-                <label for="deadlineDate">Deadline Date</label>
+                <label for="deadlineDate">Deadline</label>
                 <input type="text" formControlName="deadlineDate" placeholder="DD/MM/YYYY" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                                      class="form-control"
                                      bsDatepicker [minDate]="minDate" [maxDate]="maxDate"/> 
@@ -62,7 +65,7 @@
    
 </div>
 <div class="card-footer col-lg-6">
-    <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+    <button type="submit" class="btn btn-primary" [disabled]="saved">Save</button>&nbsp;
     <button type="button" class="btn btn-success" (click)="clear()">Clear</button>&nbsp;
     <button type="button" class="btn btn-defualt" (click)="back()">Back</button>&nbsp;
     <button type="button" class="btn btn-success" (click)="detailForm()">Add Details</button>

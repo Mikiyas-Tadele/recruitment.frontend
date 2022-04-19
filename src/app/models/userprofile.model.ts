@@ -14,6 +14,7 @@ export class Userprofile {
      mPhone1: string;
      mPhone2: string;
      fPhone: string;
+     currentLocation;'string';
      educationalBackgrounds: Education[] = [];
      workExperiences: WorkExperience[] = [];
      certifications: Certification[] = [];

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-sm ">
     <a *ngIf="!isStaff; else staff" class="navbar-brand" href="#"><img src="assets/images/dbelogo.gif" alt="DBE Logo" /></a>
-    <<ng-template #staff>
+    <ng-template #staff>
         <img src="assets/images/dbelogo.gif" alt="DBE Logo" />
     </ng-template>
     
@@ -10,11 +10,16 @@
   </button>
     <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
         <ul class="navbar-nav ml-auto">
-            <!-- <li *ngIf="!isStaff" class="nav-item d-none d-xl-block">
-                <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/help']">
-                  {{ 'Help'}}
+            <li *ngIf="!isStaff" class="nav-item">
+                <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/']">
+                  {{ 'Vacancies'}}
               </a>
-            </li> &nbsp;&nbsp; -->
+            </li> &nbsp;&nbsp;
+            <li *ngIf="!isStaff" class="nav-item">
+                <a  class="nav-link btn mt-1 btn btn-danger btn-large border border-danger" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/help']">
+                  {{ 'How to Apply'}}
+              </a>
+            </li> &nbsp;&nbsp;
             <li class="nav-item" *ngIf="isNotLoggedIn">
                 <a  class="nav-link btn mt-1" role="button" style="padding: .375rem 1rem !important;border-color: #999;" [routerLink]="['/login']">
                   {{ 'Log In'}}

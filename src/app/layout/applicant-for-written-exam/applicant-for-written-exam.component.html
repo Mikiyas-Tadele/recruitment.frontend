@@ -21,17 +21,20 @@
         <tr>
           <th style="width: 3em" rowspan="2">Select</th>
             <th>Applicant Name</th>
+            <th>Exam Code</th>
             <th>Exam Result</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-appliedPersonel let-rowIndex="rowIndex">
         <tr>
-          <td><p-tableCheckbox *ngIf="appliedPersonel.id!=null" [value]="appliedPersonel" [disabled]="appliedPersonel.isSelected" [index]="rowIndex"></p-tableCheckbox></td>
+          <td><p-tableCheckbox *ngIf="appliedPersonel.id!=null" [value]="appliedPersonel"  [index]="rowIndex"></p-tableCheckbox></td>
             <td>{{appliedPersonel.applicantName}}</td>
-            <td><input type="number" [(ngModel)]="appliedPersonel.examResult" style="width: 100%;"></td>
+            <td>{{appliedPersonel.examCode}}</td>
+            <td><input type="number" [(ngModel)]="appliedPersonel.examResult" style="width: 100%;" ></td>
           </tr>
     </ng-template>
     <ng-template pTemplate="footer">
     </ng-template>
   </p-table>
   </div>
+  <ngx-spinner></ngx-spinner>
